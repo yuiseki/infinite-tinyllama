@@ -25,7 +25,7 @@ output_model="tinyllama-colorist-v1"
 output_path="./output/tinyllama-colorist-v1"
 
 # Define the path to the pre-trained model
-model_path = "./output/tinyllama-colorist-v1/checkpoint-200"
+model_path = "./output/tinyllama-colorist-v1/checkpoint-800"
 
 
 #
@@ -45,6 +45,8 @@ def prepare_train_data(data_id):
 data = prepare_train_data(dataset)
 
 # print(data["train"][0]["text"])
+# print(data["train"][1]["text"])
+# print(data["train"][2]["text"])
 
 #
 # Load model
@@ -92,9 +94,9 @@ peft_config = LoraConfig(
 training_arguments = TrainingArguments(
         output_dir=output_path,
         # 謎のパラメーター
-        per_device_train_batch_size=16,
+        per_device_train_batch_size=8,
         # 謎のパラメーター
-        gradient_accumulation_steps=8,
+        gradient_accumulation_steps=4,
         # 謎のパラメーター
         optim="paged_adamw_32bit",
         # 謎のパラメーター
@@ -104,11 +106,11 @@ training_arguments = TrainingArguments(
         # 謎のパラメーター
         save_strategy="epoch",
         # 謎のパラメーター
-        logging_steps=20,
+        logging_steps=10,
         # 謎のパラメーター
         num_train_epochs=2,
         # 謎のパラメーター
-        max_steps=200,
+        max_steps=800,
         # 謎のパラメーター
         fp16=True,
         push_to_hub=False
@@ -138,11 +140,13 @@ trainer = SFTTrainer(
 #
 # Migrate
 #
-model = AutoModelForCausalLM.from_pretrained(model_id,
-                                             torch_dtype=torch.float16,
-                                             load_in_8bit=False,
-                                             device_map="auto",
-                                             trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained(
+    model_id,
+    torch_dtype=torch.float16,
+    load_in_8bit=False,
+    device_map="auto",
+    trust_remote_code=True
+)
 
 peft_model = PeftModel.from_pretrained(model, model_path, from_transformers=True, device_map="auto")
 
@@ -156,24 +160,24 @@ def formatted_prompt(question)-> str:
     return f"<|im_start|>user\n{question}<|im_end|>\n<|im_start|>assistant:"
 
 def generate_response(user_input):
-  prompt = formatted_prompt(user_input)
-  inputs = tokenizer([prompt], return_tensors="pt")
-  generation_config = GenerationConfig(
-      penalty_alpha=0.6,
-      top_k=5,
-      do_sample=True,
-      temperature=0.1,
-      repetition_penalty=1.2,
-      max_new_tokens=12,
-      pad_token_id=tokenizer.eos_token_id
-  )
-  start_time = perf_counter()
-  inputs = tokenizer(prompt, return_tensors="pt").to('cuda')
-  outputs = model.generate(**inputs, generation_config=generation_config)
-  res = tokenizer.decode(outputs[0], skip_special_tokens=True)
-  output_time = perf_counter() - start_time
-  print(f"\nTime taken for inference: {round(output_time,2)} seconds\n")
-  return res
+    prompt = formatted_prompt(user_input)
+    inputs = tokenizer([prompt], return_tensors="pt")
+    generation_config = GenerationConfig(
+        penalty_alpha=0.6,
+        top_k=5,
+        do_sample=True,
+        temperature=0.1,
+        repetition_penalty=1.2,
+        max_new_tokens=12,
+        pad_token_id=tokenizer.eos_token_id
+    )
+    start_time = perf_counter()
+    inputs = tokenizer(prompt, return_tensors="pt").to('cuda')
+    outputs = model.generate(**inputs, generation_config=generation_config)
+    res = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    output_time = perf_counter() - start_time
+    print(f"\nTime taken for inference: {round(output_time,2)} seconds\n")
+    return res
 
 def print_color_space(hex_color):
     def hex_to_rgb(hex_color):
@@ -185,7 +189,7 @@ def print_color_space(hex_color):
 res1 = generate_response(user_input='Pure Black: A shade that completely absorbs light and does not reflect any colors. It is the darkest possible shade.')
 print(res1)
 
-res2 = generate_response(user_input="Medium blue-green: This shade is a medium intensity blue-green, somewhat similar to the color of a tropical ocean.")
+res2 = generate_response(user_input="Deep orange-brown: This color is a rich blend of orange and brown, similar to the hue of an autumn leaves or old-fashioned rust. It's vivid but also carries a decent amount of earthy depth.")
 print(res2)
 
 res3 = generate_response(user_input='give me a pure brown color')

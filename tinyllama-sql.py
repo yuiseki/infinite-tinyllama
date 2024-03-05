@@ -24,7 +24,7 @@ output_model = "tinyllama-sql-v1"
 output_path = "./output/tinyllama-sql-v1"
 
 # Define the path to the pre-trained model
-model_path = "./output/tinyllama-sql-v1/checkpoint-200"
+model_path = "./output/tinyllama-sql-v1/checkpoint-800"
 
 data = load_dataset(dataset_id, split="train")
 df = data.to_pandas()
@@ -52,7 +52,7 @@ df["text"] = df.apply(lambda x: chat_template_for_training(x["context"], x["answ
 # Convert the dataframe back to a Dataset object.
 formatted_data = Dataset.from_pandas(df)
 
-print(df['text'][1])
+print(formatted_data)
 
 
 
@@ -106,9 +106,9 @@ training_args = TrainingArguments(
     # Set the output directory for the training run.
     output_dir=output_path,
     # Set the per-device training batch size.
-    per_device_train_batch_size=16,
+    per_device_train_batch_size=8,
     # Set the number of gradient accumulation steps.
-    gradient_accumulation_steps=8,
+    gradient_accumulation_steps=4,
     # Set the optimizer to use.
     optim="paged_adamw_32bit",
     # Set the learning rate.
@@ -118,11 +118,11 @@ training_args = TrainingArguments(
     # Set the save strategy.
     save_strategy="epoch",
     # Set the logging steps.
-    logging_steps=20,
+    logging_steps=10,
     # Set the number of training epochs.
-    num_train_epochs=4,
+    num_train_epochs=2,
     # Set the maximum number of training steps.
-    max_steps=400,
+    max_steps=800,
     # Enable fp16 training.
     fp16=True,
 )
