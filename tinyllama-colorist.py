@@ -182,5 +182,11 @@ def print_color_space(hex_color):
     r, g, b = hex_to_rgb(hex_color)
     print(f'{hex_color}: \033[48;2;{r};{g};{b}m           \033[0m')
 
-res = generate_response(user_input='Pure Black: A shade that completely absorbs light and does not reflect any colors. It is the darkest possible shade.')
-print(res)
+res1 = generate_response(user_input='Pure Black: A shade that completely absorbs light and does not reflect any colors. It is the darkest possible shade.')
+print(res1)
+
+res2 = generate_response(user_input='give me a pure brown color')
+print(res2)
+
+res3 = generate_response(user_input='Light Orange color')
+print(res3)
