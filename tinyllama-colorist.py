@@ -185,8 +185,11 @@ def print_color_space(hex_color):
 res1 = generate_response(user_input='Pure Black: A shade that completely absorbs light and does not reflect any colors. It is the darkest possible shade.')
 print(res1)
 
-res2 = generate_response(user_input='give me a pure brown color')
+res2 = generate_response(user_input="Medium blue-green: This shade is a medium intensity blue-green, somewhat similar to the color of a tropical ocean.")
 print(res2)
 
-res3 = generate_response(user_input='Light Orange color')
+res3 = generate_response(user_input='give me a pure brown color')
 print(res3)
+
+res4 = generate_response(user_input='Light Orange color')
+print(res4)
