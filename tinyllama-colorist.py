@@ -25,7 +25,7 @@ output_model="tinyllama-colorist-v1"
 output_path="./output/tinyllama-colorist-v1"
 
 # Define the path to the pre-trained model
-model_path = "./output/tinyllama-colorist-v1/checkpoint-400"
+model_path = "./output/tinyllama-colorist-v1/checkpoint-200"
 
 
 #
@@ -106,9 +106,9 @@ training_arguments = TrainingArguments(
         # 謎のパラメーター
         logging_steps=20,
         # 謎のパラメーター
-        num_train_epochs=4,
+        num_train_epochs=2,
         # 謎のパラメーター
-        max_steps=400,
+        max_steps=200,
         # 謎のパラメーター
         fp16=True,
         push_to_hub=False
@@ -129,7 +129,7 @@ trainer = SFTTrainer(
 #
 # Execute train
 #
-trainer.train()
+# trainer.train()
 #
 #
 #
