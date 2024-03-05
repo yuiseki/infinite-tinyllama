@@ -6,22 +6,26 @@ from datasets import load_dataset, Dataset
 
 from peft import LoraConfig, AutoPeftModelForCausalLM, PeftModel
 
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainingArguments
-from transformers import GenerationConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainingArguments, GenerationConfig
 
 from trl import SFTTrainer
 
-import os
 from time import perf_counter
 
 # model_id="TinyLlama-1.1B-Chat-v0.3"
 model_id="TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+
+# Define the dataset for fine-tuning
 dataset="burkelibbey/colors"
 
-# 作るLLMの名前
+# Define the name of the output model
 output_model="tinyllama-colorist-v1"
-# LLMのパス
-model_path = "./output/tinyllama-colorist-v1/checkpoint-500"
+
+# Define the path to the output model
+output_path="./output/tinyllama-colorist-v1"
+
+# Define the path to the pre-trained model
+model_path = "./output/tinyllama-colorist-v1/checkpoint-400"
 
 
 #
@@ -86,11 +90,11 @@ peft_config = LoraConfig(
     )
 
 training_arguments = TrainingArguments(
-        output_dir=os.path.join("./output", output_model),
+        output_dir=output_path,
         # 謎のパラメーター
-        per_device_train_batch_size=8,
+        per_device_train_batch_size=16,
         # 謎のパラメーター
-        gradient_accumulation_steps=2,
+        gradient_accumulation_steps=8,
         # 謎のパラメーター
         optim="paged_adamw_32bit",
         # 謎のパラメーター
@@ -100,16 +104,15 @@ training_arguments = TrainingArguments(
         # 謎のパラメーター
         save_strategy="epoch",
         # 謎のパラメーター
-        logging_steps=10,
+        logging_steps=20,
         # 謎のパラメーター
-        num_train_epochs=2,
+        num_train_epochs=4,
         # 謎のパラメーター
-        max_steps=250,
+        max_steps=400,
         # 謎のパラメーター
         fp16=True,
         push_to_hub=False
     )
-
 
 trainer = SFTTrainer(
         model=model,
@@ -127,6 +130,7 @@ trainer = SFTTrainer(
 # Execute train
 #
 trainer.train()
+#
 #
 #
 

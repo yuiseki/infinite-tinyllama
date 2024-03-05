@@ -2,12 +2,12 @@
 
 import torch
 
-from transformers import AutoTokenizer
 from datasets import load_dataset, Dataset
 
-from transformers import BitsAndBytesConfig, AutoModelForCausalLM
-from transformers import TrainingArguments
 from peft import AutoPeftModelForCausalLM, PeftModel, LoraConfig
+
+from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer, TrainingArguments
+
 from trl import SFTTrainer
 
 
@@ -16,6 +16,15 @@ model_id = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
 
 # Define the dataset for fine-tuning
 dataset_id = "b-mc2/sql-create-context"
+
+# Define the name of the output model
+output_model = "tinyllama-sql-v1"
+
+# Define the path to the output model
+output_path = "./output/tinyllama-sql-v1"
+
+# Define the path to the pre-trained model
+model_path = "./output/tinyllama-sql-v1/checkpoint-200"
 
 data = load_dataset(dataset_id, split="train")
 df = data.to_pandas()
@@ -95,11 +104,11 @@ peft_config = LoraConfig(
 # Define the training arguments.
 training_args = TrainingArguments(
     # Set the output directory for the training run.
-    output_dir="./output/tinyllama-sql-v1",
+    output_dir=output_path,
     # Set the per-device training batch size.
-    per_device_train_batch_size=8,
+    per_device_train_batch_size=16,
     # Set the number of gradient accumulation steps.
-    gradient_accumulation_steps=2,
+    gradient_accumulation_steps=8,
     # Set the optimizer to use.
     optim="paged_adamw_32bit",
     # Set the learning rate.
@@ -109,15 +118,14 @@ training_args = TrainingArguments(
     # Set the save strategy.
     save_strategy="epoch",
     # Set the logging steps.
-    logging_steps=10,
+    logging_steps=20,
     # Set the number of training epochs.
-    num_train_epochs=2,
+    num_train_epochs=4,
     # Set the maximum number of training steps.
-    max_steps=250,
+    max_steps=400,
     # Enable fp16 training.
     fp16=True,
 )
-
 
 
 # Initialize the SFTTrainer.
@@ -140,7 +148,13 @@ trainer = SFTTrainer(
     max_seq_length=1024
 )
 
+#
+# Execute train
+#
 trainer.train()
+#
+#
+#
 
 
 
@@ -156,7 +170,6 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 
 # Load the PEFT model from a checkpoint.
-model_path = "./output/tinyllama-sql-v1/checkpoint-250"
 peft_model = PeftModel.from_pretrained(model, model_path, from_transformers=True, device_map="auto")
 
 # Wrap the model with the PEFT model.
