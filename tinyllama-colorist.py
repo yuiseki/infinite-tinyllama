@@ -25,7 +25,7 @@ output_model="tinyllama-colorist-v1"
 output_path="./output/tinyllama-colorist-v1"
 
 # Define the path to the pre-trained model
-model_path = "./output/tinyllama-colorist-v1/checkpoint-800"
+model_path = "./output/tinyllama-colorist-v1/checkpoint-400"
 
 
 #
@@ -108,9 +108,9 @@ training_arguments = TrainingArguments(
         # 謎のパラメーター
         logging_steps=10,
         # 謎のパラメーター
-        num_train_epochs=2,
+        num_train_epochs=4,
         # 謎のパラメーター
-        max_steps=800,
+        max_steps=400,
         # 謎のパラメーター
         fp16=True,
         push_to_hub=False
@@ -192,8 +192,8 @@ print(res1)
 res2 = generate_response(user_input="Deep orange-brown: This color is a rich blend of orange and brown, similar to the hue of an autumn leaves or old-fashioned rust. It's vivid but also carries a decent amount of earthy depth.")
 print(res2)
 
-res3 = generate_response(user_input='give me a pure brown color')
+res3 = generate_response(user_input='give me a rgb hex code of pure brown color')
 print(res3)
 
-res4 = generate_response(user_input='Light Orange color')
+res4 = generate_response(user_input='give me a rgb hex code of  light orange color')
 print(res4)

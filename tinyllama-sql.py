@@ -24,7 +24,7 @@ output_model = "tinyllama-sql-v1"
 output_path = "./output/tinyllama-sql-v1"
 
 # Define the path to the pre-trained model
-model_path = "./output/tinyllama-sql-v1/checkpoint-800"
+model_path = "./output/tinyllama-sql-v1/checkpoint-400"
 
 data = load_dataset(dataset_id, split="train")
 df = data.to_pandas()
@@ -120,9 +120,9 @@ training_args = TrainingArguments(
     # Set the logging steps.
     logging_steps=10,
     # Set the number of training epochs.
-    num_train_epochs=2,
+    num_train_epochs=4,
     # Set the maximum number of training steps.
-    max_steps=800,
+    max_steps=400,
     # Enable fp16 training.
     fp16=True,
 )
