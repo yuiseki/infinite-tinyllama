@@ -109,18 +109,18 @@ def extract_response(output):
     return re.search(r'<\|im_start\|>assistant\n(.+)<\|im_end\|>', output, re.DOTALL).group(1)
 
 if "evaluation_prompts_with_context" in train_config:
-  for prompt in train_config['evaluation_prompts_with_context']:
-    start_time = perf_counter()
-    print(prompt)
-    res = generate_response_with_context(prompt['prompt'], prompt['context'])
-    print(extract_response(res))
-    output_time = perf_counter() - start_time
-    print(f"Time taken for inference: {round(output_time,2)} seconds\n\n")
+    for prompt in train_config['evaluation_prompts_with_context']:
+        start_time = perf_counter()
+        print(prompt)
+        res = generate_response_with_context(prompt['prompt'], prompt['context'])
+        print(extract_response(res))
+        output_time = perf_counter() - start_time
+        print(f"Time taken for inference: {round(output_time,2)} seconds\n\n")
 else:
-  for prompt in train_config['evaluation_prompts']:
-      start_time = perf_counter()
-      print(prompt)
-      res = generate_response(prompt)
-      print(extract_response(res))
-      output_time = perf_counter() - start_time
-      print(f"Time taken for inference: {round(output_time,2)} seconds\n\n")
+    for prompt in train_config['evaluation_prompts']:
+        start_time = perf_counter()
+        print(prompt)
+        res = generate_response(prompt)
+        print(extract_response(res))
+        output_time = perf_counter() - start_time
+        print(f"Time taken for inference: {round(output_time,2)} seconds\n\n")

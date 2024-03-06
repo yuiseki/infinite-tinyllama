@@ -16,7 +16,7 @@ train_gradient_accumulation_steps: 2
 train_num_train_epochs: 4
 train_max_steps: 200
 train_fp16: True
-inference_max_new_tokens: 16
+inference_max_new_tokens: 32
 evaluation_prompts_with_context:
   - 
     prompt: "How many heads of the departments are older than 56 ?"
