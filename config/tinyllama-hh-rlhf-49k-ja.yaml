@@ -14,7 +14,7 @@ train_gradient_accumulation_steps: 1
 train_num_train_epochs: 2
 train_max_steps: 100
 train_fp16: True
-inference_max_new_tokens: 16
+inference_max_new_tokens: 64
 evaluation_prompts:
   - "まず第一に、私はNASAが何を意味しているのか知りたいです。"
   - "FBIとCIAの違いは何ですか？"
