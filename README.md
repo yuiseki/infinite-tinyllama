@@ -1,4 +1,4 @@
-# plural-tinyllama
+# infinite-tinyllama
 
 ## Setup
 
