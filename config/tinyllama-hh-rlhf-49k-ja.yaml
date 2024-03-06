@@ -1,0 +1,21 @@
+# 動かない
+base_model_id: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+model_name: tinyllama-hh-rlhf-49k-ja-v1
+output_base_dir: output
+dataset_id: kunishou/hh-rlhf-49k-ja
+dataset_input_field_name: instruction
+dataset_output_field_name: output
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.4
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_per_device_train_batch_size: 4
+train_gradient_accumulation_steps: 2
+train_num_train_epochs: 2
+train_max_steps: 100
+train_fp16: True
+inference_max_new_tokens: 16
+evaluation_prompts:
+  - "まず第一に、私はNASAが何を意味しているのか知りたいです。"
+  - "FBIとCIAの違いは何ですか？"

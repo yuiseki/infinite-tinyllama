@@ -4,8 +4,10 @@
     "burkelibbey",
     "dataframe",
     "dtype",
+    "kunishou",
     "optim",
     "peft",
-    "pretraining"
+    "pretraining",
+    "rlhf"
   ]
 }
