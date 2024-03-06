@@ -12,6 +12,9 @@ from trl import SFTTrainer
 
 from time import perf_counter
 
+import os
+os.environ['TRANSFORMERS_NO_ADVISORY_WARNINGS'] = 'true'
+
 # model_id="TinyLlama-1.1B-Chat-v0.3"
 model_id="TinyLlama/TinyLlama-1.1B-Chat-v1.0"
 

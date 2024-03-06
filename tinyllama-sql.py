@@ -6,9 +6,12 @@ from datasets import load_dataset, Dataset
 
 from peft import AutoPeftModelForCausalLM, PeftModel, LoraConfig
 
-from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer, TrainingArguments
+from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer, TrainingArguments, GenerationConfig
 
 from trl import SFTTrainer
+
+import os
+os.environ['TRANSFORMERS_NO_ADVISORY_WARNINGS'] = 'true'
 
 
 # Define the model to fine-tune
@@ -24,7 +27,7 @@ output_model = "tinyllama-sql-v1"
 output_path = "./output/tinyllama-sql-v1"
 
 # Define the path to the pre-trained model
-model_path = "./output/tinyllama-sql-v1/checkpoint-400"
+model_path = "./output/tinyllama-sql-v1/checkpoint-200"
 
 data = load_dataset(dataset_id, split="train")
 df = data.to_pandas()
@@ -52,8 +55,10 @@ df["text"] = df.apply(lambda x: chat_template_for_training(x["context"], x["answ
 # Convert the dataframe back to a Dataset object.
 formatted_data = Dataset.from_pandas(df)
 
-print(formatted_data)
+data = formatted_data.train_test_split(seed=42, test_size=0.2)
 
+# print(data["train"][0]["text"])
+# print(data["train"][1]["text"])
 
 
 # Load the tokenizer for the specified model.
@@ -106,9 +111,9 @@ training_args = TrainingArguments(
     # Set the output directory for the training run.
     output_dir=output_path,
     # Set the per-device training batch size.
-    per_device_train_batch_size=8,
+    per_device_train_batch_size=6,
     # Set the number of gradient accumulation steps.
-    gradient_accumulation_steps=4,
+    gradient_accumulation_steps=2,
     # Set the optimizer to use.
     optim="paged_adamw_32bit",
     # Set the learning rate.
@@ -120,9 +125,9 @@ training_args = TrainingArguments(
     # Set the logging steps.
     logging_steps=10,
     # Set the number of training epochs.
-    num_train_epochs=4,
+    num_train_epochs=2,
     # Set the maximum number of training steps.
-    max_steps=400,
+    max_steps=200,
     # Enable fp16 training.
     fp16=True,
 )
@@ -133,7 +138,9 @@ trainer = SFTTrainer(
     # Set the model to be trained.
     model=model,
     # Set the training dataset.
-    train_dataset=formatted_data,
+    train_dataset=data["train"],
+    # Set the evaluation dataset.
+    eval_dataset=data["test"],
     # Set the PEFT configuration.
     peft_config=peft_config,
     # Set the name of the text field in the dataset.
@@ -151,7 +158,7 @@ trainer = SFTTrainer(
 #
 # Execute train
 #
-trainer.train()
+# trainer.train()
 #
 #
 #
@@ -197,7 +204,16 @@ prompt = chat_template(question,context)
 inputs = tokenizer(prompt, return_tensors="pt").to('cuda')
 
 # Generate the output.
-output = model.generate(**inputs, max_new_tokens=512)
+generation_config = GenerationConfig(
+    penalty_alpha=0.6,
+    top_k=5,
+    do_sample=True,
+    temperature=0.1,
+    repetition_penalty=1.2,
+    max_new_tokens=32,
+    pad_token_id=tokenizer.eos_token_id
+)
+output = model.generate(**inputs, generation_config=generation_config)
 
 # Decode the output.
 text = tokenizer.decode(output[0], skip_special_tokens=True)
