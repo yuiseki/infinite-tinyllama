@@ -29,10 +29,7 @@ output_path = "./output/tinyllama-sql-v1"
 # Define the path to the pre-trained model
 model_path = "./output/tinyllama-sql-v1/checkpoint-200"
 
-data = load_dataset(dataset_id, split="train")
-df = data.to_pandas()
-
-def chat_template_for_training(context, answer, question):
+def template_for_train(context, answer, question):
     template = f"""\
     <|im_start|>user
     Given the context, generate an SQL query for the following question
@@ -47,51 +44,59 @@ def chat_template_for_training(context, answer, question):
     template = "\n".join([line.lstrip() for line in template.splitlines()])
     return template
 
+def prepare_train_data(dataset_id):
+    data = load_dataset(dataset_id, split="train")
+    df = data.to_pandas()
+    # Apply the chat_template_for_training function to each row in the 
+    # dataframe and store the result in a new "text" column.
+    df["text"] = df.apply(lambda x: template_for_train(x["context"], x["answer"], x["question"]), axis=1)
+    # Convert the dataframe back to a Dataset object.
+    data = Dataset.from_pandas(df)
+    data = data.train_test_split(seed=42, test_size=0.2)
+    return data
 
-# Apply the chat_template_for_training function to each row in the 
-# dataframe and store the result in a new "text" column.
-df["text"] = df.apply(lambda x: chat_template_for_training(x["context"], x["answer"], x["question"]), axis=1)
-
-# Convert the dataframe back to a Dataset object.
-formatted_data = Dataset.from_pandas(df)
-
-data = formatted_data.train_test_split(seed=42, test_size=0.2)
+data = prepare_train_data(dataset_id)
 
 # print(data["train"][0]["text"])
 # print(data["train"][1]["text"])
 
+#
+# Load the model and tokenizer
+#
+def get_model_and_tokenizer(model_id):
+    # Load the tokenizer for the specified model.
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+    # Set the padding token to be the same as the end of sentence token.
+    tokenizer.pad_token = tokenizer.eos_token
 
-# Load the tokenizer for the specified model.
-tokenizer = AutoTokenizer.from_pretrained(model_id)
-# Set the padding token to be the same as the end of sentence token.
-tokenizer.pad_token = tokenizer.eos_token
+    # Define the quantization configuration for memory-efficient training.
+    bnb_config = BitsAndBytesConfig(
+        # Load the model weights in 4-bit quantized format.
+        load_in_4bit=True,
+        # Specify the quantization type to use for 4-bit quantization.
+        bnb_4bit_quant_type="nf4",
+        # Specify the data type to use for computations during training.
+        bnb_4bit_compute_dtype="float16",
+        # Specify whether to use double quantization for 4-bit quantization.
+        bnb_4bit_use_double_quant=True
+    )
+    # Load the model from the specified model ID and apply the quantization configuration.
+    model = AutoModelForCausalLM.from_pretrained(
+        model_id,
+        quantization_config=bnb_config,
+        device_map="auto"
+    )
+    # Disable cache to improve training speed.
+    model.config.use_cache = False
+    # Set the temperature for pretraining to 1.
+    model.config.pretraining_tp = 1 
+    return model, tokenizer
 
+model, tokenizer = get_model_and_tokenizer(model_id)
 
-# Define the quantization configuration for memory-efficient training.
-bnb_config = BitsAndBytesConfig(
-    # Load the model weights in 4-bit quantized format.
-    load_in_4bit=True,
-    # Specify the quantization type to use for 4-bit quantization.
-    bnb_4bit_quant_type="nf4",
-    # Specify the data type to use for computations during training.
-    bnb_4bit_compute_dtype="float16",
-    # Specify whether to use double quantization for 4-bit quantization.
-    bnb_4bit_use_double_quant=True
-)
-
-# Load the model from the specified model ID and apply the quantization configuration.
-model = AutoModelForCausalLM.from_pretrained(
-    model_id,
-    quantization_config=bnb_config,
-    device_map="auto"
-)
-# Disable cache to improve training speed.
-model.config.use_cache = False
-
-# Set the temperature for pretraining to 1.
-model.config.pretraining_tp = 1 
-
-
+#
+# LoRA and PEFT config
+#
 # Define the PEFT configuration.
 peft_config = LoraConfig(
     # Set the rank of the LoRA projection matrix.
@@ -127,11 +132,10 @@ training_args = TrainingArguments(
     # Set the number of training epochs.
     num_train_epochs=2,
     # Set the maximum number of training steps.
-    max_steps=200,
+    max_steps=1000,
     # Enable fp16 training.
     fp16=True,
 )
-
 
 # Initialize the SFTTrainer.
 trainer = SFTTrainer(
@@ -158,15 +162,14 @@ trainer = SFTTrainer(
 #
 # Execute train
 #
-# trainer.train()
+trainer.train()
 #
 #
 #
 
-
-
-
-
+#
+# Migrate
+#
 # Load the pre-trained model.
 model = AutoModelForCausalLM.from_pretrained(
     model_id,
@@ -182,6 +185,10 @@ peft_model = PeftModel.from_pretrained(model, model_path, from_transformers=True
 # Wrap the model with the PEFT model.
 model = peft_model.merge_and_unload()
 
+
+#
+# Inference
+#
 def chat_template(question, context):
     template = f"""\
     <|im_start|>user

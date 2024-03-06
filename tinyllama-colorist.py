@@ -15,11 +15,11 @@ from time import perf_counter
 import os
 os.environ['TRANSFORMERS_NO_ADVISORY_WARNINGS'] = 'true'
 
-# model_id="TinyLlama-1.1B-Chat-v0.3"
+# Define the model to fine-tune
 model_id="TinyLlama/TinyLlama-1.1B-Chat-v1.0"
 
 # Define the dataset for fine-tuning
-dataset="burkelibbey/colors"
+dataset_id="burkelibbey/colors"
 
 # Define the name of the output model
 output_model="tinyllama-colorist-v1"
@@ -28,31 +28,41 @@ output_model="tinyllama-colorist-v1"
 output_path="./output/tinyllama-colorist-v1"
 
 # Define the path to the pre-trained model
-model_path = "./output/tinyllama-colorist-v1/checkpoint-400"
+model_path = "./output/tinyllama-colorist-v1/checkpoint-1000"
 
 
 #
 # Prepare train data
 #
-def formatted_train(input,response)->str:
-    return f"<|im_start|>user\n{input}<|im_end|>\n<|im_start|>assistant\n{response}<|im_end|>\n"
+def template_for_train(input, output)->str:
+    template = f"""\
+    <|im_start|>user
+    {input}
+    <|im_end|>
+    <|im_start|>assistant
+    {output}
+    <|im_end|>
+    """
+    # Remove any leading whitespace characters from each line in the template.
+    template = "\n".join([line.lstrip() for line in template.splitlines()])
+    return template
 
-def prepare_train_data(data_id):
-    data = load_dataset(data_id, split="train")
+def prepare_train_data(dataset_id):
+    data = load_dataset(dataset_id, split="train")
     data_df = data.to_pandas()
-    data_df["text"] = data_df[["description", "color"]].apply(lambda x: formatted_train(x["description"], x["color"]), axis=1)
+    data_df["text"] = data_df[["description", "color"]].apply(lambda x: template_for_train(x["description"], x["color"]), axis=1)
     data = Dataset.from_pandas(data_df)
     data = data.train_test_split(seed=42, test_size=0.2)
     return data
 
-data = prepare_train_data(dataset)
+data = prepare_train_data(dataset_id)
 
 # print(data["train"][0]["text"])
 # print(data["train"][1]["text"])
 # print(data["train"][2]["text"])
 
 #
-# Load model
+# Load the model and tokenizer
 #
 def get_model_and_tokenizer(mode_id):
     tokenizer = AutoTokenizer.from_pretrained(mode_id)
@@ -113,7 +123,7 @@ training_arguments = TrainingArguments(
         # 謎のパラメーター
         num_train_epochs=4,
         # 謎のパラメーター
-        max_steps=400,
+        max_steps=1000,
         # 謎のパラメーター
         fp16=True,
         push_to_hub=False
@@ -134,7 +144,7 @@ trainer = SFTTrainer(
 #
 # Execute train
 #
-# trainer.train()
+trainer.train()
 #
 #
 #
