@@ -147,7 +147,7 @@ pandas==2.0.3
 peft==0.5.0
 petals @ git+https://github.com/bigscience-workshop/petals@d59c15c5787488005f12162a40930dd284551e02
 pexpect==4.6.0
-Pillow==9.3.0
+Pillow==10.2.0
 prefetch-generator==1.0.3
 protobuf==3.20.3
 psutil==5.9.3
