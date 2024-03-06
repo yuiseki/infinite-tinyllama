@@ -28,7 +28,7 @@ output_model="tinyllama-colorist-v1"
 output_path="./output/tinyllama-colorist-v1"
 
 # Define the path to the pre-trained model
-model_path = "./output/tinyllama-colorist-v1/checkpoint-1000"
+model_path = "./output/tinyllama-colorist-v1/checkpoint-200"
 
 
 #
@@ -109,7 +109,7 @@ training_arguments = TrainingArguments(
         # 謎のパラメーター
         per_device_train_batch_size=8,
         # 謎のパラメーター
-        gradient_accumulation_steps=4,
+        gradient_accumulation_steps=2,
         # 謎のパラメーター
         optim="paged_adamw_32bit",
         # 謎のパラメーター
@@ -123,7 +123,7 @@ training_arguments = TrainingArguments(
         # 謎のパラメーター
         num_train_epochs=4,
         # 謎のパラメーター
-        max_steps=1000,
+        max_steps=200,
         # 謎のパラメーター
         fp16=True,
         push_to_hub=False
@@ -170,7 +170,15 @@ model = peft_model.merge_and_unload()
 # Inference
 #
 def formatted_prompt(question)-> str:
-    return f"<|im_start|>user\n{question}<|im_end|>\n<|im_start|>assistant:"
+    template = f"""
+    <|im_start|>user
+    {question}
+    <|im_end|>
+    <|im_start|>assistant
+    """
+    # Remove any leading whitespace characters from each line in the template.
+    template = "\n".join([line.lstrip() for line in template.splitlines()])
+    return template
 
 def generate_response(user_input):
     prompt = formatted_prompt(user_input)
@@ -181,7 +189,8 @@ def generate_response(user_input):
         do_sample=True,
         temperature=0.1,
         repetition_penalty=1.2,
-        max_new_tokens=12,
+        max_new_tokens=16,
+        forced_eos_token_id=tokenizer.eos_token_id,
         pad_token_id=tokenizer.eos_token_id
     )
     start_time = perf_counter()
@@ -192,7 +201,17 @@ def generate_response(user_input):
     print(f"\nTime taken for inference: {round(output_time,2)} seconds\n")
     return res
 
-def print_color_space(hex_color):
+# example of text
+# <|im_start|>assistant
+# ???
+# <|im_end|>
+# extract text inside <|im_start|>assistant to <|im_end|> by regex
+def extract_color_code(text):
+    import re
+    return re.search(r'<\|im_start\|>assistant\n(.*)\n<\|im_end\|>', text).group(1)
+
+def print_color_space(text):
+    hex_color = extract_color_code(text)
     def hex_to_rgb(hex_color):
         hex_color = hex_color.lstrip('#')
         return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
@@ -201,12 +220,16 @@ def print_color_space(hex_color):
 
 res1 = generate_response(user_input='Pure Black: A shade that completely absorbs light and does not reflect any colors. It is the darkest possible shade.')
 print(res1)
+print_color_space(res1)
 
 res2 = generate_response(user_input="Deep orange-brown: This color is a rich blend of orange and brown, similar to the hue of an autumn leaves or old-fashioned rust. It's vivid but also carries a decent amount of earthy depth.")
 print(res2)
+print_color_space(res2)
 
-res3 = generate_response(user_input='give me a rgb hex code of pure brown color')
+res3 = generate_response(user_input='pure brown color')
 print(res3)
+print_color_space(res3)
 
-res4 = generate_response(user_input='give me a rgb hex code of  light orange color')
+res4 = generate_response(user_input='light orange color')
 print(res4)
+print_color_space(res4)

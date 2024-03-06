@@ -130,9 +130,9 @@ training_args = TrainingArguments(
     # Set the logging steps.
     logging_steps=10,
     # Set the number of training epochs.
-    num_train_epochs=2,
+    num_train_epochs=4,
     # Set the maximum number of training steps.
-    max_steps=1000,
+    max_steps=200,
     # Enable fp16 training.
     fp16=True,
 )
@@ -196,7 +196,7 @@ def chat_template(question, context):
     context:{context}
     question:{question}
     <|im_end|>
-    <|im_start|>assistant 
+    <|im_start|>assistant
     """
     # Remove any leading whitespace characters from each line in the template.
     template = "\n".join([line.lstrip() for line in template.splitlines()])
@@ -218,6 +218,7 @@ generation_config = GenerationConfig(
     temperature=0.1,
     repetition_penalty=1.2,
     max_new_tokens=32,
+    forced_eos_token_id=tokenizer.eos_token_id,
     pad_token_id=tokenizer.eos_token_id
 )
 output = model.generate(**inputs, generation_config=generation_config)
