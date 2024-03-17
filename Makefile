@@ -5,9 +5,12 @@ targets = \
 
 all: $(targets)
 
-.PHONY: setup
+.PHONY: setup freeze
 setup:
 	pip install -Ur requirements.txt
+
+lock:
+	pip freeze > requirements.txt.lock
 
 .PHONY: eval-all
 eval-all: $(targets)
