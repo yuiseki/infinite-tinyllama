@@ -1,0 +1,11 @@
+type: huggingface
+id: sudy-super/peace_of_refined_oscar
+url: https://huggingface.co/datasets/sudy-super/peace_of_refined_oscar
+converted_size: 1.63GB
+license: Apache-2.0
+lang: ja
+description: 事前学習はしたいけどそのまま使えるいい感じのデータセットがないという方向けにOSCARをクリーニング・フィルタリング・繰り返し排除・重複排除を行ったものの一部を公開します
+structure:
+  - id: text
+    type: string
+    description: Text
