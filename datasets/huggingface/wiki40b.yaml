@@ -15,4 +15,3 @@ structure:
   - id: version_id
     type: string
     description: Version ID
-
