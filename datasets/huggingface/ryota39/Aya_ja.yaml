@@ -1,0 +1,26 @@
+type: huggingface
+id: ryota39/Aya_ja
+url: https://huggingface.co/datasets/ryota39/Aya_ja
+converted_size: 1.89MB
+license: Apache-2.0
+lang: ja
+description: このデータセットは CohereForAI/aya_dataset の日本語インストラクションデータのみを抽出したデータセットです。人手でアノテーションされた指示応答のペアが6,259件収録されています。
+structure:
+  - id: targets
+    type: string
+    description: Answer
+  - id: inputs
+    type: string
+    description: Instruction
+  - id: language
+    type: string
+    description: Language
+  - id: annotation_type
+    type: string
+    description: Annotation type
+  - id: language_code
+    type: string
+    description: Language code
+  - id: user_id
+    type: string
+    description: User ID

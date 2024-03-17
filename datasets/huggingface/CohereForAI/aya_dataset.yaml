@@ -1,0 +1,26 @@
+type: huggingface
+id: CohereForAI/aya_dataset
+url: https://huggingface.co/datasets/CohereForAI/aya_dataset
+converted_size: 138MB
+license: Apache-2.0
+lang: multiple
+description: The Aya Dataset is a multilingual instruction fine-tuning dataset curated by an open-science community via Aya Annotation Platform from Cohere For AI. The dataset contains a total of 204k human-annotated prompt-completion pairs along with the demographics data of the annotators.
+structure:
+  - id: targets
+    type: string
+    description: Answer
+  - id: inputs
+    type: string
+    description: Instruction
+  - id: language
+    type: string
+    description: Language
+  - id: annotation_type
+    type: string
+    description: Annotation type
+  - id: language_code
+    type: string
+    description: Language code
+  - id: user_id
+    type: string
+    description: User ID
