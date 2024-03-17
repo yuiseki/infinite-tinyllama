@@ -1,0 +1,23 @@
+type: huggingface
+id: csebuetnlp/xlsum
+url: https://huggingface.co/datasets/csebuetnlp/xlsum
+converted_size: 3.45GB
+license: CC-BY-NC-SA-4.0
+lang: multiple
+description: We present XLSum, a comprehensive and diverse dataset comprising 1.35 million professionally annotated article-summary pairs from BBC, extracted using a set of carefully designed heuristics. The dataset covers 45 languages ranging from low to high-resource, for many of which no public dataset is currently available. XL-Sum is highly abstractive, concise, and of high quality, as indicated by human and intrinsic evaluation.
+structure:
+  - id: id
+    type: string
+    description: ID
+  - id: url
+    type: string
+    description: url
+  - id: title
+    type: string
+    description: Title
+  - id: summary
+    type: string
+    description: Summary
+  - id: text
+    type: string
+    description: Text

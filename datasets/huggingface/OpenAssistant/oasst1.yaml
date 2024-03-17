@@ -1,0 +1,38 @@
+type: huggingface
+id: OpenAssistant/oasst1
+url: https://huggingface.co/datasets/OpenAssistant/oasst1
+converted_size: 41.6MB
+license: Apache-2.0
+lang: multiple
+langs:
+  - en
+  - es
+  - ru
+  - de
+  - zh
+  - fr
+  - th
+  - pt
+  - ca
+  - ko
+  - uk
+  - it
+  - ja
+description: In an effort to democratize research on large-scale alignment, we release OpenAssistant Conversations (OASST1), a human-generated, human-annotated assistant-style conversation corpus consisting of 161,443 messages in 35 different languages, annotated with 461,292 quality ratings, resulting in over 10,000 fully annotated conversation trees. The corpus is a product of a worldwide crowd-sourcing effort involving over 13,500 volunteers.
+structure:
+  - id: parent_id
+    type: string
+    optional: true
+    description: Parent ID
+  - id: user_id
+    type: string
+    description: User ID
+  - id: created_date
+    type: string
+    description: Created Date
+  - id: text
+    type: string
+    description: Text
+  - id: role
+    type: string
+    description: Role

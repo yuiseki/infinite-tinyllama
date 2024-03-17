@@ -1,0 +1,17 @@
+type: huggingface
+id: sudy-super/dialogsum-ja
+url: https://huggingface.co/datasets/sudy-super/dialogsum-ja
+converted_size: 10.6MB
+license: MIT
+lang: ja
+description: このデータセットは knkarthick/dialogsum, xiaolinAndy/CSDSなどを翻訳した日本語対話要約データセットです。
+structure:
+  - id: id
+    type: string
+    description: ID
+  - id: dialogue
+    type: string
+    description: Dialogue
+  - id: summary
+    type: string
+    description: Summary

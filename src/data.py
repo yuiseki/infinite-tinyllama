@@ -2,7 +2,6 @@ from datasets import load_dataset
 
 # テスト用データセット
 load_dataset("burkelibbey/colors")
-load_dataset("roneneldan/TinyStories")
 
 # 日本語データセット
 load_dataset("shi3z/alpaca_cleaned_ja_json")

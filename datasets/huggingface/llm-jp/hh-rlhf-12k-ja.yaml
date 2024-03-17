@@ -1,0 +1,20 @@
+type: huggingface
+id: llm-jp/hh-rlhf-12k-ja
+url: https://huggingface.co/datasets/llm-jp/hh-rlhf-12k-ja
+converted_size: 11.1MB
+license: MIT
+lang: ja
+description: Anthropic/hh-rlhf の日本語版、DeepL翻訳
+structure:
+  - id: conversations
+    type: list
+    description: List of conversations, each values contain the from field and the value field
+  - id: chosen
+    type: string
+    description: Chosen
+  - id: rejected
+    type: string
+    description: Rejected
+  - id: source
+    type: string
+    description: Source

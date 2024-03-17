@@ -1,0 +1,17 @@
+type: huggingface
+id: fujiki/guanaco_ja
+url: https://huggingface.co/datasets/fujiki/guanaco_ja
+converted_size: 30.5MB
+license: GPL-3.0
+lang: ja
+description: This is a Japanese portion of the JosephusCheung/GuanacoDataset
+structure:
+  - id: output
+    type: string
+    description: Output
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: input
+    type: string
+    description: Input

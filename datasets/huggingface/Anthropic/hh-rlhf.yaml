@@ -1,0 +1,14 @@
+type: huggingface
+id: Anthropic/hh-rlhf
+url: https://huggingface.co/datasets/Anthropic/hh-rlhf
+converted_size: 184MB
+license: MIT
+lang: en
+description: Dataset for HH-RLHF from Anthropic
+structure:
+  - id: chosen
+    type: string
+    description: Chosen
+  - id: rejected
+    type: string
+    description: Rejected

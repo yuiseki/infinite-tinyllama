@@ -1,0 +1,14 @@
+type: huggingface
+id: burkelibbey/colors
+url: https://huggingface.co/datasets/burkelibbey/colors
+converted_size: 2.5MB
+license: MIT
+lang: en
+description: Dataset with a pair of RGB Hexes and their descriptions
+structure:
+  - id: color
+    type: string
+    description: RGB Hex
+  - id: description
+    type: string
+    description: Description of RGB Hex

@@ -1,0 +1,17 @@
+type: huggingface
+id: izumi-lab/wikipedia-ja-20230720
+url: https://huggingface.co/datasets/izumi-lab/wikipedia-ja-20230720
+converted_size: 2.13GB
+license: CC-BY-SA-3.0
+lang: ja
+description: 日本語Wikipediaのダンプデータを元に作成したデータセット
+structure:
+  - id: curid
+    type: string
+    description: ページID
+  - id: title
+    type: string
+    description: ページタイトル
+  - id: text
+    type: string
+    description: ページ本文

@@ -1,0 +1,17 @@
+type: huggingface
+id: b-mc2/sql-create-context
+url: https://huggingface.co/datasets/b-mc2/sql-create-context
+converted_size: 6.81MB
+license: CC-BY-4.0
+lang: en
+description: This dataset builds from WikiSQL and Spider. There are 78,577 examples of natural language queries, SQL CREATE TABLE statements, and SQL Query answering the question using the CREATE statement as context. This dataset was built with text-to-sql LLMs in mind, intending to prevent hallucination of column and table names often seen when trained on text-to-sql datasets. The CREATE TABLE statement can often be copy and pasted from different DBMS and provides table names, column names and their data types. By providing just the CREATE TABLE statement as context, we can hopefully provide better grounding for models without having to provide actual rows of data, limiting token usage and exposure to private, sensitive, or proprietary data.
+structure:
+  - id: answer
+    type: string
+    description: Answer, SQL query
+  - id: question
+    type: string
+    description: Question
+  - id: context
+    type: string
+    description: Context

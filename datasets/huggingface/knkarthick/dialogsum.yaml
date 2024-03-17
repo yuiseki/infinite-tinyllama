@@ -1,0 +1,20 @@
+type: huggingface
+id: knkarthick/dialogsum
+url: https://huggingface.co/datasets/knkarthick/dialogsum
+converted_size: 7.12
+license: CC-BY-NC-SA-4.0
+lang: en
+description: DialogSum is a large-scale dialogue summarization dataset, consisting of 13,460 (Plus 100 holdout data for topic generation) dialogues with corresponding manually labeled summaries and topics.
+structure:
+  - id: id
+    type: string
+    description: ID
+  - id: dialogue
+    type: string
+    description: Dialogue
+  - id: summary
+    type: string
+    description: Summary
+  - id: topic
+    type: string
+    description: Topic

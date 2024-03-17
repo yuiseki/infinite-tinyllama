@@ -1,0 +1,32 @@
+type: huggingface
+id: hotchpotch/JQaRA
+url: https://huggingface.co/datasets/hotchpotch/JQaRA
+converted_size: 113MB
+license: CC
+lang: ja
+description: 検索拡張(RAG)評価のための日本語 Q&A データセット
+structure:
+  - id: id
+    type: string
+    description: データID
+  - id: q_id
+    type: string
+    description: 質問ID
+  - id: passage_row_id
+    type: string
+    description: パッセージID
+  - id: label
+    type: int64
+    description: ラベル
+  - id: text
+    type: string
+    description: コンテキスト
+  - id: title
+    type: string
+    description: タイトル
+  - id: question
+    type: string
+    description: 質問
+  - id: answers
+    type: sequence
+    description: 回答

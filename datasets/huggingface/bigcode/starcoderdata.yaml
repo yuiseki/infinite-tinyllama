@@ -1,0 +1,23 @@
+type: huggingface
+id: bigcode/starcoderdata
+url: https://huggingface.co/datasets/bigcode/starcoderdata
+converted_size: 311GB
+license: CC-BY-4.0
+lang: en
+description: This is the dataset used for training StarCoder and StarCoderBase. It contains 783GB of code in 86 programming languages, and includes 54GB GitHub Issues + 13GB Jupyter notebooks in scripts and text-code pairs, and 32GB of GitHub commits, which is approximately 250 Billion tokens.
+structure:
+  - id: max_stars_repo_path
+    type: string
+    description: Path of file
+  - id: max_stars_repo_name
+    type: string
+    description: Name of repository
+  - id: max_stars_count
+    type: int64
+    description: Number of stars
+  - id: id
+    type: string
+    description: ID
+  - id: content
+    type: string
+    description: Content of file

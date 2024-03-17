@@ -1,0 +1,30 @@
+type: huggingface
+id: kunishou/amenokaku-code-instruct
+url: https://huggingface.co/datasets/kunishou/amenokaku-code-instruct
+converted_size: 1.22MB
+license: Mixed
+lang: ja
+description: コードに特化した5.2KのInstructionデータセットです。 データセットに含まれるデータは商用利用できるラインセンスが付与されたプログラミング学習コンテンツから収集、加工し作成しました（英語のコンテンツは日本語に自動翻訳し、翻訳の不自然な箇所を手動で修正）。 また、ライセンスが明記されていない学習コンテンツについては権利者に個別に連絡を取り、本データセットへの掲載の許諾を得ております。
+structure:
+  - id: liscence
+    type: string
+    description: LICENSE of the content
+  - id: output
+    type: string
+    description: Code
+  - id: index
+    type: int64
+    description: ID
+  - id: instruction
+    type: string
+    description: 指示
+  - id: source
+    type: string
+    description: source
+  - id: task
+    type: string
+    description: Type of task
+  - id: input
+    type: string
+    optional: true
+    description: Context

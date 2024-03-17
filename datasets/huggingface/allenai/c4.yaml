@@ -1,0 +1,17 @@
+type: huggingface
+id: allenai/c4
+url: https://huggingface.co/datasets/allenai/c4
+converted_size: 242GB
+license: ODC-BY
+lang: multiple
+description: A colossal, cleaned version of Common Crawl's web crawl corpus. Based on Common Crawl dataset "https://commoncrawl.org".  This is the processed version of Google's C4 dataset
+structure:
+  - id: text
+    type: string
+    description: Text
+  - id: timestamp
+    type: string
+    description: timestamp
+  - id: url
+    type: string
+    description: url

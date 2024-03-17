@@ -1,0 +1,18 @@
+type: huggingface
+id: izumi-lab/llm-japanese-dataset-vanilla
+url: https://huggingface.co/datasets/izumi-lab/llm-japanese-dataset-vanilla
+converted_size: 555MB
+license: CC-BY-SA-4.0
+lang: ja
+description: izumi-lab/llm-japanese-dataset から，日英翻訳のデータセット等を抜いたもの
+structure:
+  - id: instruction
+    type: string
+    description: 日本語のインストラクション
+  - id: input
+    type: string
+    optional: true
+    description: インストラクションのコンテキスト
+  - id: output
+    type: string
+    description: インストラクションに対する応答

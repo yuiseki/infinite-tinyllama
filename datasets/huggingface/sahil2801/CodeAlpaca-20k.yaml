@@ -1,0 +1,18 @@
+type: huggingface
+id: sahil2801/CodeAlpaca-20k
+url: https://huggingface.co/datasets/sahil2801/CodeAlpaca-20k
+converted_size: 3.34MB
+license: CC-BY-4.0
+lang: en
+description: No description provided.
+structure:
+  - id: output
+    type: string
+    description: Output
+  - id: instruction
+    type: string
+    description: Question
+  - id: input
+    type: string
+    optional: true
+    description: Context

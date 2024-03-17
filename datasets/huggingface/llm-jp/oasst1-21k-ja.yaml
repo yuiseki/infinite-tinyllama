@@ -1,0 +1,11 @@
+type: huggingface
+id: llm-jp/oasst1-21k-ja
+url: https://huggingface.co/datasets/llm-jp/oasst1-21k-ja
+converted_size: 20.6MB
+license: Apache-2.0
+lang: ja
+description: OpenAssistant/oasst1 の日本語版、DeepL翻訳
+structure:
+  - id: conversations
+    type: list
+    description: List of conversations, each values contain the from field and the value field

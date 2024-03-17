@@ -1,0 +1,27 @@
+type: huggingface
+id: kunishou/hh-rlhf-49k-ja
+url: https://huggingface.co/datasets/kunishou/hh-rlhf-49k-ja
+converted_size: 34.9MB
+license: MIT
+lang: ja
+description: Anthropic/hh-rlhf と mosaicml/dolly_hhrlhf の日本語版
+structure:
+  - id: output_en
+    type: string
+    description: 出力(英語)
+  - id: output
+    type: string
+    description: 出力
+  - id: input
+    type: string
+    optional: true
+    description: 入力
+  - id: instruction
+    type: string
+    description: 指示
+  - id: instruction_en
+    type: string
+    description: 指示(英語)
+  - id: ng_translation
+    type: string
+    description: この値が1の場合は翻訳に失敗している

@@ -1,0 +1,14 @@
+type: huggingface
+id: mosaicml/dolly_hhrlhf
+url: https://huggingface.co/datasets/mosaicml/dolly_hhrlhf
+converted_size: 24.9MB
+license: CC-BY-SA-3.0
+lang: en
+description: This dataset is a combination of Databrick's dolly-15k dataset and a filtered subset of Anthropic's HH-RLHF. It also includes a test split, which was missing in the original dolly set. That test set is composed of 200 randomly selected samples from dolly + 4,929 of the test set samples from HH-RLHF which made it through the filtering process. The train set contains 59,310 samples; 15,014 - 200 = 14,814 from Dolly, and the remaining 44,496 from HH-RLHF.
+structure:
+  - id: prompt
+    type: string
+    description: Prompt
+  - id: response
+    type: string
+    description: Response
