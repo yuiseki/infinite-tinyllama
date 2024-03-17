@@ -1,0 +1,17 @@
+type: huggingface
+id: Kendamarron/jimba-instuction-1k-beta
+url: https://huggingface.co/datasets/Kendamarron/jimba-instuction-1k-beta
+converted_size: 1.09MB
+license: Apache-2.0
+lang: ja
+description: cyberagent/calm2-7b-chatの出力を人手でチェック・修正することで作成した日本語Instructionデータセットです。
+structure:
+  - id: id
+    type: int64
+    description: ID
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: output
+    type: string
+    description: Output
