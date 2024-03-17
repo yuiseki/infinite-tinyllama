@@ -19,3 +19,6 @@ output/tinyllama-colorist-v1/checkpoint-200/README.md:
 
 output/tinyllama-sql-v1/checkpoint-200/README.md:
 	python3 src/train.py config/tinyllama-sql.yaml
+
+docker:
+	docker build --no-cache -t yuiseki/infinite-tinyllama:latest .
