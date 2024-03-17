@@ -46,10 +46,10 @@ model = peft_model.merge_and_unload()
 # Inference
 #
 
-def formatted_prompt_with_context(question, context)-> str:
+def formatted_prompt_with_context(hint, question, context)-> str:
     template = f"""\
     <|im_start|>user
-    Given the context, generate an SQL query for the following question
+    {hint}
     context:{context}
     question:{question}
     <|im_end|>
@@ -87,8 +87,8 @@ def generate_response(user_input):
     res = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return res
 
-def generate_response_with_context(question, context):
-    prompt = formatted_prompt_with_context(question, context)
+def generate_response_with_context(hint, question, context):
+    prompt = formatted_prompt_with_context(hint, question, context)
     inputs = tokenizer([prompt], return_tensors="pt")
     generation_config = GenerationConfig(
         penalty_alpha=0.6,
@@ -110,6 +110,7 @@ def extract_response(output):
 
 if "evaluation_prompts_with_context" in train_config:
     for prompt in train_config['evaluation_prompts_with_context']:
+        hint = train_config['dataset_input_context_hint']
         start_time = perf_counter()
         print(prompt)
         res = generate_response_with_context(prompt['prompt'], prompt['context'])
