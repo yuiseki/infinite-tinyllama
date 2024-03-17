@@ -1,7 +1,7 @@
 base_model_id: TinyLlama/TinyLlama-1.1B-Chat-v1.0
 model_name: tinyllama-guanaco-jp-v1
 output_base_dir: output
-dataset_id: Aruno/guanaco_jp
+dataset_id: fujiki/guanaco_jp
 dataset_input_field_name: instruction
 dataset_input_context_hint: 以下のcontextに基づいて、質問に答えてください
 dataset_input_context_field_name: input
