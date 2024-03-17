@@ -1,8 +1,9 @@
-import torch
 from datasets import load_dataset, Dataset
 from peft import LoraConfig, AutoPeftModelForCausalLM, PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainingArguments, GenerationConfig
 from trl import SFTTrainer
+import wandb
+
 from time import perf_counter
 import sys
 import os
@@ -24,8 +25,6 @@ train_config = load_yaml(filepath)
 # Prepare train data
 #
 def prepare_train_data(dataset_id):
-    input_field_name = train_config['dataset_input_field_name']
-    output_field_name = train_config['dataset_output_field_name']
     def simple_template_for_train(input, output)->str:
         template = f"""\
         <|im_start|>user
@@ -57,6 +56,8 @@ def prepare_train_data(dataset_id):
     data = load_dataset(dataset_id, split="train")
     data_df = data.to_pandas()
 
+    input_field_name = train_config['dataset_input_field_name']
+    output_field_name = train_config['dataset_output_field_name']
     if "dataset_input_context_field_name" in train_config:
         context_field_name = train_config['dataset_input_context_field_name']
         context_hint = train_config['dataset_input_context_hint']
@@ -112,40 +113,43 @@ model, tokenizer = load_model_and_tokenizer(model_id)
 #
 
 peft_config = LoraConfig(
-        r=int(train_config['lora_r']),
-        lora_alpha=int(train_config['lora_alpha']),
-        lora_dropout=float(train_config['lora_dropout']),
-        bias="none",
-        task_type="CAUSAL_LM"
-    )
+    r=int(train_config['lora_r']),
+    lora_alpha=int(train_config['lora_alpha']),
+    lora_dropout=float(train_config['lora_dropout']),
+    bias="none",
+    task_type="CAUSAL_LM"
+)
+
+os.environ["WANDB_PROJECT"]="infinite-tinyllama"
+os.environ["WANDB_LOG_MODEL"]="false"
+os.environ["WANDB_WATCH"]="false"
 output_dir = os.path.join(train_config['output_base_dir'], train_config['model_name'])
 training_arguments = TrainingArguments(
-        output_dir=output_dir,
-        per_device_train_batch_size=int(train_config['train_per_device_train_batch_size']),
-        gradient_accumulation_steps=int(train_config['train_gradient_accumulation_steps']),
-        optim="paged_adamw_32bit",
-        learning_rate=2e-4,
-        lr_scheduler_type="cosine",
-        save_strategy="epoch",
-        logging_steps=10,
-        num_train_epochs=int(train_config['train_num_train_epochs']),
-        max_steps=int(train_config['train_max_steps']),
-        fp16=True
-    )
-
+    output_dir=output_dir,
+    report_to="wandb",
+    per_device_train_batch_size=int(train_config['train_per_device_train_batch_size']),
+    gradient_accumulation_steps=int(train_config['train_gradient_accumulation_steps']),
+    optim="paged_adamw_32bit",
+    learning_rate=2e-4,
+    lr_scheduler_type="cosine",
+    save_strategy="epoch",
+    logging_steps=10,
+    num_train_epochs=int(train_config['train_num_train_epochs']),
+    max_steps=int(train_config['train_max_steps']),
+    fp16=True
+)
 
 trainer = SFTTrainer(
-        model=model,
-        train_dataset=data["train"],
-        eval_dataset=data["test"],
-        peft_config=peft_config,
-        dataset_text_field="text",
-        args=training_arguments,
-        tokenizer=tokenizer,
-        packing=False,
-        max_seq_length=1024
-    )
-
+    model=model,
+    train_dataset=data["train"],
+    eval_dataset=data["test"],
+    peft_config=peft_config,
+    dataset_text_field="text",
+    args=training_arguments,
+    tokenizer=tokenizer,
+    packing=False,
+    max_seq_length=1024
+)
 
 #
 # Execute train
