@@ -1,5 +1,5 @@
 type: huggingface
-id: shi3z/alpaca
+id: shi3z/alpaca_cleaned_ja_json
 url: https://huggingface.co/datasets/shi3z/alpaca_cleaned_ja_json
 converted_size: 26.8MB
 license: CC-BY-4.0
