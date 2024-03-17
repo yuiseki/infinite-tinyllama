@@ -1,0 +1,18 @@
+type: huggingface
+id: wiki40b
+url: https://huggingface.co/datasets/wiki40b
+converted_size: 37.6GB
+license: CC-BY-SA-4.0
+lang: multiple
+description: Clean-up text for 40+ Wikipedia languages editions of pages correspond to entities. The datasets have train/dev/test splits per language. The dataset is cleaned up by page filtering to remove disambiguation pages, redirect pages, deleted pages, and non-entity pages. Each example contains the wikidata id of the entity, and the full Wikipedia article after page processing that removes non-content sections and structured objects.
+structure:
+  - id: wikidata_id
+    type: string
+    description: Wikidata ID
+  - id: text
+    type: string
+    description: Text
+  - id: version_id
+    type: string
+    description: Version ID
+
