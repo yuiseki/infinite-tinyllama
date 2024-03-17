@@ -1,0 +1,7 @@
+datasets
+peft
+trl
+wandb
+bitsandbytes
+accelerate
+
