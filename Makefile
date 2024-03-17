@@ -1,7 +1,7 @@
 targets = \
 	setup \
-	output/tinyllama-colorist-v1/checkpoint-200/README.md \
-	output/tinyllama-sql-v1/checkpoint-200/README.md
+	output/tinyllama-color-coder-v1/checkpoint-200/README.md \
+	output/tinyllama-sql-coder-v1/checkpoint-200/README.md
 
 all: $(targets)
 
@@ -11,14 +11,14 @@ setup:
 
 .PHONY: eval-all
 eval-all: $(targets)
-	python3 src/eval.py config/tinyllama-colorist.yaml
-	python3 src/eval.py config/tinyllama-sql.yaml
+	python3 src/eval.py recipes/color-coder.yaml
+	python3 src/eval.py recipes/sql-coder.yaml
 
-output/tinyllama-colorist-v1/checkpoint-200/README.md:
-	python3 src/train.py config/tinyllama-colorist.yaml
+output/tinyllama-color-coder-v1/checkpoint-200/README.md:
+	python3 src/train.py recipes/color-coder.yaml
 
-output/tinyllama-sql-v1/checkpoint-200/README.md:
-	python3 src/train.py config/tinyllama-sql.yaml
+output/tinyllama-sql-coder-v1/checkpoint-200/README.md:
+	python3 src/train.py recipes/sql-coder.yaml
 
 docker:
 	docker build --no-cache -t yuiseki/infinite-tinyllama:latest .

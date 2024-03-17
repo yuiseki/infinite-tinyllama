@@ -19,5 +19,5 @@ make
 ## Evaluating all models
 
 ```bash
-make eval
+make eval-all
 ```

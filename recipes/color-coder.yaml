@@ -1,5 +1,5 @@
 base_model_id: TinyLlama/TinyLlama-1.1B-Chat-v1.0
-model_name: tinyllama-colorist-v1
+model_name: tinyllama-color-coder-v1
 output_base_dir: output
 dataset_id: burkelibbey/colors
 dataset_input_field_name: description
