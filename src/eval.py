@@ -113,7 +113,7 @@ if "evaluation_prompts_with_context" in train_config:
         hint = train_config['dataset_input_context_hint']
         start_time = perf_counter()
         print(prompt)
-        res = generate_response_with_context(prompt['prompt'], prompt['context'])
+        res = generate_response_with_context(hint, prompt['prompt'], prompt['context'])
         print(extract_response(res))
         output_time = perf_counter() - start_time
         print(f"Time taken for inference: {round(output_time,2)} seconds\n\n")
