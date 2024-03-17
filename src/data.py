@@ -13,6 +13,9 @@ load_dataset("shi3z/alpaca_cleaned_ja_json")
 load_dataset("izumi-lab/llm-japanese-dataset")
 load_dataset("hotchpotch/JQaRA")
 load_dataset("kunishou/hh-rlhf-49k-ja")
-load_dataset("kunishou/amenokaku-code-instruct")
 load_dataset("fujiki/guanaco_ja")
 load_dataset("allenai/c4", "ja")
+
+# コーディングデータセット（日本語）
+load_dataset("kunishou/amenokaku-code-instruct")
+load_dataset("kunishou/OpenMathInstruct-1-1.8m-ja")
