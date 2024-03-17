@@ -1,0 +1,29 @@
+type: huggingface
+id: nvidia/OpenMathInstruct-1
+url: https://huggingface.co/datasets/nvidia/OpenMathInstruct-1
+converted_size: 2.86GB
+license: NVIDIA LICENSE
+lang: en
+description: OpenMathInstruct-1 is a math instruction tuning dataset with 1.8M problem-solution pairs generated using permissively licensed Mixtral-8x7B model.
+structure:
+  - id: question
+    type: string
+    description: Question
+  - id: expected_answer
+    type: string
+    description: Expected answer
+  - id: predicted_answer
+    type: string
+    description: Predicted answer
+  - id: is_correct
+    type: bool
+    description: Is the answer correct?
+  - id: generation_type
+    type: string
+    description: Generation type
+  - id: dataset
+    type: string
+    description: Dataset of the content
+  - id: generated_solution
+    type: string
+    description: Generated solution
