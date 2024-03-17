@@ -6,16 +6,20 @@
     "Aruno",
     "bigcode",
     "burkelibbey",
+    "csebuetnlp",
     "dataframe",
     "dtype",
     "fujiki",
     "kunishou",
+    "mkqa",
     "optim",
     "peft",
     "pretraining",
     "rlhf",
+    "roneneldan",
     "sahil",
     "starcoderdata",
-    "wandb"
+    "wandb",
+    "xlsum"
   ]
 }
