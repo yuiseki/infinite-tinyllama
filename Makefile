@@ -7,7 +7,7 @@ all: $(targets)
 
 .PHONY: setup
 setup:
-	pip install -r requirements.txt
+	pip install -Ur requirements.txt
 
 .PHONY: eval-all
 eval-all: $(targets)
