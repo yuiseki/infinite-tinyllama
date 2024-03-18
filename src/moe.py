@@ -10,7 +10,9 @@ os.environ['TRANSFORMERS_NO_ADVISORY_WARNINGS'] = 'true'
 
 def perplexity(model, tokenizer, text) -> torch.Tensor:
     tokenized_input = tokenizer.encode(
-        text, add_special_tokens=False, return_tensors="pt"
+          text,
+          add_special_tokens=False,
+          return_tensors="pt"
     ).to(model.device)
     with torch.inference_mode():
         output = model(tokenized_input, labels=tokenized_input)
@@ -19,40 +21,41 @@ def perplexity(model, tokenizer, text) -> torch.Tensor:
 
 class MoE:
     def __init__(self):
-        self.models=[]
-        self.coef=[]
+        self.models = []
+        self.coef = []
 
-    def set_coefs(self,coef):
-        self.coef=coef
+    def set_coefs(self, coef):
+        self.coef = coef
 
-    def append_ELM(self,model,tokenizer):
-        pipe=pipeline("text-generation",model=model,tokenizer=tokenizer,
-                      max_new_tokens=100
+    def append_ELM(self, model, tokenizer):
+        pipe=pipeline("text-generation",
+                      model = model,
+                      tokenizer = tokenizer,
+                      max_new_tokens = 100
                       )
-        self.models.append((model,tokenizer,pipe))
+        self.models.append((model, tokenizer, pipe))
         self.coef.append(1)
 
-    def calc_perplexity(self,text):
+    def calc_perplexity(self, text):
         ppl_list=[]
-        for model,tokenizer,_ in self.models:
-            ppl_list.append(perplexity(model,tokenizer,text))
+        for model, tokenizer, _ in self.models:
+            ppl_list.append(perplexity(model, tokenizer, text))
 
         return ppl_list
 
-    def ask(self,text,verbose=True):
-        ppl_array=np.array(self.calc_perplexity(text))
-        ppl_array=ppl_array*np.array(self.coef)
-        best_model_id=np.where(ppl_array==min(ppl_array))[0][0]
+    def ask(self, text, verbose = True):
+        ppl_array = np.array(self.calc_perplexity(text))
+        ppl_array = ppl_array*np.array(self.coef)
+        best_model_id = np.where(ppl_array == min(ppl_array))[0][0]
         if verbose:
             print("perplexity list")
-            for i,ppl in enumerate(ppl_array):
-                print(i,ppl)
+            for i, ppl in enumerate(ppl_array):
+                print(i, ppl)
             print(f"model id {best_model_id} is used")
-        pipe=self.models[best_model_id][2]
+        pipe = self.models[best_model_id][2]
         return pipe(text)[0]['generated_text']
 
-moe=MoE()
-
+moe = MoE()
 
 model_path_list =[ 
     "output/tinyllama-color-coder-v1/checkpoint-200",
@@ -72,7 +75,7 @@ for model_path in model_path_list:
     tokenizer.pad_token = tokenizer.eos_token
     peft_model = PeftModel.from_pretrained(model, model_path, from_transformers=True, device_map="auto")
     model = peft_model.merge_and_unload()
-    moe.append_ELM(model,tokenizer)
+    moe.append_ELM(model, tokenizer)
 
 
 moe.set_coefs([1,0])
@@ -82,10 +85,10 @@ text_list=[
     "こんにちは",
     "how can we avoid global warming?",
     "地球温暖化を防ぐにはどうしたらいいか?",
-      ]
+]
 
 for text in text_list:
     print("-----")
     print(text)
-    response=moe.ask(text)
+    response = moe.ask(text)
     print(response)
