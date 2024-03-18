@@ -1,0 +1,26 @@
+type: huggingface
+id: aixsatoshi/cosmopedia-japanese-100k
+url: https://huggingface.co/datasets/aixsatoshi/cosmopedia-japanese-100k
+converted_size: 477MB
+license: Apache-2.0
+lang: multiple
+langs:
+  - ja
+  - en
+description: cosmopedia-japanese-20kのデータに、kunishou様から20k-100kをご提供いただけることになり100kまで拡大しました。
+structure:
+  - id: format
+    type: string
+    description: フォーマット
+  - id: audience
+    type: string
+    description: 対象読者
+  - id: seed_data
+    type: string
+    description: シードデータ
+  - id: japanese
+    type: string
+    description: 日本語
+  - id: english
+    type: string
+    description: 英語
