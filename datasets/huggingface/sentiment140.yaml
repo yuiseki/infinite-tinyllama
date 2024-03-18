@@ -1,0 +1,23 @@
+type: huggingface
+id: sentiment140
+url: https://huggingface.co/datasets/sentiment140
+converted_size: 124MB
+license: Unknown
+lang: en
+description: Sentiment140 consists of Twitter messages with emoticons, which are used as noisy labels for sentiment classification. For more detailed information please refer to the paper.
+structure:
+  - id: text
+    type: string
+    description: text
+  - id: date
+    type: string
+    description: date of the tweet
+  - id: user
+    type: string
+    description: user who tweeted
+  - id: sentiment
+    type: int32
+    description: sentiment of the tweet.
+  - id: query
+    type: string
+    description: query

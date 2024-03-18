@@ -1,0 +1,14 @@
+type: huggingface
+id: carblacac/twitter-sentiment-analysis
+url: https://huggingface.co/datasets/carblacac/twitter-sentiment-analysis
+converted_size: 2.06KB
+license: Apache-2.0
+lang: en
+description: TSATC, Twitter Sentiment Analysis Training Corpus The original Twitter Sentiment Analysis Dataset contains 1,578,627 classified tweets, each row is marked as 1 for positive sentiment and 0 for negative sentiment.
+structure:
+  - id: text
+    type: string
+    description: text
+  - id: feeling
+    type: int32
+    description: feeling of the text. 1 for positive, 0 for neutral and -1 for negative

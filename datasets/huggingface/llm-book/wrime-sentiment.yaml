@@ -1,0 +1,20 @@
+type: huggingface
+id: llm-book
+url: https://huggingface.co/datasets/llm-book/wrime-sentiment
+converted_size: 2.08MB
+license: Unknown
+lang: ja
+description: 日本語の感情分析データセット WRIME を、ポジティブ/ネガティブの二値分類のタスクに加工したデータセットです。 GitHub リポジトリ ids-cv/wrime で公開されているデータセットを利用しています。 Avg. Readers_Sentiment の値が0より大きいものをポジティブ、0より小さいものをネガティブとラベル付をしています。
+structure:
+  - id: sentence
+    type: string
+    description: sentence
+  - id: label
+    type: Label
+    description: label of the text. 1 for positive and 0 for negative
+  - id: user_id
+    type: string
+    description: ID of the user who posted
+  - id: datetime
+    type: string
+    description: date and time of the post

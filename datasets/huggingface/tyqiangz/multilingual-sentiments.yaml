@@ -1,0 +1,20 @@
+type: huggingface
+id: tyqiangz/multilingual-sentiments
+url: https://huggingface.co/datasets/tyqiangz/multilingual-sentiments
+converted_size: 79.5MB
+license: Apache-2.0
+lang: multiple
+description: A collection of multilingual sentiments datasets grouped into 3 classes -- positive, neutral, negative.
+structure:
+  - id: text
+    type: string
+    description: text
+  - id: source
+    type: string
+    description: source of the text
+  - id: language
+    type: string
+    description: language of the text
+  - id: label
+    type: Label
+    description: label of the text. 1 for positive, 0 for neutral and -1 for negative

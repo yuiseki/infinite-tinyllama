@@ -1,0 +1,14 @@
+type: huggingface
+id: mrm8488/fake-news
+url: https://huggingface.co/datasets/mrm8488/fake-news
+converted_size: 68.1MB
+license: Unknown
+lang: en
+description: No description provided.
+structure:
+  - id: text
+    type: string
+    description: text
+  - id: label
+    type: int64
+    description: label of the text. 1 for fake and 0 for real
