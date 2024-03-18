@@ -88,7 +88,7 @@ for model_path in model_path_list:
     model = peft_model.merge_and_unload()
     moe.append_ELM(model, tokenizer)
 
-moe.set_coefs([1,0])
+moe.set_coefs([1, 0, 0])
 
 def formatted_prompt(question)-> str:
     template = f"""
