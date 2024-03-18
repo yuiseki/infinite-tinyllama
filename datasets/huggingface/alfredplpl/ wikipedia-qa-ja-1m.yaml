@@ -1,0 +1,20 @@
+type: huggingface
+id: alfredplpl/wikipedia-qa-ja-1m
+url: https://huggingface.co/datasets/alfredplpl/wikipedia-qa-ja-1m
+converted_size: 173MB
+license: CC-BY-SA-3.0
+lang: ja
+description: Based on hpprc/wikipedia-20240101, Generate the answer and summarizing the line using LLM. Input RAG-like prompt to CALM 2 7B Chat. Format the response.
+structure:
+  - id: id
+    type: string
+    description: ページID
+  - id: url
+    type: string
+    description: ページURL
+  - id: question
+    type: string
+    description: 質問
+  - id: answer
+    type: string
+    description: 回答

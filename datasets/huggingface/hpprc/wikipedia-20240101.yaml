@@ -1,0 +1,20 @@
+type: huggingface
+id: hpprc/wikipedia-20240101
+url: https://huggingface.co/datasets/hpprc/wikipedia-20240101
+converted_size: 173MB
+license: CC-BY-SA-3.0
+lang: ja
+description: Based on wikipedia, apache_beamとmwparserfromhellを用いて通常のWikipediaの前処理を行ったデータセットです。
+structure:
+  - id: id
+    type: string
+    description: ページID
+  - id: url
+    type: string
+    description: ページURL
+  - id: title
+    type: string
+    description: ページタイトル
+  - id: text
+    type: string
+    description: ページ本文
