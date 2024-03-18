@@ -57,7 +57,8 @@ class MoE:
 
 moe = MoE()
 
-model_path_list =[ 
+model_path_list =[
+    "",
     "output/tinyllama-color-coder-v1/checkpoint-200",
     "output/tinyllama-sql-coder-v1/checkpoint-200",
 ]
@@ -73,6 +74,11 @@ for model_path in model_path_list:
     )
     tokenizer = AutoTokenizer.from_pretrained(base_model_id)
     tokenizer.pad_token = tokenizer.eos_token
+
+    if model_path == "":
+        moe.append_ELM(model, tokenizer)
+        continue
+
     peft_model = PeftModel.from_pretrained(
         model,
         model_path,
