@@ -3,7 +3,10 @@ id: kunishou/OpenMathInstruct-1-1.8m-ja
 url: https://huggingface.co/datasets/kunishou/OpenMathInstruct-1-1.8m-ja
 converted_size: 1.19GB
 license: NVIDIA LICENSE
-lang: ja
+lang: multiple
+langs:
+  - en
+  - ja
 description: nvidia/OpenMathInstruct-1 を日本語に自動翻訳した商用利用可能な180万件の指示チューニングデータセット
 structure:
   - id: index

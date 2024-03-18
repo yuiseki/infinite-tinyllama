@@ -3,7 +3,10 @@ id: kunishou/oasst1-89k-ja
 url: https://huggingface.co/datasets/kunishou/oasst1-89k-ja
 converted_size: 59.8MB
 license: Apache-2.0
-lang: ja
+lang: multiple
+langs:
+  - en
+  - ja
 description: OpenAssistant/oasst1 の日本語版
 structure:
   - id: parent_id

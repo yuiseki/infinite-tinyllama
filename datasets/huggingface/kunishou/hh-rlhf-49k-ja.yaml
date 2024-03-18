@@ -3,7 +3,10 @@ id: kunishou/hh-rlhf-49k-ja
 url: https://huggingface.co/datasets/kunishou/hh-rlhf-49k-ja
 converted_size: 34.9MB
 license: MIT
-lang: ja
+lang: multiple
+langs:
+  - en
+  - ja
 description: Anthropic/hh-rlhf と mosaicml/dolly_hhrlhf の日本語版
 structure:
   - id: output_en
