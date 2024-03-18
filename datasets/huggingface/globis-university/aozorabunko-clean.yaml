@@ -1,0 +1,17 @@
+type: huggingface
+id: globis-university/aozorabunko-clean
+url: https://huggingface.co/datasets/globis-university/aozorabunko-clean
+converted_size: 382MB
+license: CC-BY-4.0
+lang: ja
+description: This dataset provides a convenient and user-friendly format of data from Aozora Bunko (青空文庫), a website that compiles public-domain books in Japan, ideal for Machine Learning applications.
+structure:
+  - id: text
+    type: string
+    description: 本文
+  - id: footnote
+    type: string
+    description: 脚注
+  - id: meta
+    type: dict
+    description: メタデータ

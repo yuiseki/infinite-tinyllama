@@ -1,0 +1,11 @@
+type: huggingface
+id: if001/oscar_2023_filtered
+url: https://huggingface.co/datasets/if001/oscar_2023_filtered
+converted_size: 3.02GB
+license: CC0-1.0
+lang: ja
+description: this is fork of oscar-corpus/OSCAR-2301. Filtered only Japanese text and converted for train.
+structure:
+  - id: text
+    type: string
+    description: 本文

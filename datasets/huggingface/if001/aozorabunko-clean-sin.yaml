@@ -1,0 +1,17 @@
+type: huggingface
+id: if001/aozorabunko-clean-sin
+url: https://huggingface.co/datasets/if001/aozorabunko-clean-sin
+converted_size: 288MB
+license: CC-BY-4.0
+lang: ja
+description: this is fork globis-university/aozorabunko-clean. Filtered row["meta"]["文字遣い種別"] == "新字新仮名"
+structure:
+  - id: text
+    type: string
+    description: 本文
+  - id: footnote
+    type: string
+    description: 脚注
+  - id: meta
+    type: dict
+    description: メタデータ
