@@ -38,6 +38,7 @@
     "optim",
     "peft",
     "pretraining",
+    "rgbhex",
     "rlhf",
     "roneneldan",
     "ryota",
@@ -48,6 +49,7 @@
     "sudy",
     "tatsu",
     "wandb",
+    "wikisql",
     "xiaolin",
     "xlsum"
   ]

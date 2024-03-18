@@ -1,0 +1,20 @@
+type: huggingface
+id: wikisql
+url: https://huggingface.co/datasets/wikisql
+converted_size: 36.6MB
+license: Unknown
+lang: en
+description: A large crowd-sourced dataset for developing natural language interfaces for relational databases.  WikiSQL is a dataset of 80654 hand-annotated examples of questions and SQL queries distributed across 24241 tables from Wikipedia.
+structure:
+  - id: phase
+    type: int32
+    description: Phase
+  - id: question
+    type: string
+    description: Question
+  - id: table
+    type: dict
+    description: Table
+  - id: sql
+    type: dict
+    description: SQL
