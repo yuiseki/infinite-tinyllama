@@ -1,0 +1,11 @@
+type: huggingface
+id: izumi-lab/open-text-books
+url: https://huggingface.co/datasets/izumi-lab/open-text-books
+converted_size: 152MB
+license: CC-BY-SA-4.0
+lang: en
+description: No description provided
+structure:
+  - id: text
+    type: string
+    description: Text
