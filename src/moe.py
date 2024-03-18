@@ -45,7 +45,7 @@ class MoE:
 
     def ask(self, text, verbose = True):
         ppl_array = np.array(self.calc_perplexity(text))
-        ppl_array = ppl_array*np.array(self.coef)
+        ppl_array = ppl_array * np.array(self.coef)
         best_model_id = np.where(ppl_array == min(ppl_array))[0][0]
         if verbose:
             print("perplexity list")
@@ -73,7 +73,12 @@ for model_path in model_path_list:
     )
     tokenizer = AutoTokenizer.from_pretrained(base_model_id)
     tokenizer.pad_token = tokenizer.eos_token
-    peft_model = PeftModel.from_pretrained(model, model_path, from_transformers = True, device_map = "auto")
+    peft_model = PeftModel.from_pretrained(
+        model,
+        model_path,
+        from_transformers = True,
+        device_map = "auto"
+    )
     model = peft_model.merge_and_unload()
     moe.append_ELM(model, tokenizer)
 
