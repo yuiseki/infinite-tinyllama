@@ -3,8 +3,8 @@ model_name: tinyllama-sql-coder-v1
 output_base_dir: output
 dataset_id: b-mc2/sql-create-context
 dataset_input_field_name: question
-dataset_input_context_hint: Given the context, generate an SQL query that answers the question
-dataset_input_context_field_name: context
+dataset_context_hint: Given the context, generate an SQL query that answers the question
+dataset_context_field_name: context
 dataset_output_field_name: answer
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2

@@ -110,7 +110,7 @@ def extract_response(output):
 
 if "evaluation_prompts_with_context" in train_config:
     for prompt in train_config['evaluation_prompts_with_context']:
-        hint = train_config['dataset_input_context_hint']
+        hint = train_config['dataset_context_hint']
         start_time = perf_counter()
         print(prompt)
         res = generate_response_with_context(hint, prompt['prompt'], prompt['context'])

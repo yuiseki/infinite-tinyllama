@@ -58,9 +58,9 @@ def prepare_train_data(dataset_id):
 
     input_field_name = train_config['dataset_input_field_name']
     output_field_name = train_config['dataset_output_field_name']
-    if "dataset_input_context_field_name" in train_config:
-        context_field_name = train_config['dataset_input_context_field_name']
-        context_hint = train_config['dataset_input_context_hint']
+    if "dataset_context_field_name" in train_config:
+        context_hint = train_config['dataset_context_hint']
+        context_field_name = train_config['dataset_context_field_name']
         data_df["text"] = data_df[[context_field_name, input_field_name, output_field_name]].apply(lambda x: context_template_for_train(context_hint, x[context_field_name], x[input_field_name], x[output_field_name]), axis=1)
     else:
         data_df["text"] = data_df[[input_field_name, output_field_name]].apply(lambda x: simple_template_for_train(x[input_field_name], x[output_field_name]), axis=1)
