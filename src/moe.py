@@ -79,15 +79,37 @@ for model_path in model_path_list:
 
 moe.set_coefs([1,0])
 
-text_list=[
-    "hello, I'm John",
-    "こんにちは",
-    "how can we avoid global warming?",
-    "地球温暖化を防ぐにはどうしたらいいか?",
+def formatted_prompt(question)-> str:
+    template = f"""
+    <|im_start|>user
+    {question}
+    <|im_end|>
+    <|im_start|>assistant
+    """
+    # Remove any leading whitespace characters from each line in the template.
+    template = "\n".join([line.lstrip() for line in template.splitlines()])
+    return template
+
+def formatted_prompt_with_context(hint, question, context)-> str:
+    template = f"""\
+    <|im_start|>user
+    {hint}
+    context:{context}
+    question:{question}
+    <|im_end|>
+    <|im_start|>assistant
+    """
+    # Remove any leading whitespace characters from each line in the template.
+    template = "\n".join([line.lstrip() for line in template.splitlines()])
+    return template
+
+text_list = [
+    "Pure Brown Color",
+    "Who is the Secretary General of the United Nations?",
 ]
 
 for text in text_list:
     print("-----")
-    print(text)
+    prompt = formatted_prompt(text)
     response = moe.ask(text)
     print(response)
