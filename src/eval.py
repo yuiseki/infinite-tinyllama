@@ -46,6 +46,17 @@ model = peft_model.merge_and_unload()
 # Inference
 #
 
+def formatted_prompt(question)-> str:
+    template = f"""
+    <|im_start|>user
+    {question}
+    <|im_end|>
+    <|im_start|>assistant
+    """
+    # Remove any leading whitespace characters from each line in the template.
+    template = "\n".join([line.lstrip() for line in template.splitlines()])
+    return template
+
 def formatted_prompt_with_context(hint, question, context)-> str:
     template = f"""\
     <|im_start|>user
@@ -60,16 +71,6 @@ def formatted_prompt_with_context(hint, question, context)-> str:
     return template
 
 def generate_response(user_input):
-    def formatted_prompt(question)-> str:
-        template = f"""
-        <|im_start|>user
-        {question}
-        <|im_end|>
-        <|im_start|>assistant
-        """
-        # Remove any leading whitespace characters from each line in the template.
-        template = "\n".join([line.lstrip() for line in template.splitlines()])
-        return template
     prompt = formatted_prompt(user_input)
     inputs = tokenizer([prompt], return_tensors="pt")
     generation_config = GenerationConfig(
