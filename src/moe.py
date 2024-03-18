@@ -1,5 +1,5 @@
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
 from peft import PeftModel
 import numpy as np
 
@@ -28,12 +28,7 @@ class MoE:
         self.coef = coef
 
     def append_ELM(self, model, tokenizer):
-        pipe = pipeline("text-generation",
-                      model = model,
-                      tokenizer = tokenizer,
-                      max_new_tokens = 100
-                      )
-        self.models.append((model, tokenizer, pipe))
+        self.models.append((model, tokenizer))
         self.coef.append(1)
 
     def calc_perplexity(self, text):
@@ -52,8 +47,22 @@ class MoE:
             for i, ppl in enumerate(ppl_array):
                 print(i, ppl)
             print(f"model id {best_model_id} is used")
-        pipe = self.models[best_model_id][2]
-        return pipe(text)[0]['generated_text']
+
+        tokenizer = self.models[best_model_id][1]
+        generation_config = GenerationConfig(
+            penalty_alpha=0.6,
+            top_k=5,
+            do_sample=True,
+            temperature=0.1,
+            repetition_penalty=1.2,
+            max_new_tokens=100,
+            forced_eos_token_id=tokenizer.eos_token_id,
+            pad_token_id=tokenizer.eos_token_id
+        )
+        inputs = tokenizer(text, return_tensors="pt").to('cuda')
+        outputs = model.generate(**inputs, generation_config=generation_config)
+        res = tokenizer.decode(outputs[0], skip_special_tokens=True)
+        return res
 
 moe = MoE()
 
