@@ -28,7 +28,7 @@ class MoE:
         self.coef = coef
 
     def append_ELM(self, model, tokenizer):
-        pipe=pipeline("text-generation",
+        pipe = pipeline("text-generation",
                       model = model,
                       tokenizer = tokenizer,
                       max_new_tokens = 100
