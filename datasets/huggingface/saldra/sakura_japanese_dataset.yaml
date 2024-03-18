@@ -1,0 +1,21 @@
+type: huggingface
+id: saldra/sakura_japanese_dataset
+url: https://huggingface.co/datasets/saldra/sakura_japanese_dataset
+converted_size: 62.7KB
+license: DbCL-1.0
+lang: ja
+description: 商用利用可能な超小規模高品質日本語データセット。 categoryは以下 commonsense_qa, 常識問題 Calc-ape210k, 数学問題 japanese-commonsense-openqa, 日本の常識問題(自作)
+structure:
+  - id: category
+    type: string
+    description: カテゴリ
+  - id: instruction
+    type: string
+    description: 日本語のインストラクション
+  - id: input
+    type: string
+    optional: true
+    description: インストラクションのコンテキスト
+  - id: output
+    type: string
+    description: インストラクションに対する応答
