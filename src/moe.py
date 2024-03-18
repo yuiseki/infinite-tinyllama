@@ -60,7 +60,6 @@ moe = MoE()
 model_path_list =[
     "",
     "output/tinyllama-color-coder-v1/checkpoint-200",
-    "output/tinyllama-sql-coder-v1/checkpoint-200",
 ]
 
 for model_path in model_path_list:
@@ -88,7 +87,7 @@ for model_path in model_path_list:
     model = peft_model.merge_and_unload()
     moe.append_ELM(model, tokenizer)
 
-moe.set_coefs([1, 1, 1])
+moe.set_coefs([0, 0])
 
 def formatted_prompt(question)-> str:
     template = f"""
@@ -115,8 +114,8 @@ def formatted_prompt_with_context(hint, question, context)-> str:
     return template
 
 text_list = [
-    "Pure Brown Color",
     "Who is the Secretary General of the United Nations?",
+    "Pure Black: A shade that completely absorbs light and does not reflect any colors. It is the darkest possible shade.",
 ]
 
 for text in text_list:
