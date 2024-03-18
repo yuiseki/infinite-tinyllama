@@ -37,7 +37,7 @@ class MoE:
         self.coef.append(1)
 
     def calc_perplexity(self, text):
-        ppl_list=[]
+        ppl_list = []
         for model, tokenizer, _ in self.models:
             ppl_list.append(perplexity(model, tokenizer, text))
 
@@ -88,7 +88,7 @@ for model_path in model_path_list:
     model = peft_model.merge_and_unload()
     moe.append_ELM(model, tokenizer)
 
-moe.set_coefs([1, 0, 0])
+moe.set_coefs([1, 1, 1])
 
 def formatted_prompt(question)-> str:
     template = f"""
