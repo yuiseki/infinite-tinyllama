@@ -72,7 +72,6 @@ def formatted_prompt_with_context(hint, question, context)-> str:
 
 def generate_response(user_input):
     prompt = formatted_prompt(user_input)
-    inputs = tokenizer([prompt], return_tensors="pt")
     generation_config = GenerationConfig(
         penalty_alpha=0.6,
         top_k=5,
