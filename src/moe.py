@@ -33,7 +33,7 @@ class MoE:
 
     def calc_perplexity(self, text):
         ppl_list = []
-        for model, tokenizer, _ in self.models:
+        for model, tokenizer in self.models:
             ppl_list.append(perplexity(model, tokenizer, text))
 
         return ppl_list
