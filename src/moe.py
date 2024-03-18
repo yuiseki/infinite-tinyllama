@@ -66,10 +66,10 @@ for model_path in model_path_list:
     base_model_id = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
     model = AutoModelForCausalLM.from_pretrained(
         base_model_id,
-        torch_dtype=torch.float16,
-        load_in_8bit=False,
-        device_map="auto",
-        trust_remote_code=True
+        torch_dtype = torch.float16,
+        load_in_8bit = False,
+        device_map = "auto",
+        trust_remote_code = True
     )
     tokenizer = AutoTokenizer.from_pretrained(base_model_id)
     tokenizer.pad_token = tokenizer.eos_token
