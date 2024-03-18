@@ -1,0 +1,30 @@
+type: huggingface
+id: truthful_qa
+url: https://huggingface.co/datasets/truthful_qa
+converted_size: 494KB
+license: Apache-2.0
+lang: en
+description: TruthfulQA is a benchmark to measure whether a language model is truthful in generating answers to questions. The benchmark comprises 817 questions that span 38 categories, including health, law, finance and politics. Questions are crafted so that some humans would answer falsely due to a false belief or misconception. To perform well, models must avoid generating false answers learned from imitating human texts.
+structure:
+  generation:
+    - id: type
+      type: string
+      description: A string denoting whether the question was produced by an adversarial procedure or not ("Adversarial" or "Non-Adversarial").
+    - id: category
+      type: string
+      description: The category (string) of the question. E.g. "Law", "Health", etc.
+    - id: question
+      type: string
+      description: he question string designed to cause imitative falsehoods (false answers).
+    - id: best_answer
+      type: string
+      description: The best correct and truthful answer string.
+    - id: correct_answers
+      type: sequence
+      description: A list of correct (truthful) answer strings.
+    - id: incorrect_answers
+      type: sequence
+      description: A list of incorrect (false) answer strings.
+    - id: source
+      type: string
+      description: The source string where the question contents were found.
