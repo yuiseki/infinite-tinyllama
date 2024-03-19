@@ -5,6 +5,7 @@
 - `text2overpassql` is a task of converting natural language text to Overpass QL queries
 - The task is to generate an Overpass QL query from a natural language text
 - The Overpass QL query is used to retrieve the data from the OpenStreetMap database
+- Enable TinyLlama to respond in Overpass QL to English questions
 
 ### Target language of this task
 

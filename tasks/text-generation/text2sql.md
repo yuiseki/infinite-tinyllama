@@ -5,6 +5,7 @@
 - `text2sql` is a task of converting natural language questions to SQL queries
 - The task is to generate a SQL query from a natural language question
 - The SQL query is used to retrieve the answer from a database
+- Enable TinyLlama to respond in SQL to English questions
 
 ### Target language of this task
 
