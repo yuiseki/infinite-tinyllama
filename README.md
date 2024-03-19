@@ -20,11 +20,11 @@ VRAM 24GB で日本語データセットでファインチューニングしよ�
 
 - 人力フェーズ
   - 🔨 `datasets/huggingface/` 以下に、データセットの情報を機械可読な形式で丁寧に記述した YAML ファイルを追加していく
-    - `datasets/huggingface/burkelibbey/colors.yaml`
+    - 例: `datasets/huggingface/burkelibbey/colors.yaml`
   - 🔨 `tasks/` 以下に、「こういう TinyLlama が作りたい、このデータセットが使えそう」という Markdown ファイルを追加していく
-    - `tasks/text-generation/text2rgbhex.md`
+    - 例: `tasks/text-generation/text2rgbhex.md`
   - 🔨 `recipes/` 以下に、データセットの YAML ファイルと Markdown ファイルの説明から、TinyLlama を学習するための YAML ファイルを追加していく
-    - `recipes/RTX_3060_12GB/color-coder.yaml`
+    - 例: `recipes/RTX_3060_12GB/color-coder.yaml`
 - シンギュラリティフェーズ
   - 🤔 `datasets/huggingface/` 以下に、新たなファイルを生成して追加する TinyLlama を作る
   - 🤔 `tasks/` 以下に、新たなファイルを生成して追加する TinyLlama を作る
