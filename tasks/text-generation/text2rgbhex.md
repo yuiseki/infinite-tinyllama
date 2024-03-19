@@ -34,6 +34,11 @@
 
 ### Evaluation
 
+#### Evaluation models
+
+- `TinyLlama/TinyLlama-1.1B-Chat-v1.0`
+- `tinyllama-color-coder-v1`
+
 #### Evaluation datasets
 
 - TBD

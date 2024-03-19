@@ -70,26 +70,7 @@ def formatted_prompt_with_context(hint, question, context)-> str:
     template = "\n".join([line.lstrip() for line in template.splitlines()])
     return template
 
-def generate_response(user_input):
-    prompt = formatted_prompt(user_input)
-    generation_config = GenerationConfig(
-        penalty_alpha=0.6,
-        top_k=5,
-        do_sample=True,
-        temperature=0.1,
-        repetition_penalty=1.2,
-        max_new_tokens=train_config['inference_max_new_tokens'],
-        forced_eos_token_id=tokenizer.eos_token_id,
-        pad_token_id=tokenizer.eos_token_id
-    )
-    inputs = tokenizer(prompt, return_tensors="pt").to('cuda')
-    outputs = model.generate(**inputs, generation_config=generation_config)
-    res = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    return res
-
-def generate_response_with_context(hint, question, context):
-    prompt = formatted_prompt_with_context(hint, question, context)
-    inputs = tokenizer([prompt], return_tensors="pt")
+def generate_response(prompt):
     generation_config = GenerationConfig(
         penalty_alpha=0.6,
         top_k=5,
@@ -108,20 +89,22 @@ def generate_response_with_context(hint, question, context):
 def extract_response(output):
     return re.search(r'<\|im_start\|>assistant\n(.+)<\|im_end\|>', output, re.DOTALL).group(1)
 
-if "evaluation_prompts_with_context" in train_config:
-    for prompt in train_config['evaluation_prompts_with_context']:
-        hint = train_config['dataset_context_hint']
+if "evaluations" in train_config:
+    for evaluation in train_config['evaluations']:
         start_time = perf_counter()
-        print(prompt)
-        res = generate_response_with_context(hint, prompt['prompt'], prompt['context'])
-        print(extract_response(res))
-        output_time = perf_counter() - start_time
-        print(f"Time taken for inference: {round(output_time,2)} seconds\n\n")
-else:
-    for prompt in train_config['evaluation_prompts']:
-        start_time = perf_counter()
+        input = evaluation['prompt']
+        expected_output = evaluation['expected_output']
+        if "context" in evaluation:
+            hint = train_config['dataset_context_hint']
+            prompt = formatted_prompt_with_context(hint, input, evaluation['context'])
+        else:
+            prompt = formatted_prompt(input)
         print(prompt)
         res = generate_response(prompt)
-        print(extract_response(res))
+        extracted_res = extract_response(res)
+        print("Output:")
+        print(extracted_res)
+        print("Expected Output:")
+        print(expected_output)
         output_time = perf_counter() - start_time
         print(f"Time taken for inference: {round(output_time,2)} seconds\n\n")
