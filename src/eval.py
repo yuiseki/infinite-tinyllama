@@ -90,8 +90,8 @@ def evaluate_model(model, train_config):
             extracted_output = extract_assistant_output(res)
         except AttributeError:
             extracted_output = res
-        print(f"Actual Output:\t\t{extracted_output}")
         print(f"Expected Output:\t{expected_output}")
+        print(f"Actual Output:\t\t{extracted_output}")
         print("\n\n")
         if extracted_output == expected_output:
             score += 1
