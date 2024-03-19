@@ -1,8 +1,8 @@
-## Task: `fake-news-detection`
+## Task: `summarization`
 
 ### Name of new TinyLLama
 
-- `tinyllama-fake-news-detector-v1`
+- `tinyllama-summarizer-v1`
 
 ### Status
 
@@ -15,9 +15,9 @@
 
 ### Description
 
-- `fake-news-detection` is a task of detecting fake news
-- The task is to classify news articles as fake or real
-- Enable TinyLlama to respond in `fake` or `real` to news articles
+- `summarization` is a task of summarizing a text
+- The task is to generate a summary of a text
+- Enable TinyLlama to respond with a summary of a text
 
 ### Target language
 

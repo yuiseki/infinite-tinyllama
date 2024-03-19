@@ -1,6 +1,6 @@
 ## Task: `text2onomatopoeia`
 
-### Name of TinyLLama
+### Name of new TinyLLama
 
 - `tinyllama-onomatopoeia-ja-v1`
 

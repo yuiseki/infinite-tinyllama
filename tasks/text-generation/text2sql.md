@@ -1,6 +1,6 @@
 ## Task: `text2sql`
 
-### Name of TinyLLama
+### Name of new TinyLLama
 
 - `tinyllama-sql-coder-v1`
 
