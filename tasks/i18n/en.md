@@ -1,22 +1,41 @@
 ## Task: `en`
 
-### Status of this task
+### Name of new TinyLLama
+
+- None
+
+### Status
 
 - Completed
+- Nothing to do
 
-### Description of this task
+### Description
 
 - `en` is a task to make TinyLlama available in English
 - Enable TinyLlama to respond in English to English instructions.
 
-### Target language of this task
+### Target language
 
 - English
-
-### Name of TinyLLama for this task
-
-- `tinyllama-en-v1`
 
 ### Datasets for this task
 
 - None
+
+### Recipes
+
+- None
+
+### Evaluation
+
+#### Evaluation datasets
+
+- TBD
+
+#### Evaluation metrics
+
+- TBD
+
+#### Evaluation results
+
+- TBD

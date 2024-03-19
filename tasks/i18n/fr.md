@@ -1,18 +1,45 @@
 ## Task: `fr`
 
-### Description of this task
+### Name of new TinyLLama
+
+- `tinyllama-fr-v1`
+
+### Status
+
+- [x] Describe and define the task
+- [ ] List up available datasets for this task
+- [ ] Define recipes for this task
+- [ ] Train new TinyLlama for this task
+- [ ] Evaluate the performance of TinyLlama for this task
+- [ ] Release the new TinyLlama for this task to huggingface
+
+### Description
 
 - `fr` is a task to make TinyLlama available in French
 - Enable TinyLlama to respond in French to French instructions.
 
-### Target language of this task
+### Target language
 
 - French
 
-### Name of TinyLLama for this task
+### Datasets
 
-- `tinyllama-fr-v1`
+- TBD
 
-### Datasets for this task
+### Recipes
+
+- TBD
+
+### Evaluation
+
+#### Evaluation datasets
+
+- TBD
+
+#### Evaluation metrics
+
+- TBD
+
+#### Evaluation results
 
 - TBD
