@@ -10,7 +10,7 @@
 - [x] List up available datasets for this task
 - [x] Define recipes for this task
 - [x] Train new TinyLlama for this task
-- [ ] Evaluate the performance of TinyLlama for this task
+- [x] Evaluate the performance of TinyLlama for this task
 - [ ] Release the new TinyLlama for this task to huggingface
 
 ### Description
