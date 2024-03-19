@@ -15,21 +15,16 @@ train_num_train_epochs: 4
 train_max_steps: 200
 train_fp16: True
 inference_max_new_tokens: 16
-evaluation_prompts:
-  - "Pure Black: A shade that completely absorbs light and does not reflect any colors. It is the darkest possible shade."
-  - "Deep orange-brown: This color is a rich blend of orange and brown, similar to the hue of an autumn leaves or old-fashioned rust. It's vivid but also carries a decent amount of earthy depth."
-  - "pure brown color"
-  - "light orange color"
 evaluations:
   -
     prompt: "Pure Black: A shade that completely absorbs light and does not reflect any colors. It is the darkest possible shade."
     expected_output: "#000000"
   -
-    prompt: "Deep orange-brown: This color is a rich blend of orange and brown, similar to the hue of an autumn leaves or old-fashioned rust. It's vivid but also carries a decent amount of earthy depth."
-    expected_output: "#aa5033"
+    prompt: "yellow color"
+    expected_output: "#fff000"
   -
-    prompt: "pure brown color"
-    expected_output: "#a03010"
+    prompt: "sky blue color"
+    expected_output: "#3090c0"
   - 
     prompt: "light orange color"
-    expected_output: "#f08030"
+    expected_output: "#f08040"

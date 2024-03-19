@@ -42,8 +42,10 @@ def prepare_train_data(dataset_id):
         template = f"""\
         <|im_start|>user
         {hint}
-        context:{context}
-        question:{question}
+        context:
+        {context}
+        question:
+        {question}
         <|im_end|>
         <|im_start|>assistant
         {answer}
