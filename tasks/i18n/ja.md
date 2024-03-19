@@ -1,5 +1,10 @@
 ## Task: `ja`
 
+### Status of this task
+
+- [ ] List up available datasets for this task
+- [ ] Define recipes for this task
+
 ### Description of this task
 
 - `ja` is a task to make TinyLlama available in Japanese
