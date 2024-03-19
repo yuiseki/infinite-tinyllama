@@ -30,18 +30,4 @@
 
 ### Recipes
 
-- TBD
-
-### Evaluation
-
-#### Evaluation datasets
-
-- TBD
-
-#### Evaluation metrics
-
-- TBD
-
-#### Evaluation results
-
-- TBD
+- `recipes/RTX_3060_12GB/onomatopoeia-ja.yaml`

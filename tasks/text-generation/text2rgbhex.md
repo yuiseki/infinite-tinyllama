@@ -31,22 +31,3 @@
 ### Recipes
 
 - `recipes/RTX_3060_12GB/color-coder.yaml`
-
-### Evaluation
-
-#### Evaluation models
-
-- `TinyLlama/TinyLlama-1.1B-Chat-v1.0`
-- `tinyllama-color-coder-v1`
-
-#### Evaluation datasets
-
-- TBD
-
-#### Evaluation metrics
-
-- TBD
-
-#### Evaluation results
-
-- TBD

@@ -29,17 +29,3 @@
 ### Recipes
 
 - TBD
-
-### Evaluation
-
-#### Evaluation datasets
-
-- TBD
-
-#### Evaluation metrics
-
-- TBD
-
-#### Evaluation results
-
-- TBD

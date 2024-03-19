@@ -32,17 +32,3 @@
 ### Recipes
 
 - `recipes/RTX_3060_12GB/sql-coder.yaml`
-
-### Evaluation
-
-#### Evaluation datasets
-
-- TBD
-
-#### Evaluation metrics
-
-- TBD
-
-#### Evaluation results
-
-- TBD

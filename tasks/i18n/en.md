@@ -25,17 +25,3 @@
 ### Recipes
 
 - None
-
-### Evaluation
-
-#### Evaluation datasets
-
-- TBD
-
-#### Evaluation metrics
-
-- TBD
-
-#### Evaluation results
-
-- TBD
