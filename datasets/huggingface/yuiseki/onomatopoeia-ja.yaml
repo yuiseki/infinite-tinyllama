@@ -1,0 +1,23 @@
+type: huggingface
+id: yuiseki/onomatopoeia-ja
+url: https://huggingface.co/datasets/yuiseki/onomatopoeia-ja
+converted_size: 335KB
+license: MIT
+lang: multiple
+langs:
+  - ja
+  - en
+description: 5060件の日本語オノマトペのデータセット。
+structure:
+  - id: onomatopoeia_ja
+    type: string
+    description: Onomatopoeia (Japanese)
+  - id: translate_en
+    type: sequence
+    description: Onomatopoeia (English)
+  - id: details_ja
+    type: sequence
+    description: Details of onomatopoeia (Japanese)
+  - id: details_en
+    type: sequence
+    description: Details of onomatopoeia (English)
