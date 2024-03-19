@@ -68,6 +68,15 @@ def extract_user_input(prompt):
 def extract_assistant_output(output):
     return re.search(r'<\|im_start\|>assistant\n(.+)\n<\|im_end\|>', output, re.DOTALL).group(1)
 
+def extract_assistant_output_robust(output):
+    # <|im_start|>assistant はあるけど <|im_end|> がない場合は、<|im_start|>assistant から最後までを返す
+    match = re.search(r'<\|im_start\|>assistant\n(.+)', output, re.DOTALL)
+    if match:
+        return match.group(1)
+    else:
+        return output
+
+
 #
 # Evaluate
 #
@@ -89,7 +98,7 @@ def evaluate_model(model, train_config):
         try:
             extracted_output = extract_assistant_output(res)
         except AttributeError:
-            extracted_output = res
+            extracted_output = extract_assistant_output_robust(res)
         print(f"Expected Output:\t{expected_output}")
         print(f"Actual Output:\t\t{extracted_output}")
         print("\n\n")
