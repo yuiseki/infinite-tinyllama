@@ -21,3 +21,8 @@ evaluations:
   - 
     prompt: "How many heads of the departments are older than 56 ?"
     context: "CREATE TABLE head (age INTEGER)"
+    expected_output: "SELECT COUNT(*) FROM head WHERE age > 56"
+  -
+    prompt: "List the name, born state and age of the heads of departments ordered by age."
+    context: "CREATE TABLE head (name VARCHAR, born_state VARCHAR, age VARCHAR)"
+    expected_output: "SELECT name, born_state, age FROM head ORDER BY age"

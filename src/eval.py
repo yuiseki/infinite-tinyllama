@@ -93,13 +93,13 @@ if "evaluations" in train_config:
     for evaluation in train_config['evaluations']:
         start_time = perf_counter()
         input = evaluation['prompt']
+        print(input)
         expected_output = evaluation['expected_output']
         if "context" in evaluation:
             hint = train_config['dataset_context_hint']
             prompt = formatted_prompt_with_context(hint, input, evaluation['context'])
         else:
             prompt = formatted_prompt(input)
-        print(prompt)
         res = generate_response(prompt)
         extracted_res = extract_response(res)
         print("Output:")
@@ -107,4 +107,4 @@ if "evaluations" in train_config:
         print("Expected Output:")
         print(expected_output)
         output_time = perf_counter() - start_time
-        print(f"Time taken for inference: {round(output_time,2)} seconds\n\n")
+        print(f"\nTime taken for inference: {round(output_time,2)} seconds\n\n")
