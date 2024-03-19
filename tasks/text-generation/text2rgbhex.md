@@ -1,8 +1,8 @@
-## Task: text2rgbhex
+## Task: `text2rgbhex`
 
 ### Description of this task
 
-- text2rgbhex is a task of converting natural language text to RGB hex color codes
+- `text2rgbhex` is a task of converting natural language text to RGB hex color codes
 - The task is to generate a RGB hex color code from a natural language text
 - The RGB hex color code is used to represent the text as a color
 
@@ -12,7 +12,7 @@
 
 ### Name of TinyLLama for this task
 
-- tinyllama-color-coder-v1
+- `tinyllama-color-coder-v1`
 
 ### Datasets for this task
 

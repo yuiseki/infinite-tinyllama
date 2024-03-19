@@ -1,8 +1,8 @@
-## Task: text2onomatopeia
+## Task: `text2onomatopoeia`
 
 ### Description of this task
 
-- text2onomatopeia is a task of converting natural language text to onomatopoeia
+- `text2onomatopoeia` is a task of converting natural language text to onomatopoeia
 - The task is to generate an onomatopoeia from a natural language text
 - The onomatopoeia is used to represent the text as a sound
 
@@ -12,7 +12,7 @@
 
 ### Name of TinyLLama for this task
 
-- tinyllama-onomatopoeia-ja-v1
+- `tinyllama-onomatopoeia-ja-v1`
 
 ### Datasets for this task
 
