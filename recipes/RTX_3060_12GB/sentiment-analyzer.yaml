@@ -5,7 +5,7 @@ output_base_dir: output
 dataset_id: carblacac/twitter-sentiment-analysis
 dataset_input_hint: Given the text, predict whether it is positive or negative. You must always, without fail, output just only with 0 or 1.
 dataset_input_field_name: text
-dataset_output_field_name: label
+dataset_output_field_name: feeling
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8
