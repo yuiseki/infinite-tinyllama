@@ -25,8 +25,8 @@
 
 ### Datasets
 
-- TBD
+- https://huggingface.co/datasets/mrm8488/fake-news
 
 ### Recipes
 
-- TBD
+- `recipes/RTX_3060_12GB/fake-news-detector.yaml`
