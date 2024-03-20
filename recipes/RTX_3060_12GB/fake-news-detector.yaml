@@ -20,3 +20,6 @@ evaluations:
   -
     prompt: "Donald Trump has never been President of the United States."
     expected_output: "1"
+  -
+    prompt: "The Earth is flat."
+    expected_output: "1"
