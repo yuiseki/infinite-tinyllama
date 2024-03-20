@@ -7,7 +7,7 @@ all: $(targets)
 
 .PHONY: setup
 setup:
-	pip install -r requirements.txt
+	pip install accelerate peft bitsandbytes transformers trl
 
 .PHONY: eval-all
 eval-all: $(targets)
