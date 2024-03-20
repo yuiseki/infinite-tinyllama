@@ -22,3 +22,6 @@ output/tinyllama-sql-coder-v1/checkpoint-200/README.md:
 
 docker:
 	docker build --no-cache -t yuiseki/infinite-tinyllama:latest .
+
+docker-run:
+	docker run -it --rm --gpus all -v $(PWD):/app yuiseki/infinite-tinyllama:latest
