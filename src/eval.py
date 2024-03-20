@@ -31,6 +31,18 @@ def formatted_prompt(question)-> str:
     template = "\n".join([line.lstrip() for line in template.splitlines()])
     return template
 
+def formatted_prompt_with_hint(hint, question)-> str:
+    template = f"""\
+    <|im_start|>user
+    {hint}
+    {question}
+    <|im_end|>
+    <|im_start|>assistant
+    """
+    # Remove any leading whitespace characters from each line in the template.
+    template = "\n".join([line.lstrip() for line in template.splitlines()])
+    return template
+
 def formatted_prompt_with_context(hint, question, context)-> str:
     template = f"""\
     <|im_start|>user
@@ -88,6 +100,9 @@ def evaluate_model(model, train_config):
         if "context" in evaluation:
             hint = train_config['dataset_context_hint']
             prompt = formatted_prompt_with_context(hint, input, evaluation['context'])
+        elif "hint" in evaluation:
+            hint = evaluation['hint']
+            prompt = formatted_prompt_with_hint(hint, input)
         else:
             prompt = formatted_prompt(input)
         extracted_input = extract_user_input(prompt)

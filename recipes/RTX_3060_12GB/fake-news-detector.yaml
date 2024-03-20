@@ -3,6 +3,7 @@ base_model_id: TinyLlama/TinyLlama-1.1B-Chat-v1.0
 model_name: tinyllama-fake-news-detector-v1
 output_base_dir: output
 dataset_id: mrm8488/fake-news
+dataset_input_hint: Given the text, predict whether it is fake news or not. You must always respond only with 0 or 1.
 dataset_input_field_name: text
 dataset_output_field_name: label
 dataset_train_split_seed: 42

@@ -38,6 +38,20 @@ def prepare_train_data(dataset_id):
         template = "\n".join([line.lstrip() for line in template.splitlines()])
         return template
 
+    def hint_template_for_train(hint, question, answer):
+        template = f"""\
+        <|im_start|>user
+        {hint}
+        {question}
+        <|im_end|>
+        <|im_start|>assistant
+        {answer}
+        <|im_end|>
+        """
+        # Remove any leading whitespace characters from each line in the template.
+        template = "\n".join([line.lstrip() for line in template.splitlines()])
+        return template
+
     def context_template_for_train(hint, context, question, answer):
         template = f"""\
         <|im_start|>user
@@ -64,6 +78,9 @@ def prepare_train_data(dataset_id):
         context_hint = train_config['dataset_context_hint']
         context_field_name = train_config['dataset_context_field_name']
         data_df["text"] = data_df[[context_field_name, input_field_name, output_field_name]].apply(lambda x: context_template_for_train(context_hint, x[context_field_name], x[input_field_name], x[output_field_name]), axis=1)
+    elif "dataset_input_hint" in train_config:
+        input_hint = train_config['dataset_input_hint']
+        data_df["text"] = data_df[[input_field_name, output_field_name]].apply(lambda x: hint_template_for_train(input_hint, x[input_field_name], x[output_field_name]), axis=1)
     else:
         data_df["text"] = data_df[[input_field_name, output_field_name]].apply(lambda x: simple_template_for_train(x[input_field_name], x[output_field_name]), axis=1)
 
