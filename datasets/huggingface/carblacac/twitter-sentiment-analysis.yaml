@@ -11,4 +11,4 @@ structure:
     description: text
   - id: feeling
     type: int32
-    description: feeling of the text. 1 for positive, 0 for neutral and -1 for negative
+    description: Each feeling has two possible values, 0 indicates the sentence has a negative sentiment, while 1 indicates a positive feeling.

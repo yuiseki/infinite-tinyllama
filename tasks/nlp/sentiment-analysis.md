@@ -7,7 +7,7 @@
 ### Status
 
 - [x] Describe and define the task
-- [ ] List up available datasets for this task
+- [x] List up available datasets for this task
 - [ ] Define recipes for this task
 - [ ] Train new TinyLlama for this task
 - [ ] Evaluate the performance of TinyLlama for this task
@@ -25,7 +25,7 @@
 
 ### Datasets
 
-- TBD
+- https://huggingface.co/datasets/carblacac/twitter-sentiment-analysis
 
 ### Recipes
 

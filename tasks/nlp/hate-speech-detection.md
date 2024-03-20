@@ -25,8 +25,8 @@
 
 ### Datasets
 
-- TBD
+- https://huggingface.co/datasets/tweets_hate_speech_detection
 
 ### Recipes
 
-- TBD
+- `recipes/RTX_3060_12GB/hate-speech-detector.yaml`
