@@ -1,0 +1,20 @@
+type: huggingface
+id: facebook/flores
+url: https://huggingface.co/datasets/facebook/flores
+converted_size: Unknown
+license: CC-BY-SA-4.0
+lang: multiple
+description: FLORES is a benchmark dataset for machine translation between English and low-resource languages.
+structure:
+  - id: id
+    type: int64
+    description: ID
+  - id: sentence
+    type: string
+    description: Sentence
+  - id: domain
+    type: string
+    description: Domain
+  - id: topic
+    type: string
+    description: Topic
