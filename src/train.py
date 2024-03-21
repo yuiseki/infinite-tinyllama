@@ -120,7 +120,7 @@ def load_model_and_tokenizer(model_id):
     # Disable cache to improve training speed.
     model.config.use_cache = False
     # Set the temperature for pretraining to 1.
-    model.config.pretraining_tp = 1 
+    model.config.pretraining_tp = 1
     return model, tokenizer
 
 model_id = train_config['base_model_id']
