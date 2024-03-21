@@ -2,6 +2,7 @@ from datasets import load_dataset, Dataset
 from peft import LoraConfig, AutoPeftModelForCausalLM, PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainingArguments, GenerationConfig
 from trl import SFTTrainer
+import torch
 import wandb
 
 from time import perf_counter
@@ -114,13 +115,14 @@ def load_model_and_tokenizer(model_id):
     # Load the model from the specified model ID and apply the quantization configuration.
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
-        quantization_config=bnb_config,
+        # quantization_config=bnb_config,
         device_map="auto"
     )
     # Disable cache to improve training speed.
     model.config.use_cache = False
     # Set the temperature for pretraining to 1.
     model.config.pretraining_tp = 1
+    print(model.hf_device_map)
     return model, tokenizer
 
 model_id = train_config['base_model_id']
