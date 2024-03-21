@@ -26,3 +26,9 @@ evaluations:
   -
     prompt: "Hello"
     expected_output: "こんにちは"
+  -
+    prompt: "How are you?"
+    expected_output: "お元気ですか？"
+  -
+    prompt: "I am hungry"
+    expected_output: "お腹が空いています"
