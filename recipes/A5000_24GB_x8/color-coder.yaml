@@ -1,5 +1,5 @@
 target_task: tasks/text-generation/text2rgbhex.md
-base_model_id: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
 model_name: tinyllama-color-coder-v1
 output_base_dir: output
 dataset_id: burkelibbey/colors

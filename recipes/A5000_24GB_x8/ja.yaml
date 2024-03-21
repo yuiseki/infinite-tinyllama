@@ -1,5 +1,5 @@
 target_task: tasks/nlp/hate-speech-detection.md
-base_model_id: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
 model_name: tinyllama-ja-v1
 output_base_dir: output
 dataset_id: izumi-lab/llm-japanese-dataset-vanilla
