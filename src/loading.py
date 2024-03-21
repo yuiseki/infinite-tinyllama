@@ -30,3 +30,6 @@ for file in files:
     except Exception as e:
         print(f"Error loading dataset: {e}")
         continue
+
+# wiki40b ja
+load_dataset('wiki40b', 'ja')
