@@ -19,5 +19,10 @@ for file in files:
     print(data['converted_size'])
     # FIXME: MB単位のやつだけload_datasetで準備しておく
     if data['converted_size'][-2:] == 'MB':
-        dataset = load_dataset(data['id'])
-        print(dataset)
+        # エラー時はcontinueする
+        try:
+            dataset = load_dataset(data['id'])
+            print(dataset)
+        except Exception as e:
+            print(f"Error loading dataset: {e}")
+            continue
