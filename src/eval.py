@@ -155,7 +155,7 @@ tokenizer.pad_token = tokenizer.eos_token
 #
 # Evaluate base model
 #
-print("===== ===== ===== Evaluating base model...")
+print("===== ===== ===== Evaluating base model... ===== ===== =====")
 base_model_score = evaluate_model(base_model, train_config)
 
 #
@@ -169,7 +169,7 @@ merged_model = peft_model.merge_and_unload()
 #
 # Evaluate merged model
 #
-print("===== ===== ===== Evaluating merged model...")
+print("===== ===== ===== Evaluating merged model... ===== ===== =====")
 merged_model_score = evaluate_model(merged_model, train_config)
 
 print(f"Base model score: {base_model_score}")
