@@ -1,11 +1,10 @@
 target_task: tasks/i18n/ja.md
 base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
-model_name: tinyllama-ja-v1
+model_name: tinyllama-ja-aya-v1
 output_base_dir: output
-dataset_id: izumi-lab/llm-japanese-dataset-vanilla
-dataset_input_field_name: instruction
-dataset_context_field_name: input
-dataset_output_field_name: output
+dataset_id: ryota39/Aya_ja
+dataset_input_field_name: inputs
+dataset_output_field_name: targets
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8
