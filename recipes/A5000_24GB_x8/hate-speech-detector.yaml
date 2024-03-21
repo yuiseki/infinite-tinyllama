@@ -3,7 +3,6 @@ base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
 model_name: tinyllama-hate-speech-detector-v1
 output_base_dir: output
 dataset_id: tweets_hate_speech_detection
-dataset_input_hint: Given the text, predict whether it is hate speech or not. You must always, without fail, output just only with 0 or 1.
 dataset_input_field_name: tweet
 dataset_output_field_name: label
 dataset_train_split_seed: 42
@@ -17,7 +16,7 @@ train_gradient_accumulation_steps: 4
 train_num_train_epochs: 4
 train_max_steps: 1000
 train_fp16: True
-inference_max_new_tokens: 16
+inference_max_new_tokens: 1
 evaluations:
   -
     prompt: "the white establishment can't have blk folx running around loving themselves and promoting our greatness"
