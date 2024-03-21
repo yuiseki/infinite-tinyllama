@@ -19,8 +19,11 @@ train_fp16: True
 inference_max_new_tokens: 16
 evaluations:
   -
-    prompt: "Yes my laptop works So now i can abort my diplomthesis"
-    expected_output: "1"
+    prompt: "格闘家ボブ・サップの出身国はどこでしょう？"
+    context: ""
+    expected_output: "アメリカ"
+
   -
-    prompt: "Hmm don't know what to do today -- Model just canceled = I hate it when that happens..will have to do gardening!	"
-    expected_output: "1"
+    prompt: "以下の日本語をやさしい日本語に言い換えてください。"
+    context: "ジョーンズ先生は授業中、いねむりをしたかどで私を叱った。"
+    expected_output: "私は授業中に寝ていて、ジョーンズ先生に怒られた。"
