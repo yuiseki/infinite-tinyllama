@@ -1,0 +1,34 @@
+target_task: tasks/i18n/ja.md
+base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
+model_name: tinyllama-ja-databricks-dolly-v1
+output_base_dir: output
+dataset_id: llm-jp/databricks-dolly-15k-ja
+dataset_context_field_name: context
+dataset_input_field_name: instruction
+dataset_output_field_name: response
+dataset_filter_field_value: 0
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.2
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_clain_gpu_num: 4
+train_per_device_train_batch_size: 8
+train_gradient_accumulation_steps: 4
+train_num_train_epochs: 4
+train_max_steps: 1000
+train_fp16: True
+inference_max_new_tokens: 32
+evaluations:
+  -
+    prompt: "２つ以上の文字を組み合わせて図案化したもののことで、特にルイ・ヴィトンのものが知られるのは何でしょう？"
+    context: ""
+    expected_output: "モノグラム"
+  -
+    prompt: "幾つかの布切れを縫いあわせ、飾りや模様を作る手芸方法を何というでしょう？"
+    context: ""
+    expected_output: "パッチワーク"
+  -
+    prompt: "格闘家ボブ・サップの出身国はどこでしょう？"
+    context: ""
+    expected_output: "アメリカ"
