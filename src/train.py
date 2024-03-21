@@ -53,7 +53,21 @@ def prepare_train_data(dataset_id):
         template = "\n".join([line.lstrip() for line in template.splitlines()])
         return template
 
-    def context_template_for_train(hint, context, question, answer):
+    def context_template_for_train(context, question, answer):
+        template = f"""\
+        <|im_start|>user
+        {question}
+        {context}
+        <|im_end|>
+        <|im_start|>assistant
+        {answer}
+        <|im_end|>
+        """
+        # Remove any leading whitespace characters from each line in the template.
+        template = "\n".join([line.lstrip() for line in template.splitlines()])
+        return template
+
+    def context_hint_template_for_train(hint, context, question, answer):
         template = f"""\
         <|im_start|>user
         {hint}
@@ -76,9 +90,12 @@ def prepare_train_data(dataset_id):
     input_field_name = train_config['dataset_input_field_name']
     output_field_name = train_config['dataset_output_field_name']
     if "dataset_context_field_name" in train_config:
-        context_hint = train_config['dataset_context_hint']
         context_field_name = train_config['dataset_context_field_name']
-        data_df["text"] = data_df[[context_field_name, input_field_name, output_field_name]].apply(lambda x: context_template_for_train(context_hint, x[context_field_name], x[input_field_name], x[output_field_name]), axis=1)
+        if "dataset_context_hint" not in train_config:
+            data_df["text"] = data_df[[context_field_name, input_field_name, output_field_name]].apply(lambda x: context_template_for_train(x[context_field_name], x[input_field_name], x[output_field_name]), axis=1)
+        else:
+            context_hint = train_config['dataset_context_hint']
+            data_df["text"] = data_df[[context_field_name, input_field_name, output_field_name]].apply(lambda x: context_hint_template_for_train(context_hint, x[context_field_name], x[input_field_name], x[output_field_name]), axis=1)
     elif "dataset_input_hint" in train_config:
         input_hint = train_config['dataset_input_hint']
         data_df["text"] = data_df[[input_field_name, output_field_name]].apply(lambda x: hint_template_for_train(input_hint, x[input_field_name], x[output_field_name]), axis=1)
