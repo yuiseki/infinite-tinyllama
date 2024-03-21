@@ -23,69 +23,76 @@ filepath = sys.argv[1]
 train_config = load_yaml(filepath)
 
 #
+# Template
+#
+def simple_template_for_train(input, output)->str:
+    template = f"""\
+    <|im_start|>user
+    {input}
+    <|im_end|>
+    <|im_start|>assistant
+    {output}
+    <|im_end|>
+    """
+    # Remove any leading whitespace characters from each line in the template.
+    template = "\n".join([line.lstrip() for line in template.splitlines()])
+    return template
+
+def hint_template_for_train(hint, question, answer):
+    template = f"""\
+    <|im_start|>user
+    {hint}
+    {question}
+    <|im_end|>
+    <|im_start|>assistant
+    {answer}
+    <|im_end|>
+    """
+    # Remove any leading whitespace characters from each line in the template.
+    template = "\n".join([line.lstrip() for line in template.splitlines()])
+    return template
+
+def context_template_for_train(context, question, answer):
+    template = f"""\
+    <|im_start|>user
+    {question}
+    {context}
+    <|im_end|>
+    <|im_start|>assistant
+    {answer}
+    <|im_end|>
+    """
+    # Remove any leading whitespace characters from each line in the template.
+    template = "\n".join([line.lstrip() for line in template.splitlines()])
+    return template
+
+def context_hint_template_for_train(hint, context, question, answer):
+    template = f"""\
+    <|im_start|>user
+    {hint}
+    context:
+    {context}
+    question:
+    {question}
+    <|im_end|>
+    <|im_start|>assistant
+    {answer}
+    <|im_end|>
+    """
+    # Remove any leading whitespace characters from each line in the template.
+    template = "\n".join([line.lstrip() for line in template.splitlines()])
+    return template
+
+#
 # Prepare train data
 #
 def prepare_train_data(dataset_id):
-    def simple_template_for_train(input, output)->str:
-        template = f"""\
-        <|im_start|>user
-        {input}
-        <|im_end|>
-        <|im_start|>assistant
-        {output}
-        <|im_end|>
-        """
-        # Remove any leading whitespace characters from each line in the template.
-        template = "\n".join([line.lstrip() for line in template.splitlines()])
-        return template
-
-    def hint_template_for_train(hint, question, answer):
-        template = f"""\
-        <|im_start|>user
-        {hint}
-        {question}
-        <|im_end|>
-        <|im_start|>assistant
-        {answer}
-        <|im_end|>
-        """
-        # Remove any leading whitespace characters from each line in the template.
-        template = "\n".join([line.lstrip() for line in template.splitlines()])
-        return template
-
-    def context_template_for_train(context, question, answer):
-        template = f"""\
-        <|im_start|>user
-        {question}
-        {context}
-        <|im_end|>
-        <|im_start|>assistant
-        {answer}
-        <|im_end|>
-        """
-        # Remove any leading whitespace characters from each line in the template.
-        template = "\n".join([line.lstrip() for line in template.splitlines()])
-        return template
-
-    def context_hint_template_for_train(hint, context, question, answer):
-        template = f"""\
-        <|im_start|>user
-        {hint}
-        context:
-        {context}
-        question:
-        {question}
-        <|im_end|>
-        <|im_start|>assistant
-        {answer}
-        <|im_end|>
-        """
-        # Remove any leading whitespace characters from each line in the template.
-        template = "\n".join([line.lstrip() for line in template.splitlines()])
-        return template
-
     data = load_dataset(dataset_id, split="train")
+
     data_df = data.to_pandas()
+
+    if "dataset_filter_field_name" in train_config:
+        data_df = data_df[data_df[train_config['dataset_filter_field_name']] == train_config['dataset_filter_field_value']]
 
     input_field_name = train_config['dataset_input_field_name']
     output_field_name = train_config['dataset_output_field_name']
@@ -104,6 +111,7 @@ def prepare_train_data(dataset_id):
 
     data = Dataset.from_pandas(data_df)
     data = data.train_test_split(seed=42, test_size=0.2)
+    print(len(data["train"]))
     return data
 
 dataset_id = train_config['dataset_id']
