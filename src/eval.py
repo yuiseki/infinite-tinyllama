@@ -110,6 +110,7 @@ def evaluate_model(model, train_config):
         print(extracted_input)
         print("")
         res = generate_response(model, prompt)
+        print(res)
         try:
             extracted_output = extract_assistant_output(res)
         except AttributeError:

@@ -6,10 +6,10 @@ import torch
 import wandb
 
 from time import perf_counter
+import yaml
 import sys
 import os
 os.environ['TRANSFORMERS_NO_ADVISORY_WARNINGS'] = 'true'
-import yaml
 
 
 # 指定されたファイルパスからyamlファイルを読み込む
@@ -115,7 +115,8 @@ def load_model_and_tokenizer(model_id):
     # Load the model from the specified model ID and apply the quantization configuration.
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
-        # quantization_config=bnb_config,
+        quantization_config=bnb_config,
+        trust_remote_code=True,
         device_map="auto"
     )
     # Disable cache to improve training speed.
