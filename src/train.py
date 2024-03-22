@@ -1,15 +1,23 @@
-from datasets import load_dataset, Dataset
-from peft import LoraConfig, AutoPeftModelForCausalLM, PeftModel
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, TrainingArguments, GenerationConfig
-from trl import SFTTrainer
+import os
+import sys
+from time import perf_counter
+
 import torch
 import wandb
-
-from time import perf_counter
 import yaml
-import sys
-import os
-os.environ['TRANSFORMERS_NO_ADVISORY_WARNINGS'] = 'true'
+from peft import AutoPeftModelForCausalLM, LoraConfig, PeftModel
+from transformers import (
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    BitsAndBytesConfig,
+    GenerationConfig,
+    TrainingArguments,
+)
+from trl import SFTTrainer
+
+from datasets import Dataset, load_dataset
+
+os.environ["TRANSFORMERS_NO_ADVISORY_WARNINGS"] = "true"
 
 
 # 指定されたファイルパスからyamlファイルを読み込む
@@ -18,14 +26,16 @@ def load_yaml(file_path):
         data = yaml.safe_load(file)
     return data
 
+
 # 実行時の1番目の引数をload_yamlに渡す
 filepath = sys.argv[1]
 train_config = load_yaml(filepath)
 
+
 #
 # Template
 #
-def simple_template_for_train(input, output)->str:
+def simple_template_for_train(input, output) -> str:
     template = f"""\
     <|im_start|>user
     {input}
@@ -37,6 +47,7 @@ def simple_template_for_train(input, output)->str:
     # Remove any leading whitespace characters from each line in the template.
     template = "\n".join([line.lstrip() for line in template.splitlines()])
     return template
+
 
 def hint_template_for_train(hint, question, answer):
     template = f"""\
@@ -52,6 +63,7 @@ def hint_template_for_train(hint, question, answer):
     template = "\n".join([line.lstrip() for line in template.splitlines()])
     return template
 
+
 def context_template_for_train(context, question, answer):
     template = f"""\
     <|im_start|>user
@@ -65,6 +77,7 @@ def context_template_for_train(context, question, answer):
     # Remove any leading whitespace characters from each line in the template.
     template = "\n".join([line.lstrip() for line in template.splitlines()])
     return template
+
 
 def context_hint_template_for_train(hint, context, question, answer):
     template = f"""\
@@ -83,6 +96,7 @@ def context_hint_template_for_train(hint, context, question, answer):
     template = "\n".join([line.lstrip() for line in template.splitlines()])
     return template
 
+
 #
 # Prepare train data
 #
@@ -92,30 +106,62 @@ def prepare_train_data(dataset_id):
     data_df = data.to_pandas()
 
     if "dataset_filter_field_name" in train_config:
-        data_df = data_df[data_df[train_config['dataset_filter_field_name']] == train_config['dataset_filter_field_value']]
+        data_df = data_df[
+            data_df[train_config["dataset_filter_field_name"]]
+            == train_config["dataset_filter_field_value"]
+        ]
 
-    input_field_name = train_config['dataset_input_field_name']
-    output_field_name = train_config['dataset_output_field_name']
+    input_field_name = train_config["dataset_input_field_name"]
+    output_field_name = train_config["dataset_output_field_name"]
     if "dataset_context_field_name" in train_config:
-        context_field_name = train_config['dataset_context_field_name']
+        context_field_name = train_config["dataset_context_field_name"]
         if "dataset_context_hint" not in train_config:
-            data_df["text"] = data_df[[context_field_name, input_field_name, output_field_name]].apply(lambda x: context_template_for_train(x[context_field_name], x[input_field_name], x[output_field_name]), axis=1)
+            data_df["text"] = data_df[
+                [context_field_name, input_field_name, output_field_name]
+            ].apply(
+                lambda x: context_template_for_train(
+                    x[context_field_name], x[input_field_name], x[output_field_name]
+                ),
+                axis=1,
+            )
         else:
-            context_hint = train_config['dataset_context_hint']
-            data_df["text"] = data_df[[context_field_name, input_field_name, output_field_name]].apply(lambda x: context_hint_template_for_train(context_hint, x[context_field_name], x[input_field_name], x[output_field_name]), axis=1)
+            context_hint = train_config["dataset_context_hint"]
+            data_df["text"] = data_df[
+                [context_field_name, input_field_name, output_field_name]
+            ].apply(
+                lambda x: context_hint_template_for_train(
+                    context_hint,
+                    x[context_field_name],
+                    x[input_field_name],
+                    x[output_field_name],
+                ),
+                axis=1,
+            )
     elif "dataset_input_hint" in train_config:
-        input_hint = train_config['dataset_input_hint']
-        data_df["text"] = data_df[[input_field_name, output_field_name]].apply(lambda x: hint_template_for_train(input_hint, x[input_field_name], x[output_field_name]), axis=1)
+        input_hint = train_config["dataset_input_hint"]
+        data_df["text"] = data_df[[input_field_name, output_field_name]].apply(
+            lambda x: hint_template_for_train(
+                input_hint, x[input_field_name], x[output_field_name]
+            ),
+            axis=1,
+        )
     else:
-        data_df["text"] = data_df[[input_field_name, output_field_name]].apply(lambda x: simple_template_for_train(x[input_field_name], x[output_field_name]), axis=1)
+        data_df["text"] = data_df[[input_field_name, output_field_name]].apply(
+            lambda x: simple_template_for_train(
+                x[input_field_name], x[output_field_name]
+            ),
+            axis=1,
+        )
 
     data = Dataset.from_pandas(data_df)
     data = data.train_test_split(seed=42, test_size=0.2)
     print(len(data["train"]))
     return data
 
-dataset_id = train_config['dataset_id']
+
+dataset_id = train_config["dataset_id"]
 data = prepare_train_data(dataset_id)
+
 
 #
 # Load the model and tokenizer
@@ -135,14 +181,14 @@ def load_model_and_tokenizer(model_id):
         # Specify the data type to use for computations during training.
         bnb_4bit_compute_dtype="float16",
         # Specify whether to use double quantization for 4-bit quantization.
-        bnb_4bit_use_double_quant=True
+        bnb_4bit_use_double_quant=True,
     )
     # Load the model from the specified model ID and apply the quantization configuration.
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
         quantization_config=bnb_config,
         trust_remote_code=True,
-        device_map="auto"
+        device_map="auto",
     )
     # Disable cache to improve training speed.
     model.config.use_cache = False
@@ -151,18 +197,19 @@ def load_model_and_tokenizer(model_id):
     print(model.hf_device_map)
     return model, tokenizer
 
-model_id = train_config['base_model_id']
+
+model_id = train_config["base_model_id"]
 model, tokenizer = load_model_and_tokenizer(model_id)
 
 
-os.environ["WANDB_PROJECT"]="infinite-tinyllama"
-os.environ["WANDB_LOG_MODEL"]="false"
-os.environ["WANDB_WATCH"]="all"
+os.environ["WANDB_PROJECT"] = "infinite-tinyllama"
+os.environ["WANDB_LOG_MODEL"] = "false"
+os.environ["WANDB_WATCH"] = "all"
 wandb.init(
     project="infinite-tinyllama",
-    name=train_config['model_name'],
-    group=train_config['model_name'],
-    config=train_config
+    name=train_config["model_name"],
+    group=train_config["model_name"],
+    config=train_config,
 )
 
 #
@@ -170,27 +217,27 @@ wandb.init(
 #
 
 peft_config = LoraConfig(
-    r=int(train_config['lora_r']),
-    lora_alpha=int(train_config['lora_alpha']),
-    lora_dropout=float(train_config['lora_dropout']),
+    r=int(train_config["lora_r"]),
+    lora_alpha=int(train_config["lora_alpha"]),
+    lora_dropout=float(train_config["lora_dropout"]),
     bias="none",
-    task_type="CAUSAL_LM"
+    task_type="CAUSAL_LM",
 )
 
-output_dir = os.path.join(train_config['output_base_dir'], train_config['model_name'])
+output_dir = os.path.join(train_config["output_base_dir"], train_config["model_name"])
 training_arguments = TrainingArguments(
     output_dir=output_dir,
     report_to="wandb",
-    per_device_train_batch_size=int(train_config['train_per_device_train_batch_size']),
-    gradient_accumulation_steps=int(train_config['train_gradient_accumulation_steps']),
+    per_device_train_batch_size=int(train_config["train_per_device_train_batch_size"]),
+    gradient_accumulation_steps=int(train_config["train_gradient_accumulation_steps"]),
     optim="paged_adamw_32bit",
     learning_rate=2e-4,
     lr_scheduler_type="cosine",
     save_strategy="epoch",
     logging_steps=10,
-    num_train_epochs=int(train_config['train_num_train_epochs']),
-    max_steps=int(train_config['train_max_steps']),
-    fp16=True
+    num_train_epochs=int(train_config["train_num_train_epochs"]),
+    max_steps=int(train_config["train_max_steps"]),
+    fp16=True,
 )
 
 trainer = SFTTrainer(
@@ -202,7 +249,7 @@ trainer = SFTTrainer(
     args=training_arguments,
     tokenizer=tokenizer,
     packing=False,
-    max_seq_length=1024
+    max_seq_length=1024,
 )
 
 #
