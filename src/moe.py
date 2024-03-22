@@ -11,9 +11,7 @@ os.environ["TRANSFORMERS_NO_ADVISORY_WARNINGS"] = "true"
 
 
 def perplexity(model, tokenizer, text) -> torch.Tensor:
-    tokenized_input = tokenizer.encode(
-        text, add_special_tokens=False, return_tensors="pt"
-    ).to(model.device)
+    tokenized_input = tokenizer.encode(text, add_special_tokens=False, return_tensors="pt").to(model.device)
     with torch.inference_mode():
         output = model(tokenized_input, labels=tokenized_input)
     ppl = torch.exp(output.loss)
@@ -89,9 +87,7 @@ for model_path in model_path_list:
         moe.append_ELM(model, tokenizer)
         continue
 
-    peft_model = PeftModel.from_pretrained(
-        model, model_path, from_transformers=True, device_map="auto"
-    )
+    peft_model = PeftModel.from_pretrained(model, model_path, from_transformers=True, device_map="auto")
     model = peft_model.merge_and_unload()
     moe.append_ELM(model, tokenizer)
 

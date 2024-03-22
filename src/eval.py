@@ -97,15 +97,11 @@ def generate_response(target_model, prompt):
 
 
 def extract_user_input(prompt):
-    return re.search(
-        r"<\|im_start\|>user\n(.+)\n<\|im_end\|>", prompt, re.DOTALL
-    ).group(1)
+    return re.search(r"<\|im_start\|>user\n(.+)\n<\|im_end\|>", prompt, re.DOTALL).group(1)
 
 
 def extract_assistant_output(output):
-    return re.search(
-        r"<\|im_start\|>assistant\n(.+)\n<\|im_end\|>", output, re.DOTALL
-    ).group(1)
+    return re.search(r"<\|im_start\|>assistant\n(.+)\n<\|im_end\|>", output, re.DOTALL).group(1)
 
 
 def extract_assistant_output_robust(output):
@@ -130,9 +126,7 @@ def evaluate_model(model, train_config):
                 prompt = formatted_prompt_with_context(input, evaluation["context"])
             else:
                 hint = train_config["dataset_context_hint"]
-                prompt = formatted_prompt_with_hint_and_context(
-                    hint, input, evaluation["context"]
-                )
+                prompt = formatted_prompt_with_hint_and_context(hint, input, evaluation["context"])
         elif "hint" in evaluation:
             hint = evaluation["hint"]
             prompt = formatted_prompt_with_hint(hint, input)
@@ -185,9 +179,7 @@ model_path = os.path.join(
     train_config["model_name"],
     f"checkpoint-{train_config['train_max_steps']}",
 )
-peft_model = PeftModel.from_pretrained(
-    base_model, model_path, from_transformers=True, device_map="auto"
-)
+peft_model = PeftModel.from_pretrained(base_model, model_path, from_transformers=True, device_map="auto")
 
 merged_model = peft_model.merge_and_unload()
 

@@ -26,10 +26,7 @@ for file in files:
         # MBオーダーかどうか
         is_mb_dataset = data["converted_size"][-2:] == "MB"
         # 10GB以下のデータセットかどうか
-        is_lte_10gb_dataset = (
-            data["converted_size"][-2:] == "GB"
-            and float(data["converted_size"][:-2]) <= 10
-        )
+        is_lte_10gb_dataset = data["converted_size"][-2:] == "GB" and float(data["converted_size"][:-2]) <= 10
         # MBオーダーか10GB以下のデータセットの場合のみ読み込む
         if is_mb_dataset or is_lte_10gb_dataset:
             dataset = load_dataset(data["id"])

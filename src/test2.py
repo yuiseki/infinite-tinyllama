@@ -21,9 +21,7 @@ bnb_config = BitsAndBytesConfig(
     bnb_4bit_use_double_quant=True,
 )
 # Load the model from the specified model ID and apply the quantization configuration.
-model = AutoModelForCausalLM.from_pretrained(
-    model_id, quantization_config=bnb_config, device_map="auto"
-)
+model = AutoModelForCausalLM.from_pretrained(model_id, quantization_config=bnb_config, device_map="auto")
 # Disable cache to improve training speed.
 model.config.use_cache = False
 # Set the temperature for pretraining to 1.
