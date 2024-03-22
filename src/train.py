@@ -160,7 +160,9 @@ os.environ["WANDB_LOG_MODEL"]="false"
 os.environ["WANDB_WATCH"]="all"
 wandb.init(
     project="infinite-tinyllama",
+    name=train_config['model_name'],
     group=train_config['model_name'],
+    # config=train_config
 )
 
 #
