@@ -1,6 +1,6 @@
 target_task: tasks/i18n/ja.md
 base_model_id: lightblue/karasu-1.1B
-model_name: tinyllama-ja-databricks-dolly-v1
+model_name: karasu-databricks-dolly-v1
 output_base_dir: output
 dataset_id: llm-jp/databricks-dolly-15k-ja
 dataset_context_field_name: context
