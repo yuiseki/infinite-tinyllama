@@ -1,0 +1,29 @@
+target_task: tasks/text-generation/text2onomatopoeia.md
+base_model_id: lightblue/karasu-1.1B
+model_name: karasu-onomatopoeia-ja-v0.1
+output_base_dir: output
+dataset_id: yuiseki/onomatopoeia-ja-flat
+dataset_input_field_name: text
+dataset_output_field_name: onomatopoeia_ja
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.2
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_claim_gpu_num: 4
+train_per_device_train_batch_size: 16
+train_gradient_accumulation_steps: 4
+train_num_train_epochs: 4
+train_max_steps: 1000
+train_fp16: True
+inference_max_new_tokens: 16
+evaluations:
+  -
+    prompt: "ネコが鳴いている"
+    expected_output: "ニャー"
+  - prompt: "寝ている"
+    expected_output: "スヤスヤ"
+  - prompt: "強い雨が降っている"
+    expected_output: "ザーザー"
+  - prompt: "強い風が吹いている"
+    expected_output: "ビュービュー"
