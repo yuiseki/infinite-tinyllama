@@ -1,8 +1,7 @@
 import glob
 
 import yaml
-
-from datasets import load_dataset
+from datasets.load import load_dataset
 
 
 # 指定されたファイルパスからyamlファイルを読み込む

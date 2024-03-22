@@ -3,6 +3,8 @@ import sys
 
 import wandb
 import yaml
+from datasets.arrow_dataset import Dataset
+from datasets.load import load_dataset
 from peft import LoraConfig
 from transformers import (
     AutoModelForCausalLM,
@@ -11,8 +13,6 @@ from transformers import (
     TrainingArguments,
 )
 from trl import SFTTrainer
-
-from datasets import Dataset, load_dataset
 
 os.environ["TRANSFORMERS_NO_ADVISORY_WARNINGS"] = "true"
 
