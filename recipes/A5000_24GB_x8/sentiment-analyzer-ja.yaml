@@ -1,6 +1,6 @@
 target_task: tasks/nlp/sentiment-analysis.md
 base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
-model_name: tinyllama-sentiment-analyzer-ja-v1
+model_name: tinyllama-sentiment-analyzer-ja-v0.1
 output_base_dir: output
 dataset_id: llm-book/wrime-sentiment
 dataset_input_field_name: sentence

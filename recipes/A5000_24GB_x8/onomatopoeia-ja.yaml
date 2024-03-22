@@ -1,6 +1,6 @@
 target_task: tasks/text-generation/text2onomatopoeia.md
-base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
-model_name: tinyllama-onomatopoeia-ja-v1
+base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-480k-1T
+model_name: tinyllama-onomatopoeia-ja-v0.1
 output_base_dir: output
 dataset_id: yuiseki/onomatopoeia-ja-flat
 dataset_input_field_name: text
