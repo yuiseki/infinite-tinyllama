@@ -40,6 +40,3 @@ for file in files:
 
 # wiki40b ja
 load_dataset("wiki40b", "ja")
-
-# wiki40b ja
-load_dataset("wiki40b", "ja")
