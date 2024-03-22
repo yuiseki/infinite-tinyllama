@@ -1,0 +1,11 @@
+type: huggingface
+id: timdettmers/openassistant-guanaco
+url: https://huggingface.co/datasets/timdettmers/openassistant-guanaco
+converted_size: 9.68MB
+license: Unknown
+lang: en
+description: This dataset is a subset of the OpenAssistant/oasst1 dataset. This subset of the data only contains the highest-rated paths in the conversation tree, with a total of 9,846 samples.
+structure:
+  - id: text
+    type: string
+    description: text
