@@ -1,0 +1,17 @@
+type: huggingface
+id: cognitivecomputations/dolphin
+url: https://huggingface.co/datasets/cognitivecomputations/dolphin
+converted_size: 3.6GB
+license: Apache-2.0
+lang: en
+description: This dataset is an attempt to replicate the results of Microsoft's Orca
+structure:
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: input
+    type: string
+    description: Context
+  - id: output
+    type: string
+    description: Response
