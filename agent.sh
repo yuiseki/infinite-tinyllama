@@ -53,7 +53,29 @@ for i in $(seq $GPU_NUM); do
 done
 echo "AVAILABLE_GPU_NUM: $AVAILABLE_GPU_NUM"
 echo "AVAILABLE_GPU_INDEX: ${AVAILABLE_GPU_INDEX[@]}"
+
+# exit if AVAILABLE_GPU_NUM is 0
+if [ $AVAILABLE_GPU_NUM -eq 0 ]; then
+  echo "No available GPU"
+  exit 1
+fi
+
 # AVAILABLE_GPU_INDEX: 5 6 7 8
 CUDA_VISIBLE_DEVICES=$(echo ${AVAILABLE_GPU_INDEX[@]} | sed 's/ /,/g')
 echo "CUDA_VISIBLE_DEVICES: $CUDA_VISIBLE_DEVICES"
 
+# $1 = directory of recipes
+# echo all recipes path
+RECIPE_DIR=$1
+echo "RECIPE_DIR: $RECIPE_DIR"
+RECIPE_LIST=$(ls $RECIPE_DIR)
+AVAILABLE_RECIPES=()
+for RECIPE in $RECIPE_LIST; do
+  # echo "RECIPE: $1$RECIPE"
+  RECIPE_CLAIM_GPU_NUM=$(cat $1$RECIPE | yq ".train_claim_gpu_num")
+  # echo "RECIPE_CLAIM_GPU_NUM: $RECIPE_CLAIM_GPU_NUM"
+  if [ $RECIPE_CLAIM_GPU_NUM -le $AVAILABLE_GPU_NUM ]; then
+    AVAILABLE_RECIPES+=($RECIPE)
+  fi
+done
+echo "AVAILABLE_RECIPES: ${AVAILABLE_RECIPES[@]}"
