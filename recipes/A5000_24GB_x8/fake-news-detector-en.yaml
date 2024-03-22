@@ -1,6 +1,6 @@
 target_task: tasks/nlp/fake-news-detection.md
 base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
-model_name: tinyllama-fake-news-detector-en-v0.1
+model_name: tinyllama-fake-news-detector-en-v1
 output_base_dir: output
 dataset_id: mrm8488/fake-news
 dataset_input_field_name: text
