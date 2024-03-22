@@ -1,16 +1,13 @@
 import os
 import sys
-from time import perf_counter
 
-import torch
 import wandb
 import yaml
-from peft import AutoPeftModelForCausalLM, LoraConfig, PeftModel
+from peft import LoraConfig
 from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer,
     BitsAndBytesConfig,
-    GenerationConfig,
     TrainingArguments,
 )
 from trl import SFTTrainer

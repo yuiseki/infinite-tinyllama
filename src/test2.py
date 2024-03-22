@@ -1,5 +1,3 @@
-import torch
-import transformers
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 model_id = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
