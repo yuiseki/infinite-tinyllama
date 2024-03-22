@@ -1,0 +1,21 @@
+type: huggingface
+id: Open-Orca/OpenOrca
+url: https://huggingface.co/datasets/Open-Orca/OpenOrca
+converted_size: 2.85GB
+license: MIT
+lang: en
+description: We are thrilled to announce the release of the OpenOrca dataset! This rich collection of augmented FLAN data aligns, as best as possible, with the distributions outlined in the Orca paper. It has been instrumental in generating high-performing model checkpoints and serves as a valuable resource for all NLP researchers and developers!
+structure:
+  - id: id
+    type: string
+    description: ID
+  - id: system_prompt
+    type: string
+    optional: true
+    description: System prompt
+  - id: question
+    type: string
+    description: Question
+  - id: response
+    type: string
+    description: Response
