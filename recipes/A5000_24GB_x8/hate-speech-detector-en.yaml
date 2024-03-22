@@ -1,5 +1,5 @@
 target_task: tasks/nlp/hate-speech-detection.md
-base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-480k-1T
+base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
 model_name: tinyllama-hate-speech-detector-en-v0.1
 output_base_dir: output
 dataset_id: tweets_hate_speech_detection
