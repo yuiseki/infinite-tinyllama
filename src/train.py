@@ -103,7 +103,7 @@ def context_hint_template_for_train(hint, context, question, answer):
 def prepare_train_data(dataset_id):
     if "dataset_load_config" in train_config:
         dataset_load_config = train_config["dataset_load_config"]
-        data_df = load_dataset(dataset_id, dataset_load_config)
+        data_df = load_dataset(dataset_id, dataset_load_config, split="train")
     else:
         data = load_dataset(dataset_id, split="train")
         data_df = data.to_pandas()
