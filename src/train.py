@@ -155,6 +155,16 @@ model_id = train_config['base_model_id']
 model, tokenizer = load_model_and_tokenizer(model_id)
 
 
+os.environ["WANDB_PROJECT"]="infinite-tinyllama"
+os.environ["WANDB_LOG_MODEL"]="false"
+os.environ["WANDB_WATCH"]="false"
+wandb.init(
+    project="infinite-tinyllama",
+    group=train_config['model_name'],
+    config=train_config
+
+)
+
 #
 # Define LoRA and PEFT config
 #
@@ -167,9 +177,6 @@ peft_config = LoraConfig(
     task_type="CAUSAL_LM"
 )
 
-os.environ["WANDB_PROJECT"]="infinite-tinyllama"
-os.environ["WANDB_LOG_MODEL"]="false"
-os.environ["WANDB_WATCH"]="false"
 output_dir = os.path.join(train_config['output_base_dir'], train_config['model_name'])
 training_arguments = TrainingArguments(
     output_dir=output_dir,
@@ -205,3 +212,5 @@ trainer.train()
 #
 #
 #
+
+wandb.finish()
