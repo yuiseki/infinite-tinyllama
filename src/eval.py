@@ -1,11 +1,14 @@
+import os
+import re
+import sys
+
 import torch
+import yaml
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
-import sys
-import os
-os.environ['TRANSFORMERS_NO_ADVISORY_WARNINGS'] = 'true'
-import yaml
-import re
+
+os.environ["TRANSFORMERS_NO_ADVISORY_WARNINGS"] = "true"
+
 
 # 指定されたファイルパスからyamlファイルを読み込む
 def load_yaml(file_path):
@@ -13,14 +16,16 @@ def load_yaml(file_path):
         data = yaml.safe_load(file)
     return data
 
+
 # 実行時の1番目の引数をload_yamlに渡す
 filepath = sys.argv[1]
 train_config = load_yaml(filepath)
 
+
 #
 # Utils
 #
-def formatted_prompt(question)-> str:
+def formatted_prompt(question) -> str:
     template = f"""\
     <|im_start|>user
     {question}
@@ -31,7 +36,8 @@ def formatted_prompt(question)-> str:
     template = "\n".join([line.lstrip() for line in template.splitlines()])
     return template
 
-def formatted_prompt_with_hint(hint, question)-> str:
+
+def formatted_prompt_with_hint(hint, question) -> str:
     template = f"""\
     <|im_start|>user
     {hint}
@@ -43,7 +49,8 @@ def formatted_prompt_with_hint(hint, question)-> str:
     template = "\n".join([line.lstrip() for line in template.splitlines()])
     return template
 
-def formatted_prompt_with_context(question, context)-> str:
+
+def formatted_prompt_with_context(question, context) -> str:
     template = f"""\
     <|im_start|>user
     {question}
@@ -55,7 +62,8 @@ def formatted_prompt_with_context(question, context)-> str:
     template = "\n".join([line.lstrip() for line in template.splitlines()])
     return template
 
-def formatted_prompt_with_hint_and_context(hint, question, context)-> str:
+
+def formatted_prompt_with_hint_and_context(hint, question, context) -> str:
     template = f"""\
     <|im_start|>user
     {hint}
@@ -70,6 +78,7 @@ def formatted_prompt_with_hint_and_context(hint, question, context)-> str:
     template = "\n".join([line.lstrip() for line in template.splitlines()])
     return template
 
+
 def generate_response(target_model, prompt):
     generation_config = GenerationConfig(
         penalty_alpha=0.6,
@@ -77,24 +86,31 @@ def generate_response(target_model, prompt):
         do_sample=True,
         temperature=0.001,
         repetition_penalty=1.2,
-        max_new_tokens=train_config['inference_max_new_tokens'],
+        max_new_tokens=train_config["inference_max_new_tokens"],
         forced_eos_token_id=tokenizer.eos_token_id,
-        pad_token_id=tokenizer.eos_token_id
+        pad_token_id=tokenizer.eos_token_id,
     )
-    inputs = tokenizer(prompt, return_tensors="pt").to('cuda')
+    inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
     outputs = target_model.generate(**inputs, generation_config=generation_config)
     res = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return res
 
+
 def extract_user_input(prompt):
-    return re.search(r'<\|im_start\|>user\n(.+)\n<\|im_end\|>', prompt, re.DOTALL).group(1)
+    return re.search(
+        r"<\|im_start\|>user\n(.+)\n<\|im_end\|>", prompt, re.DOTALL
+    ).group(1)
+
 
 def extract_assistant_output(output):
-    return re.search(r'<\|im_start\|>assistant\n(.+)\n<\|im_end\|>', output, re.DOTALL).group(1)
+    return re.search(
+        r"<\|im_start\|>assistant\n(.+)\n<\|im_end\|>", output, re.DOTALL
+    ).group(1)
+
 
 def extract_assistant_output_robust(output):
     # <|im_start|>assistant はあるけど <|im_end|> がない場合は、<|im_start|>assistant から最後までを返す
-    match = re.search(r'<\|im_start\|>assistant\n(.+)', output, re.DOTALL)
+    match = re.search(r"<\|im_start\|>assistant\n(.+)", output, re.DOTALL)
     if match:
         return match.group(1)
     else:
@@ -106,17 +122,19 @@ def extract_assistant_output_robust(output):
 #
 def evaluate_model(model, train_config):
     score = 0
-    for evaluation in train_config['evaluations']:
-        input = evaluation['prompt']
-        expected_output = evaluation['expected_output']
+    for evaluation in train_config["evaluations"]:
+        input = evaluation["prompt"]
+        expected_output = evaluation["expected_output"]
         if "context" in evaluation:
             if "dataset_context_hint" not in train_config:
-                prompt = formatted_prompt_with_context(input, evaluation['context'])
+                prompt = formatted_prompt_with_context(input, evaluation["context"])
             else:
-                hint = train_config['dataset_context_hint']
-                prompt = formatted_prompt_with_hint_and_context(hint, input, evaluation['context'])
+                hint = train_config["dataset_context_hint"]
+                prompt = formatted_prompt_with_hint_and_context(
+                    hint, input, evaluation["context"]
+                )
         elif "hint" in evaluation:
-            hint = evaluation['hint']
+            hint = evaluation["hint"]
             prompt = formatted_prompt_with_hint(hint, input)
         else:
             prompt = formatted_prompt(input)
@@ -136,16 +154,17 @@ def evaluate_model(model, train_config):
             score += 1
     return score
 
+
 #
 # Original model
 #
-model_id = train_config['base_model_id']
+model_id = train_config["base_model_id"]
 base_model = AutoModelForCausalLM.from_pretrained(
     model_id,
     torch_dtype=torch.float16,
     load_in_8bit=False,
     device_map="auto",
-    trust_remote_code=True
+    trust_remote_code=True,
 )
 # Load the tokenizer for the specified model.
 tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -161,8 +180,14 @@ base_model_score = evaluate_model(base_model, train_config)
 #
 # Merge model
 #
-model_path = os.path.join(train_config['output_base_dir'], train_config['model_name'], f"checkpoint-{train_config['train_max_steps']}")
-peft_model = PeftModel.from_pretrained(base_model, model_path, from_transformers=True, device_map="auto")
+model_path = os.path.join(
+    train_config["output_base_dir"],
+    train_config["model_name"],
+    f"checkpoint-{train_config['train_max_steps']}",
+)
+peft_model = PeftModel.from_pretrained(
+    base_model, model_path, from_transformers=True, device_map="auto"
+)
 
 merged_model = peft_model.merge_and_unload()
 
