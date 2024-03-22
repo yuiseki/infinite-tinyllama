@@ -199,7 +199,3 @@ merged_model_score = evaluate_model(merged_model, train_config)
 
 print(f"Base model score: {base_model_score}")
 print(f"Merged model score: {merged_model_score}")
-merged_model_score = evaluate_model(merged_model, train_config)
-
-print(f"Base model score: {base_model_score}")
-print(f"Merged model score: {merged_model_score}")
