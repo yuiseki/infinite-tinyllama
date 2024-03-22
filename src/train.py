@@ -162,7 +162,7 @@ wandb.init(
     project="infinite-tinyllama",
     name=train_config['model_name'],
     group=train_config['model_name'],
-    # config=train_config
+    config=train_config
 )
 
 #
