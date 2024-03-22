@@ -1,10 +1,10 @@
 target_task: tasks/nlp/sentiment-analysis.md
 base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
-model_name: tinyllama-sentiment-analyzer-v1
+model_name: tinyllama-sentiment-analyzer-multilingual-v1
 output_base_dir: output
-dataset_id: carblacac/twitter-sentiment-analysis
+dataset_id: tyqiangz/multilingual-sentiments
 dataset_input_field_name: text
-dataset_output_field_name: feeling
+dataset_output_field_name: label
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8
