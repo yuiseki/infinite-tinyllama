@@ -30,3 +30,9 @@ evaluations:
   - 
     prompt: "light orange color"
     expected_output: "#f08040"
+  -
+    prompt: "sunset"
+    expected_output: "#e05070"
+  -
+    prompt: "beach"
+    expected_output: "#e0c0ff"
