@@ -1,8 +1,10 @@
 import os
+from typing import List
 
 import numpy as np
 import torch
 from peft import PeftModel
+from torch.types import Number
 from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
 
 os.environ["TRANSFORMERS_NO_ADVISORY_WARNINGS"] = "true"
@@ -10,7 +12,7 @@ os.environ["TRANSFORMERS_NO_ADVISORY_WARNINGS"] = "true"
 # https://note.com/kan_hatakeyama/n/nb5625d6411a8
 
 
-def perplexity(model, tokenizer, text) -> torch.Tensor:
+def perplexity(model, tokenizer, text) -> Number:
     tokenized_input = tokenizer.encode(text, add_special_tokens=False, return_tensors="pt").to(model.device)
     with torch.inference_mode():
         output = model(tokenized_input, labels=tokenized_input)
@@ -30,8 +32,8 @@ class MoE:
         self.models.append((model, tokenizer))
         self.coef.append(1)
 
-    def calc_perplexity(self, text):
-        ppl_list = []
+    def calc_perplexity(self, text) -> List[Number]:
+        ppl_list: List[Number] = []
         for model, tokenizer in self.models:
             ppl_list.append(perplexity(model, tokenizer, text))
 
