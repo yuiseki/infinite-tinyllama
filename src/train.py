@@ -157,7 +157,7 @@ model, tokenizer = load_model_and_tokenizer(model_id)
 
 os.environ["WANDB_PROJECT"]="infinite-tinyllama"
 os.environ["WANDB_LOG_MODEL"]="false"
-os.environ["WANDB_WATCH"]="false"
+os.environ["WANDB_WATCH"]="all"
 wandb.init(
     project="infinite-tinyllama",
     group=train_config['model_name'],
