@@ -49,3 +49,4 @@ peft_model = PeftModel.from_pretrained(base_model, model_path, from_transformers
 merged_model = peft_model.merge_and_unload()
 
 merged_model.push_to_hub(train_config["model_name"])
+tokenizer.push_to_hub(train_config["model_name"])
