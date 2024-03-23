@@ -1,6 +1,6 @@
 target_task: tasks/i18n/ja.md
-base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
-model_name: tinyllama-ja-guanaco-v0.1
+base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
+model_name: tinyllama-ja-guanaco-v1.5T-0.1
 output_base_dir: output
 dataset_id: fujiki/guanaco_ja
 dataset_context_field_name: input

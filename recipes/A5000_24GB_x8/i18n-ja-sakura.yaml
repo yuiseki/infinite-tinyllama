@@ -1,6 +1,6 @@
 target_task: tasks/i18n/ja.md
 base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
-model_name: tinyllama-ja-sakura-v0.1
+model_name: tinyllama-ja-sakura-1.5T-v0.1
 output_base_dir: output
 dataset_id: saldra/sakura_japanese_dataset
 dataset_context_field_name: input
