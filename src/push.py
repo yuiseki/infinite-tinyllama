@@ -1,11 +1,10 @@
 import os
-import re
 import sys
 
 import torch
 import yaml
 from peft import PeftModel
-from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 os.environ["TRANSFORMERS_NO_ADVISORY_WARNINGS"] = "true"
 
@@ -45,9 +44,7 @@ model_path = os.path.join(
     train_config["model_name"],
     f"checkpoint-{train_config['train_max_steps']}",
 )
-peft_model = PeftModel.from_pretrained(
-    base_model, model_path, from_transformers=True, device_map="auto"
-)
+peft_model = PeftModel.from_pretrained(base_model, model_path, from_transformers=True, device_map="auto")
 
 merged_model = peft_model.merge_and_unload()
 
