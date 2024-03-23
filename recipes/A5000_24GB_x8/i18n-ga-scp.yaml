@@ -5,8 +5,6 @@ output_base_dir: output
 dataset_id: yuiseki/scp-jp-plain
 dataset_input_field_name: id
 dataset_output_field_name: text
-dataset_filter_field_name: person
-dataset_filter_field_value: バナージ
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 16
