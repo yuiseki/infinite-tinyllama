@@ -1,5 +1,5 @@
 target_task: tasks/i18n/ja.md
-base_model_id: ./output/tinyllama-ja-wikipedia-1.5T-v0.1/checkpoint-2000
+base_model_id: yuiseki/tinyllama-ja-wikipedia-1.5T-v0.1
 model_name: tinyllama-ja-wikipedia-aya-1.5T-v0.1
 output_base_dir: output
 dataset_id: CohereForAI/aya_dataset
