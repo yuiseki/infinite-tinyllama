@@ -33,6 +33,8 @@ train_config = load_yaml(filepath)
 # Template
 #
 def simple_template_for_train(input, output) -> str:
+    # outputから、2つ以上連続する改行を除去する
+    output = "\n".join([line for line in output.splitlines() if line.strip() != ""])
     template = f"""\
     <|im_start|>user
     {input}
