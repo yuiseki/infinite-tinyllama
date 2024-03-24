@@ -1,0 +1,20 @@
+type: huggingface
+id: matsuxr/JaGovFaqs-22k
+url: https://huggingface.co/datasets/matsuxr/JaGovFaqs-22k
+converted_size: 7.77MB
+license: CC-BY 4.0
+lang: ja
+description: このデータは、日本の官公庁のWebサイトに掲載されている「よくある質問」を手作業で抽出し、インストラクション用のデータセットとしたものです。 日本の官公庁のWebサイトは多くが「政府標準利用規約（第2.0版）」に準拠しており、この規約はCC-BY-4.0（国際）と互換性があると記述されています。
+structure:
+  - id: Question
+    type: string
+    description: 質問
+  - id: Answer
+    type: string
+    description: 回答
+  - id: copyright
+    type: string
+    description: 著作権
+  - id: url
+    type: string
+    description: URL

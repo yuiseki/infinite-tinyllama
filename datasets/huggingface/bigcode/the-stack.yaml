@@ -1,0 +1,20 @@
+type: huggingface
+id: bigcode/the-stack
+url: https://huggingface.co/datasets/bigcode/the-stack
+converted_size: 2.45TB
+license: Other
+lang: multiple
+description: The Stack contains over 6TB of permissively-licensed source code files covering 358 programming languages. The dataset was created as part of the BigCode Project, an open scientific collaboration working on the responsible development of Large Language Models for Code (Code LLMs). The Stack serves as a pre-training dataset for Code LLMs, i.e., code-generating AI systems which enable the synthesis of programs from natural language descriptions as well as other from code snippets.
+structure:
+  - id: content
+    type: string
+    description: Content of file
+  - id: size
+    type: int64
+    description: Size of file
+  - id: lang
+    type: string
+    description: Programming language
+  - id: ext
+    type: string
+    description: Extension of file

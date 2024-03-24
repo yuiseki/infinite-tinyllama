@@ -1,0 +1,32 @@
+type: huggingface
+id: amazon_reviews_multi
+url: https://huggingface.co/datasets/amazon_reviews_multi
+converted_size: Unknown
+license: Other
+lang: multiple
+description: We provide an Amazon product reviews dataset for multilingual text classification. The dataset contains reviews in English, Japanese, German, French, Chinese and Spanish, collected between November 1, 2015 and November 1, 2019. Each record in the dataset contains the review text, the review title, the star rating, an anonymized reviewer ID, an anonymized product ID and the coarse-grained product category (e.g. ‘books’, ‘appliances’, etc.) The corpus is balanced across stars, so each star rating constitutes 20% of the reviews in each language.
+structure:
+  - id: review_id
+    type: string
+    description: Review ID
+  - id: product_id
+    type: string
+    description: Product ID
+  - id: reviewer_id
+    type: string
+    description: Reviewer ID
+  - id: stars
+    type: string
+    description: Number of stars of the review
+  - id: review_body
+    type: string
+    description: Review text
+  - id: review_title
+    type: string
+    description: Review title
+  - id: language
+    type: string
+    description: Language of the review
+  - id: product_category
+    type: string
+    description: Product category

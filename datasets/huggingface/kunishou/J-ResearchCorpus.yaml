@@ -1,0 +1,20 @@
+type: huggingface
+id: kunishou/J-ResearchCorpus
+url: https://huggingface.co/datasets/kunishou/J-ResearchCorpus
+converted_size: 37.9MB
+license: Mixed
+lang: ja
+description: CC-BY-* ライセンスで公開されている日本語論文や学会誌等から抜粋した高品質なテキストのデータセットです。言語モデルの事前学習や RAG 等でご活用下さい。
+structure:
+  - id: filename
+    type: string
+    description: Filename
+  - id: text
+    type: string
+    description: Text
+  - id: category
+    type: string
+    description: Category
+  - id: license
+    type: string
+    description: License
