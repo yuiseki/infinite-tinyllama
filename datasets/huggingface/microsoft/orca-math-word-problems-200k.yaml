@@ -1,0 +1,15 @@
+type: huggingface
+id: microsoft/orca-math-word-problems-200k
+url: https://huggingface.co/datasets/microsoft/orca-math-word-problems-200k
+converted_size: 84.2MB
+license: MIT
+lang: en
+description: This dataset contains ~200K grade school math word problems. All the answers in this dataset is generated using Azure GPT4-Turbo. Please refer to Orca-Math, Unlocking the potential of SLMs in Grade School Math for details about the dataset construction.
+structure:
+  - id: question
+    type: string
+    description: Question
+  - id: anser
+    type: string
+    description: Answer
+
