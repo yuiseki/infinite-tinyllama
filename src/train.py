@@ -109,10 +109,7 @@ def prepare_train_data(dataset_id):
     data_df = data.to_pandas()
 
     if "dataset_filter_field_name" in train_config:
-        if train_config["dataset_filter_field_exclude"]:
-            data_df = data_df[data_df[train_config["dataset_filter_field_name"]] != train_config["dataset_filter_field_value"]]
-        else:
-            data_df = data_df[data_df[train_config["dataset_filter_field_name"]] == train_config["dataset_filter_field_value"]]
+        data_df = data_df[data_df[train_config["dataset_filter_field_name"]] == train_config["dataset_filter_field_value"]]
 
     input_field_name = train_config["dataset_input_field_name"]
     output_field_name = train_config["dataset_output_field_name"]
