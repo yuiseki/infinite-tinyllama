@@ -1,0 +1,14 @@
+type: huggingface
+id: VatsaDev/animebench-alpha
+url: https://huggingface.co/datasets/VatsaDev/animebench-alpha
+converted_size: 18.9KB
+license: MIT
+lang: en
+description: Alpha version of some form of anime-bench ** This needs more data, if you have anime QA in text format, send it. 200 questions, would consider the easy version of anime bench, as its just anime trivia, anime challenge should be deeper into the lore of several anime, maybe even iceberg chart stuff
+structure:
+  - id: question
+    type: string
+    description: Question
+  - id: answer
+    type: string
+    description: Answer
