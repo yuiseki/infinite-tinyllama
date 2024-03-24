@@ -12,4 +12,3 @@ structure:
   - id: answer
     type: string
     description: Answer
-
