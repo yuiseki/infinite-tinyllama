@@ -1,0 +1,21 @@
+type: huggingface
+id: Cleanlab/databricks-dolly-15k-cleaned
+url: https://huggingface.co/datasets/Cleanlab/databricks-dolly-15k-cleaned
+converted_size: 5.6MB
+license: CC-BY-SA-3.0
+lang: en
+description: databricks-dolly-15k-cleaned is a cleaned up version of the popular databricks-dolly-15k dataset after automatically removing low quality datapoints detected using Cleanlab.
+structure:
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: context
+    type: string
+    optional: true
+    description: Context
+  - id: response
+    type: string
+    description: Response
+  - id: category
+    type: string
+    description: Category
