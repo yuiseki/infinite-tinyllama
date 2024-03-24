@@ -1,0 +1,14 @@
+type: huggingface
+id: Amod/mental_health_counseling_conversations
+url: https://huggingface.co/datasets/Amod/mental_health_counseling_conversations
+converted_size: 2.45MB
+license: CreativeML Open RAIL-M
+lang: en
+description: This dataset is a collection of questions and answers sourced from two online counseling and therapy platforms. The questions cover a wide range of mental health topics, and the answers are provided by qualified psychologists. The dataset is intended to be used for fine-tuning language models to improve their ability to provide mental health advice.
+structure:
+  - id: Response
+    type: string
+    description: Response
+  - id: Context
+    type: string
+    description: Context
