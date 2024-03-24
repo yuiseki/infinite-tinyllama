@@ -4,7 +4,7 @@ model_name: tinyllama-ja-wikipedia-gov-faq-1.5T-v0.1
 output_base_dir: output
 dataset_id: matsuxr/JaGovFaqs-22k
 dataset_input_field_name: Question
-dataset_output_field_name: Anser
+dataset_output_field_name: Answer
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8
