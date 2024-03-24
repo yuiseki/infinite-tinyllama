@@ -7,6 +7,7 @@ dataset_input_field_name: place
 dataset_output_field_name: text
 dataset_filter_field_name: text
 dataset_filter_field_value: "「……！」"
+dataset_filter_field_exclude: true
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8
