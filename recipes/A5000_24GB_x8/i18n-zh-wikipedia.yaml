@@ -1,9 +1,9 @@
 target_task: tasks/i18n/ja.md
 base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
-model_name: tinyllama-ar-wikipedia-1.5T-v0.1
+model_name: tinyllama-ru-wikipedia-1.5T-v0.1
 output_base_dir: output
 dataset_id: wikimedia/wikipedia
-dataset_load_config: 20231101.ar
+dataset_load_config: 20231101.zh
 dataset_input_field_name: title
 dataset_output_field_name: text
 dataset_train_split_seed: 42
