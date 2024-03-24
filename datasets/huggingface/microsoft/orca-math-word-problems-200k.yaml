@@ -9,7 +9,7 @@ structure:
   - id: question
     type: string
     description: Question
-  - id: anser
+  - id: answer
     type: string
     description: Answer
 

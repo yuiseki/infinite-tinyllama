@@ -18,9 +18,9 @@ structure:
   - id: value
     type: int32
     description: Value
-  - id: anser
+  - id: answer
     type: string
-    description: Anser
+    description: Answer
   - id: round
     type: string
     description: Round
