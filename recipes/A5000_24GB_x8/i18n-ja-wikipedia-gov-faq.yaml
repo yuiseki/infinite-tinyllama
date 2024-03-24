@@ -1,0 +1,29 @@
+target_task: tasks/i18n/ja.md
+base_model_id: yuiseki/tinyllama-ja-wikipedia-1.5T-v0.1
+model_name: tinyllama-ja-wikipedia-gov-faq-1.5T-v0.1
+output_base_dir: output
+dataset_id: matsuxr/JaGovFaqs-22k
+dataset_input_field_name: Question
+dataset_output_field_name: Anser
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.2
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_claim_gpu_num: 2
+train_per_device_train_batch_size: 8
+train_gradient_accumulation_steps: 4
+train_num_train_epochs: 4
+train_max_steps: 1000
+train_fp16: True
+inference_max_new_tokens: 512
+evaluations:
+  -
+    prompt: "分娩制限は行っていますか。"
+    expected_output: "現在分娩制限は行っておりません。"
+  -
+    prompt: "隊員が食べている食事は、誰が作っているのですか？"
+    expected_output: "隊員等が調理しています。 海・空自衛隊の部隊では、給養員と呼ばれる専門の隊員で構成される給養小隊(班)という食事を作る部隊がいます。 陸上自衛隊では、駐屯地にいる隊員又は民間人の方(民間企業等へ部外委託等)で調理しています。また部隊によっては料理競技会などを 実施して調理技術の向上に努めています。"
+  -
+    prompt: "官給品の扱いが複雑なため、1年に1度程度、官給品取扱説明書の説明会（勉強会）を開催して欲しい。"
+    expected_output: "説明会（勉強会）の開催を計画中であります。なお、開催の時期については、別途、ご連絡差し上げます。"
