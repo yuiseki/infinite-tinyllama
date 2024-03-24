@@ -1,0 +1,16 @@
+type: huggingface
+id: adorkin/extended_tweet_emojis
+url: https://huggingface.co/datasets/adorkin/extended_tweet_emojis
+converted_size: 3MB
+license: Unknown
+lang: en
+description: This dataset is comprised of emoji and emotion subsets of tweet_eval. The motivation is that the original emoji subset essentially contains only positive/neutral emojis, while emotion subset contains a varied array of emotions. So, the idea was to replace emotion labels with corresponding emojis (sad, angry) in the emotion subset and mix it together with the emoji subset.
+structure:
+  generation:
+    - id: text
+      type: string
+      description: Tweet
+    - id: label
+      type: Label
+      # 0: ❤ 1: 😍 2: 😂 3: 💕 4: 🔥 5: 😊 6: 😎 7: ✨ 8: 💙 9: 😘 10: 📷 11: 🇺🇸 12: ☀ 13: 💜 14: 😉 15: 💯 16: 😁 17: 🎄 18: 📸 19: 😜
+      description: Label for emoji, 0 = ❤, 1 = 😍, 2 = 😂, 3 = 💕, 4 = 🔥, 5 = 😊, 6 = 😎, 7 = ✨, 8 = 💙, 9 = 😘, 10 = 📷, 11 = 🇺🇸, 12 = ☀, 13 = 💜, 14 = 😉, 15 = 💯, 16 = 😁, 17 = 🎄, 18 = 📸, 19 = 😜.
