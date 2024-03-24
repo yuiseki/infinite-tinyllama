@@ -7,8 +7,8 @@ dataset_input_field_name: id
 dataset_output_field_name: text
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
-lora_r: 16
-lora_alpha: 8
+lora_r: 8
+lora_alpha: 16
 lora_dropout: 0.05
 train_claim_gpu_num: 4
 train_per_device_train_batch_size: 8
