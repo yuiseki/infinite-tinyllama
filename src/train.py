@@ -32,9 +32,18 @@ train_config = load_yaml(filepath)
 #
 # Template
 #
+def simple_template_for_pretrain(input) -> str:
+    # inputから、2つ以上連続する改行を除去する
+    input = "\n".join([line for line in input.splitlines() if line.strip() != ""])
+    template = f"""\
+    {input}
+    """
+    # Remove any leading whitespace characters from each line in the template.
+    template = "\n".join([line.lstrip() for line in template.splitlines()])
+    return template
+
+
 def simple_template_for_train(input, output) -> str:
-    # outputから、2つ以上連続する改行を除去する
-    output = "\n".join([line for line in output.splitlines() if line.strip() != ""])
     template = f"""\
     <|im_start|>user
     {input}
@@ -112,36 +121,39 @@ def prepare_train_data(dataset_id):
         data_df = data_df[data_df[train_config["dataset_filter_field_name"]] == train_config["dataset_filter_field_value"]]
 
     input_field_name = train_config["dataset_input_field_name"]
-    output_field_name = train_config["dataset_output_field_name"]
-    if "dataset_context_field_name" in train_config:
-        context_field_name = train_config["dataset_context_field_name"]
-        if "dataset_context_hint" not in train_config:
-            data_df["text"] = data_df[[context_field_name, input_field_name, output_field_name]].apply(
-                lambda x: context_template_for_train(x[context_field_name], x[input_field_name], x[output_field_name]),
+    if "dataset_output_field_name" not in train_config:
+        data_df["text"] = data_df[input_field_name].apply(lambda x: simple_template_for_pretrain(x))
+    else:
+        output_field_name = train_config["dataset_output_field_name"]
+        if "dataset_context_field_name" in train_config:
+            context_field_name = train_config["dataset_context_field_name"]
+            if "dataset_context_hint" not in train_config:
+                data_df["text"] = data_df[[context_field_name, input_field_name, output_field_name]].apply(
+                    lambda x: context_template_for_train(x[context_field_name], x[input_field_name], x[output_field_name]),
+                    axis=1,
+                )
+            else:
+                context_hint = train_config["dataset_context_hint"]
+                data_df["text"] = data_df[[context_field_name, input_field_name, output_field_name]].apply(
+                    lambda x: context_hint_template_for_train(
+                        context_hint,
+                        x[context_field_name],
+                        x[input_field_name],
+                        x[output_field_name],
+                    ),
+                    axis=1,
+                )
+        elif "dataset_input_hint" in train_config:
+            input_hint = train_config["dataset_input_hint"]
+            data_df["text"] = data_df[[input_field_name, output_field_name]].apply(
+                lambda x: hint_template_for_train(input_hint, x[input_field_name], x[output_field_name]),
                 axis=1,
             )
         else:
-            context_hint = train_config["dataset_context_hint"]
-            data_df["text"] = data_df[[context_field_name, input_field_name, output_field_name]].apply(
-                lambda x: context_hint_template_for_train(
-                    context_hint,
-                    x[context_field_name],
-                    x[input_field_name],
-                    x[output_field_name],
-                ),
+            data_df["text"] = data_df[[input_field_name, output_field_name]].apply(
+                lambda x: simple_template_for_train(x[input_field_name], x[output_field_name]),
                 axis=1,
             )
-    elif "dataset_input_hint" in train_config:
-        input_hint = train_config["dataset_input_hint"]
-        data_df["text"] = data_df[[input_field_name, output_field_name]].apply(
-            lambda x: hint_template_for_train(input_hint, x[input_field_name], x[output_field_name]),
-            axis=1,
-        )
-    else:
-        data_df["text"] = data_df[[input_field_name, output_field_name]].apply(
-            lambda x: simple_template_for_train(x[input_field_name], x[output_field_name]),
-            axis=1,
-        )
 
     data = Dataset.from_pandas(data_df)
     data = data.train_test_split(seed=42, test_size=0.2)
