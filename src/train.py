@@ -189,6 +189,15 @@ def load_model_and_tokenizer(model_id):
 
 
 model_id = train_config["base_model_id"]
+
+output_dir = os.path.join(train_config["output_base_dir"], train_config["model_name"])
+
+# output_dirが既にある場合は終了
+if os.path.exists(output_dir):
+    print(f"{output_dir} already exists.")
+    sys.exit(1)
+
+
 model, tokenizer = load_model_and_tokenizer(model_id)
 
 
@@ -213,13 +222,6 @@ peft_config = LoraConfig(
     bias="none",
     task_type="CAUSAL_LM",
 )
-
-output_dir = os.path.join(train_config["output_base_dir"], train_config["model_name"])
-
-# output_dirが既にある場合は終了
-if os.path.exists(output_dir):
-    print(f"{output_dir} already exists.")
-    sys.exit(1)
 
 training_arguments = TrainingArguments(
     output_dir=output_dir,
