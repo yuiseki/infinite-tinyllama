@@ -1,0 +1,7 @@
+type: huggingface
+id: bigcode/the-stack-v2
+url: https://huggingface.co/datasets/bigcode/the-stack-v2
+converted_size: Unknown
+license: Other
+lang: multiple
+description: The Stack v2 contains over 3B files in 600+ programming and markup languages. The dataset was created as part of the BigCode Project, an open scientific collaboration working on the responsible development of Large Language Models for Code (Code LLMs). The Stack serves as a pre-training dataset for Code LLMs, i.e., code-generating AI systems which enable the synthesis of programs from natural language descriptions as well as other from code snippets.
