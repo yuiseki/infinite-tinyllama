@@ -1,0 +1,17 @@
+type: huggingface
+id: math-ai/StackMathQA
+url: https://huggingface.co/datasets/math-ai/StackMathQA
+converted_size: 5.47GB
+license: CC-BY-4.0
+lang: en
+description: StackMathQA is a meticulously curated collection of 2 million mathematical questions and answers, sourced from various Stack Exchange sites. This repository is designed to serve as a comprehensive resource for researchers, educators, and enthusiasts in the field of mathematics and AI research.
+structure:
+  - id: Q
+    type: string
+    description: Question
+  - id: A
+    type: string
+    description: Answer
+  - id: meta
+    type: dict
+    description: Metadata
