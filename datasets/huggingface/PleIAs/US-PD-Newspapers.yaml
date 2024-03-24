@@ -1,0 +1,29 @@
+type: huggingface
+id: PleIAs/US-PD-Newspapers
+url: https://huggingface.co/datasets/PleIAs/US-PD-Newspapers
+converted_size: 410GB
+license: CC0-1.0
+lang: en
+description: US-PD-Newspapers is an agregation of all the archives of US newspapers digitized by the Library of Congress for the Chronicling America digital library.  With nearly 100 billion words, it is one of the largest open corpus in the United States. All the materials are now part of the public domain and have no intellectual property rights remaining.
+structure:
+  - id: id
+    type: string
+    description: ID
+  - id: date
+    type: string
+    description: Date
+  - id: edition
+    type: string
+    description: edition
+  - id: page
+    type: string
+    description: Page
+  - id: file_name
+    type: string
+    description: File name
+  - id: word_count
+    type: int64
+    description: Count of words
+  - id: text
+    type: int32
+    description: Text
