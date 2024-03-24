@@ -1,0 +1,29 @@
+type: huggingface
+id: PleIAs/Spanish-PD-Newspapers
+url: https://huggingface.co/datasets/PleIAs/Spanish-PD-Newspapers
+converted_size: 48.6GB
+license: Unkown
+lang: es
+description: Spanish-Public Domain-Newspapers or Spanish-PD-Newspapers is a large collection aiming to aggregate all Spanish monographies in the public domain. As of March 2024, with Spanish-PD-Books, it is the biggest Spanish open corpus.
+structure:
+  - id: id
+    type: string
+    description: ID
+  - id: file_name
+    type: string
+    description: File name
+  - id: start_date
+    type: string
+    description: Start date
+  - id: end_date
+    type: string
+    description: End date
+  - id: edition
+    type: string
+    description: Edition
+  - id: word_count
+    type: int64
+    description: Count of words
+  - id: text
+    type: string
+    description: Text

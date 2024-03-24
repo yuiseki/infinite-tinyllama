@@ -25,5 +25,5 @@ structure:
     type: int64
     description: Count of words
   - id: text
-    type: int32
+    type: string
     description: Text

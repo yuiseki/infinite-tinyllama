@@ -1,0 +1,26 @@
+type: huggingface
+id: PleIAs/Chinese-PD
+url: https://huggingface.co/datasets/PleIAs/Chinese-PD
+converted_size: 272MB
+license: Unkown
+lang: zh
+description: Chinese-Public Domain or Chinese-PD is a large collection aiming to aggregate all Chinese monographies and periodicals in the public domain.
+structure:
+  - id: identifier
+    type: string
+    description: ID
+  - id: creator
+    type: string
+    description: Creator
+  - id: title
+    type: string
+    description: Title
+  - id: publication_date
+    type: string
+    description: Date
+  - id: word_count
+    type: int64
+    description: Count of words
+  - id: text
+    type: string
+    description: Text

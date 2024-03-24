@@ -1,0 +1,35 @@
+type: huggingface
+id: PleIAs/French-PD-Newspapers
+url: https://huggingface.co/datasets/PleIAs/French-PD-Newspapers
+converted_size: 3.99GB
+license: Unkown
+lang: fr
+description: French-Public Domain-Newspapers or French-PD-Newpapers is a large collection aiming to agregate all the French newspapers and periodicals in the public domain.  The collection has been originally compiled by Pierre-Carl Langlais, on the basis of a large corpus curated by Benoît de Courson, Benjamin Azoulay for Gallicagram and in cooperation with OpenLLMFrance. Gallicagram is leading cultural analytics project giving access to word and ngram search on very large cultural heritage datasets in French and other languages.
+structure:
+  - id: file_id
+    type: string
+    description: ID
+  - id: ocr
+    type: string
+    description: OCR
+  - id: title
+    type: string
+    description: Title
+  - id: date
+    type: string
+    description: Date
+  - id: author
+    type: string
+    description: Author
+  - id: page_count
+    type: int64
+    description: Number of pages
+  - id: word_count
+    type: int64
+    description: Count of words
+  - id: character_count
+    type: int64
+    description: Count of characters
+  - id: complete_text
+    type: string
+    description: Text
