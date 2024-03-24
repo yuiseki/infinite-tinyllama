@@ -1,7 +1,7 @@
 target_task: tasks/nlp/sentiment-analysis.md
 base_model_id: lightblue/karasu-1.1B
 model_name: karasu-sentiment-analyzer-ja-v0.1
-output_base_dir: output
+output_base_dir: /data/output
 dataset_id: llm-book/wrime-sentiment
 dataset_input_field_name: sentence
 dataset_output_field_name: label

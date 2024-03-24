@@ -1,7 +1,7 @@
 target_task: tasks/i18n/ja.md
 base_model_id: lightblue/karasu-1.1B
 model_name: karasu-sake-qa-v0.1
-output_base_dir: output
+output_base_dir: /data/output
 dataset_id: yuiseki/sake_qa
 dataset_input_field_name: input
 dataset_output_field_name: output

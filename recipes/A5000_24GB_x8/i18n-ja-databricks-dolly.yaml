@@ -1,7 +1,7 @@
 target_task: tasks/i18n/ja.md
 base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
 model_name: tinyllama-ja-databricks-dolly-1.5T-v0.1
-output_base_dir: output
+output_base_dir: /data/output
 dataset_id: llm-jp/databricks-dolly-15k-ja
 dataset_context_field_name: context
 dataset_input_field_name: instruction

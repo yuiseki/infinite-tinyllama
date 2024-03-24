@@ -1,7 +1,7 @@
 target_task: tasks/i18n/ja.md
 base_model_id: lightblue/karasu-1.1B
 model_name: karasu-wikibook-jh-ja-v0.1
-output_base_dir: output
+output_base_dir: /data/output
 dataset_id: DataPilot/wikibook_Junior_High_School_textbooks_ja
 dataset_input_field_name: text
 dataset_train_split_seed: 42

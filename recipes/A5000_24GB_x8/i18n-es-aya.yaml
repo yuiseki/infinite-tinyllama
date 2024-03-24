@@ -1,7 +1,7 @@
 target_task: tasks/i18n/fr.md
 base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
 model_name: tinyllama-es-aya-1.5T-v0.1
-output_base_dir: output
+output_base_dir: /data/output
 dataset_id: CohereForAI/aya_dataset
 dataset_input_field_name: inputs
 dataset_output_field_name: targets
