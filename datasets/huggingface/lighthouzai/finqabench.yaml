@@ -1,0 +1,23 @@
+type: huggingface
+id: lighthouzai/finqabench
+url: https://huggingface.co/datasets/lighthouzai/finqabench
+converted_size: 107KB
+license: Apache-2.0
+lang: en
+description: This dataset contains queries and responses to evaluate financial AI chatbots for hallucinations and accuracy. The dataset was created using Lighthouz AutoBench, a no-code test case generator for LLM use cases, and then manually verified by two human annotators.
+structure:
+  - id: Query
+    type: string
+    description: Query
+  - id: Response
+    type: string
+    description: Response
+  - id: Context
+    type: string
+    description: Context
+  - id: Category
+    type: string
+    description: Category
+  - id: Filename
+    type: string
+    description: Filename
