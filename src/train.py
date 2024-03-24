@@ -191,10 +191,14 @@ def load_model_and_tokenizer(model_id):
 model_id = train_config["base_model_id"]
 
 output_dir = os.path.join(train_config["output_base_dir"], train_config["model_name"])
+model_path = os.path.join(
+    output_dir,
+    f"checkpoint-{train_config['train_max_steps']}",
+)
 
-# output_dirが既にある場合は終了
-if os.path.exists(output_dir):
-    print(f"{output_dir} already exists.")
+# model_pathが既にある場合は終了
+if os.path.exists(model_path):
+    print(f"{model_path} already exists.")
     sys.exit(1)
 
 
