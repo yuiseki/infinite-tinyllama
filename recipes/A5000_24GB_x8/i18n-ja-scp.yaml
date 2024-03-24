@@ -3,8 +3,7 @@ base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
 model_name: tinyllama-ja-scp-1.5T-v0.1
 output_base_dir: /data/output
 dataset_id: yuiseki/scp-jp-plain
-dataset_input_field_name: id
-dataset_output_field_name: text
+dataset_input_field_name: text
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8
