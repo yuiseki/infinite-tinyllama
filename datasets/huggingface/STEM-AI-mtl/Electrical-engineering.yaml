@@ -1,0 +1,18 @@
+type: huggingface
+id: STEM-AI-mtl/Electrical-engineering
+url: https://huggingface.co/datasets/STEM-AI-mtl/Electrical-engineering
+converted_size: 204KB
+license: Other
+lang: en
+description: No description provided.
+structure:
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: input
+    type: string
+    description: prompt
+  - id: output
+    type: string
+    description: Output
+

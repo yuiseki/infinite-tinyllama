@@ -1,0 +1,20 @@
+type: huggingface
+id: meta-math/MetaMathQA
+url: https://huggingface.co/datasets/meta-math/MetaMathQA
+converted_size: 188MB
+license: MIT
+lang: en
+description: All MetaMathQA data are augmented from the training sets of GSM8K and MATH. None of the augmented data is from the testing set.  You can check the original_question in meta-math/MetaMathQA, each item is from the GSM8K or MATH train set.
+structure:
+  - id: type
+    type: string
+    description: Type
+  - id: query
+    type: string
+    description: Query
+  - id: original_question
+    type: string
+    description: Original question
+  - id: response
+    type: string
+    description: Responses

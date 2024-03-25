@@ -1,0 +1,14 @@
+type: huggingface
+id: WizardLM/WizardLM_evol_instruct_70k
+url: https://huggingface.co/datasets/WizardLM/WizardLM_evol_instruct_70k
+converted_size: 69.2MB
+license: MIT
+lang: en
+description: This is the training data of WizardLM.
+structure:
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: output
+    type: string
+    description: Output of python code

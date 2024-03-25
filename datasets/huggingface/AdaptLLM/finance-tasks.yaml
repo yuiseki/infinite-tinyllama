@@ -1,0 +1,14 @@
+type: huggingface
+id: AdaptLLM/finance-tasks
+url: https://huggingface.co/datasets/AdaptLLM/finance-tasks
+converted_size: 9.09MB
+license: Unknown
+lang: en
+description: This repo contains the evaluation datasets for our ICLR 2024 paper Adapting Large Language Models via Reading Comprehension.  We explore continued pre-training on domain-specific corpora for large language models. While this approach enriches LLMs with domain knowledge, it significantly hurts their prompting ability for question answering. Inspired by human learning via reading comprehension, we propose a simple method to transform large-scale pre-training corpora into reading comprehension texts, consistently improving prompting performance across tasks in biomedicine, finance, and law domains. Our 7B model competes with much larger domain-specific models like BloombergGPT-50B.
+structure:
+  - id: id
+    type: int64
+    description: ID
+  - id: input
+    type: string
+    description: Input

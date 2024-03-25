@@ -6,9 +6,6 @@ license: CC-BY-4.0
 lang: en
 description: No description provided.
 structure:
-  - id: output
-    type: string
-    description: Output
   - id: instruction
     type: string
     description: Question
@@ -16,3 +13,6 @@ structure:
     type: string
     optional: true
     description: Context
+  - id: output
+    type: string
+    description: Output

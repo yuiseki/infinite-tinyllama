@@ -1,0 +1,32 @@
+type: huggingface
+id: seedboxai/german_to_english_translations_v1
+url: https://huggingface.co/datasets/seedboxai/german_to_english_translations_v1
+converted_size: 5.27GB
+license: Unknown
+lang: multiple
+langs:
+  - de
+  - en
+description: No description provided.
+structure:
+  - id: dataset
+    type: string
+    description: Source dataset
+  - id: tokens
+    type: int64
+    description: Tokens
+  - id: range
+    type: string
+    description: Range
+  - id: text
+    type: string
+    description: Text
+  - id: original
+    type: string
+    description: Original
+  - id: translation
+    type: string
+    description: Translation
+  - id: __index_level_0__
+    type: int64
+    description: Index level 0

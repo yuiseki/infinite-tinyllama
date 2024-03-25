@@ -1,0 +1,14 @@
+type: huggingface
+id: HuggingFaceH4/CodeAlpaca_20K
+url: https://huggingface.co/datasets/HuggingFaceH4/CodeAlpaca_20K
+converted_size: 3.34MB
+license: CC
+lang: en
+description: This dataset splits the original sahil2801/CodeAlpaca-20k dataset into train and test splits.
+structure:
+  - id: prompt
+    type: string
+    description: Prompt
+  - id: completion
+    type: string
+    description: Completion

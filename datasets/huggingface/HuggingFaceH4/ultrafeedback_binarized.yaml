@@ -1,0 +1,29 @@
+type: huggingface
+id: HuggingFaceH4/ultrafeedback_binarized
+url: https://huggingface.co/datasets/HuggingFaceH4/ultrafeedback_binarized
+converted_size: 650MB
+license: MIT
+lang: en
+description: No description provided
+structure:
+  - id: prompt
+    type: string
+    description: Prompt
+  - id: prompt_id
+    type: string
+    description: ID of prompt
+  - id: chosen
+    type: list
+    description: Chosen
+  - id: rejected
+    type: list
+    description: Rejected
+  - id: messages
+    type: list
+    description: Messages
+  - id: score_chosen
+    type: float64
+    description: Score chosen
+  - id: score_rejected
+    type: float64
+    description: Score rejected

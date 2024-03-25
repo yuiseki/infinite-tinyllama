@@ -1,0 +1,20 @@
+type: huggingface
+id: TokenBender/code_instructions_122k_alpaca_style
+url: https://huggingface.co/datasets/TokenBender/code_instructions_122k_alpaca_style
+converted_size: 72.2MB
+license: Apache-2.0
+lang: en
+description: No description provided
+structure:
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: input
+    type: string
+    description: Context of instruction
+  - id: output
+    type: string
+    description: Output of python code
+  - id: text
+    type: string
+    description: Pair of Instruction and Output

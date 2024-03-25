@@ -1,0 +1,20 @@
+type: huggingface
+id: seedboxai/multitask_german_examples_32k
+url: https://huggingface.co/datasets/seedboxai/multitask_german_examples_32k
+converted_size: 8.03GB
+license: Unknown
+lang: de
+description: No description provided.
+structure:
+  - id: source_dataset
+    type: string
+    description: Source dataset
+  - id: tokens
+    type: int64
+    description: Tokens
+  - id: range
+    type: string
+    description: Range
+  - id: text
+    type: string
+    description: Text

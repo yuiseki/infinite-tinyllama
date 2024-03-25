@@ -9,7 +9,9 @@
     "aozorabunko",
     "Aruno",
     "bigcode",
+    "binarized",
     "burkelibbey",
+    "cais",
     "carblacac",
     "Cheung",
     "coefs",
@@ -22,6 +24,7 @@
     "dialogsum",
     "diplomthesis",
     "dtype",
+    "evol",
     "folx",
     "fujiki",
     "globis",
@@ -35,10 +38,12 @@
     "kunishou",
     "Mixtral",
     "mkqa",
+    "mmlu",
     "mosaicml",
     "mwparserfromhell",
     "neverump",
     "oasst",
+    "openassistant",
     "openqa",
     "optim",
     "overpassql",
@@ -51,12 +56,15 @@
     "sahil",
     "sakura",
     "saldra",
+    "seedboxai",
     "shunk",
     "starcoderdata",
     "sudy",
     "tatsu",
+    "timdettmers",
     "TSATC",
     "tyqiangz",
+    "ultrafeedback",
     "VARCHAR",
     "wandb",
     "wikisql",
@@ -66,7 +74,6 @@
     "xlsum"
   ],
 
-
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,
@@ -74,16 +81,8 @@
       "source.organizeImports": "explicit"
     }
   },
-  "isort.args": [
-    "--profile",
-    "black"
-  ],
-  "flake8.args": [
-    "--max-line-length=148",
-    "--ignore=E203"
-  ],
-  "black-formatter.args": [
-    "--line-length=148"
-  ],
+  "isort.args": ["--profile", "black"],
+  "flake8.args": ["--max-line-length=148", "--ignore=E203"],
+  "black-formatter.args": ["--line-length=148"],
   "python.defaultInterpreterPath": ".venv/bin/python"
 }
