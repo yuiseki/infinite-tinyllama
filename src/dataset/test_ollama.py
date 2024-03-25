@@ -10,6 +10,7 @@ Hello, world!
 """
 
 models = [
+    "gemma:2b-instruct",
     "gemma:7b-instruct",
     "elyza:codellama-7b-instruct",
     "qwen:4b-chat",
