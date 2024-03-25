@@ -1,0 +1,8 @@
+FROM ~/llama.cpp/models/rinna-youri-7b-instruction-q4_K_M.gguf
+
+TEMPLATE """ユーザー: {{ .Prompt }}
+システム: 
+"""
+
+PARAMETER stop "ユーザー:"
+PARAMETER stop "システム:"

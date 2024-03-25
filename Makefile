@@ -29,6 +29,8 @@ docker:
 docker-run:
 	docker run -it --rm --gpus all -v $(PWD):/app yuiseki/infinite-tinyllama:latest
 
-ollama-elyza:
+ollama:
 	ollama create elyza-llama2:7b-instruct -f ollama_models/ELYZA/Llama-2/7b-instruct/Modelfile
 	ollama create elyza-codellama:7b-instruct -f ollama_models/ELYZA/CodeLlama/7b-instruct/Modelfile
+	ollama create rakutenai:7b-instruct -f ollama_models/Rakuten/RakutenAI/7b-instruct/Modelfile
+	ollama create rakutenai:7b-chat -f ollama_models/Rakuten/RakutenAI/7b-chat/Modelfile

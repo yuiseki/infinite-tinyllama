@@ -1,8 +1,10 @@
 FROM ~/llama.cpp/models/ELYZA-japanese-CodeLlama-7b-instruct-q4_K_M.gguf
+
 TEMPLATE """[INST] <<SYS>>{{ .System }}<</SYS>>
 
 {{ .Prompt }} [/INST]
 """
+
 PARAMETER stop "[INST]"
 PARAMETER stop "[/INST]"
 PARAMETER stop "<<SYS>>"
