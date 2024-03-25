@@ -1,0 +1,9 @@
+FROM ~/llama.cpp/models/ELYZA-japanese-Llama-2-7b-instruct-q4_K_M.gguf
+TEMPLATE """[INST] <<SYS>>{{ .System }}<</SYS>>
+
+{{ .Prompt }} [/INST]
+"""
+PARAMETER stop "[INST]"
+PARAMETER stop "[/INST]"
+PARAMETER stop "<<SYS>>"
+PARAMETER stop "<</SYS>>"
