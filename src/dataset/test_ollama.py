@@ -10,14 +10,12 @@ Hello, world!
 """
 
 models = [
-    "llama2:7b-chat",
     "gemma:7b-instruct",
-    "mistral:7b-instruct",
     "elyza:codellama-7b-instruct",
     "qwen:4b-chat",
     "qwen:7b-chat",
-    "tinyllama:1.1b-chat",
-    "karasu:1b",
+    "zephyr:7b",
+    "mixtral:instruct",
 ]
 
 for model in models:
