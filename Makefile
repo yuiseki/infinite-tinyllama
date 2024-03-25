@@ -34,3 +34,4 @@ ollama:
 	ollama create elyza-codellama:7b-instruct -f ollama_models/ELYZA/CodeLlama/7b-instruct/Modelfile
 	ollama create rakutenai:7b-instruct -f ollama_models/Rakuten/RakutenAI/7b-instruct/Modelfile
 	ollama create rakutenai:7b-chat -f ollama_models/Rakuten/RakutenAI/7b-chat/Modelfile
+	ollama create rinna-youri:7b-chat -f ollama_models/rinna/youri/7b-chat/Modelfile

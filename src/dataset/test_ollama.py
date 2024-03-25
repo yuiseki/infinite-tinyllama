@@ -21,7 +21,7 @@ models = [
     "elyza-llama2:7b-instruct",
     "elyza-codellama:7b-instruct",
     "rakutenai:7b-chat",
-    # "zephyr:7b",
+    "rinna-youri:7b-chat",
 ]
 
 results = []
