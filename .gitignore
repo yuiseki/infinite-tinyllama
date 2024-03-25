@@ -2,3 +2,4 @@
 output
 wandb
 /.venv
+/.mypy_cache
