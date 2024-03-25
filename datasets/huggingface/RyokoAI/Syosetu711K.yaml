@@ -1,0 +1,15 @@
+type: huggingface
+id: RyokoAI/Syosetu711K
+url: https://huggingface.co/datasets/RyokoAI/Syosetu711K
+converted_size: Unknown
+license: Apache-2.0
+lang: ja
+description: Syosetu711K is a dataset composed of approximately 711,700 novels scraped from the Japanese novel self-publishing website Syosetuka ni Narou (JA 小説家になろう, lit. "Let's Become a Novelist") between March 26 and March 27, 2023. The dataset contains most if not all novels published on the site, regardless of length or quality; however, we include metadata so users of this dataset can filter and evaluate its contents.
+structure:
+  - id: text
+    type: string
+    description: Text
+  - id: meta
+    type: dict
+    description: Metadata
+
