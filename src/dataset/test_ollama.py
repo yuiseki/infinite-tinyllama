@@ -7,21 +7,27 @@ text_to_translate = sys.argv[1]
 prompt = f"""\
 あなたは優秀な翻訳者です。
 以下の英語テキストを日本語に翻訳してください。
-翻訳結果のみを出力してください。
 
+英語:
 {text_to_translate}
+日本語:
 """
 
 models = [
     "gemma:2b-instruct",
     "gemma:7b-instruct",
-    "qwen:4b-chat",
-    "qwen:7b-chat",
+    "qwen:4b-text",
+    "qwen:7b-text",
     "xwinlm:7b",
     "elyza-llama2:7b-instruct",
     "elyza-codellama:7b-instruct",
-    "rakutenai:7b-chat",
-    "rinna-youri:7b-chat",
+    "rakutenai:7b-instruct",
+    "rinna-youri:7b-instruct",
+    "phi:2.7b",
+    "zephyr:7b",
+    "yi:6b",
+    "stablelm-zephyr:3b",
+    "stablelm2:1.6b-zephyr",
 ]
 
 results = []
@@ -71,6 +77,9 @@ for result in results:
         response_model_num[result["response"]] += 1
     else:
         response_model_num[result["response"]] = 1
+
+# sort by value
+response_model_num = dict(sorted(response_model_num.items(), key=lambda x: x[1], reverse=True))
 
 print("")
 print("=========================================")
