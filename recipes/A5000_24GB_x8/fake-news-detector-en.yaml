@@ -19,7 +19,7 @@ train_gradient_accumulation_steps: 2
 train_num_train_epochs: 4
 train_max_steps: 1000
 train_fp16: True
-inference_max_new_tokens: 2
+inference_max_new_tokens: 8
 evaluations:
   -
     prompt: "Donald Trump has never been President of the United States."
