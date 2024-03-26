@@ -1,0 +1,23 @@
+type: huggingface
+id: bbz662bbz/databricks-dolly-15k-ja-gozarinnemon
+url: https://huggingface.co/datasets/bbz662bbz/databricks-dolly-15k-ja-gozarinnemon
+converted_size: 9.17MB
+license: CC-BY-SA-3.0
+lang: ja
+description: This dataset was using "kunishou/databricks-dolly-15k-ja" This dataset is licensed under CC BY SA 3.0
+structure:
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: input
+    type: string
+    description: Context
+  - id: output
+    type: string
+    description: Output
+  - id: category
+    type: string
+    description: Category
+  - id: index
+    type: string
+    description: Index

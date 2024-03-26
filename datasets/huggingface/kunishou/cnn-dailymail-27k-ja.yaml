@@ -1,0 +1,20 @@
+type: huggingface
+id: kunishou/cnn-dailymail-27k-ja
+url: https://huggingface.co/datasets/kunishou/cnn-dailymail-27k-ja
+converted_size: 63.6MB
+license: MIT
+lang: ja
+description: This dataset was created by automatically translating part of "cnn_dailymail" into Japanese.
+structure:
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: input
+    type: string
+    description: Context
+  - id: output
+    type: string
+    description: Output
+  - id: id
+    type: string
+    description: ID
