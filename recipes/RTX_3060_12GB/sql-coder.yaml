@@ -1,5 +1,5 @@
 target_task: tasks/text-generation/text2sql.md
-base_model_id: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
 model_name: tinyllama-sql-coder-v1
 output_base_dir: output
 dataset_id: b-mc2/sql-create-context
