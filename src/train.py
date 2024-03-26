@@ -171,8 +171,7 @@ data = prepare_train_data(dataset_id)
 def load_model_and_tokenizer(model_id):
     # Load the tokenizer for the specified model.
     tokenizer = AutoTokenizer.from_pretrained(model_id)
-    # Set the padding token to be the same as the end of sentence token.
-    tokenizer.pad_token = tokenizer.eos_token
+    tokenizer.add_special_tokens({'pad_token': '[PAD]'})
 
     # Define the quantization configuration for memory-efficient training.
     bnb_config = BitsAndBytesConfig(
@@ -196,6 +195,7 @@ def load_model_and_tokenizer(model_id):
     model.config.use_cache = False
     # Set the temperature for pretraining to 1.
     model.config.pretraining_tp = 1
+    model.resize_token_embeddings(len(tokenizer))
     print(model.hf_device_map)
     return model, tokenizer
 
@@ -203,14 +203,11 @@ def load_model_and_tokenizer(model_id):
 model_id = train_config["base_model_id"]
 
 output_dir = os.path.join(train_config["output_base_dir"], train_config["model_name"])
-model_path = os.path.join(
-    output_dir,
-    f"checkpoint-{train_config['train_max_steps']}",
-)
+merged_model_path = os.path.join(output_dir, "pretrained")
 
 # model_pathが既にある場合は終了
-if os.path.exists(model_path):
-    print(f"{model_path} already exists.")
+if os.path.exists(merged_model_path):
+    print(f"{merged_model_path} already exists.")
     sys.exit(1)
 
 
@@ -271,8 +268,13 @@ trainer = SFTTrainer(
 # Execute train
 #
 trainer.train()
+
+
 #
+# Save the model
 #
-#
+merged_model = model.merge_and_unload()
+merged_model.save_pretrained(merged_model_path)
+tokenizer.save_pretrained(merged_model_path)
 
 wandb.finish()
