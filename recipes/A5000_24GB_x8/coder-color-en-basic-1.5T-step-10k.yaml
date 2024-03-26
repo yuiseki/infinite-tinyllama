@@ -1,0 +1,32 @@
+target_task: tasks/text-generation/text2rgbhex.md
+base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
+model_name: tinyllama-coder-color-en-basic-1.5T
+output_base_dir: /data/output
+dataset_id: burkelibbey/colors
+dataset_input_field_name: description
+dataset_output_field_name: color
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.2
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_claim_gpu_num: 1
+train_per_device_train_batch_size: 8
+train_gradient_accumulation_steps: 2
+train_num_train_epochs: 4
+train_max_steps: 10000
+train_fp16: True
+inference_max_new_tokens: 16
+evaluations:
+  -
+    prompt: "Pure Black: A shade that completely absorbs light and does not reflect any colors. It is the darkest possible shade."
+    expected_output: "#000000"
+  -
+    prompt: "yellow color"
+    expected_output: "#fff000"
+  -
+    prompt: "sky blue color"
+    expected_output: "#3090c0"
+  - 
+    prompt: "light orange color"
+    expected_output: "#f08040"
