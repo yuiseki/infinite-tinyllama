@@ -1,0 +1,37 @@
+target_task: tasks/nlp/sentiment-analysis.md
+base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
+model_name: tinyllama-sentiment-analyzer-multilingual-1.5T-v0.1
+output_base_dir: output
+dataset_id: tyqiangz/multilingual-sentiments
+dataset_load_config: all
+dataset_input_field_name: text
+dataset_output_field_name: label
+dataset_output_field_values_to_texts:
+  0: "Positive"
+  1: "Neutral"
+  2: "Negative"
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.2
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_claim_gpu_num: 2
+train_per_device_train_batch_size: 6
+train_gradient_accumulation_steps: 2
+train_num_train_epochs: 4
+train_max_steps: 1000
+train_fp16: True
+inference_max_new_tokens: 2
+evaluations:
+  -
+    prompt: "Yes my laptop works So now i can abort my diplomthesis"
+    expected_output: "Negative"
+  -
+    prompt: "Hmm don't know what to do today -- Model just canceled = I hate it when that happens..will have to do gardening!"
+    expected_output: "Negative"
+  -
+    prompt: "ぼけっとしてたらこんな時間。チャリあるから食べにでたいのに…"
+    expected_output: "Negative"
+  -
+    prompt: "今日の月も白くて明るい。昨日より雲が少なくてキレイな〜 と立ち止まる帰り道。チャリなし生活も悪くない。"
+    expected_output: "Positive"
