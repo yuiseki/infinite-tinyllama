@@ -1,6 +1,6 @@
 target_task: tasks/text-generation/text2rgbhex.md
 base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
-model_name: tinyllama-coder-color-en-basic-1.5T
+model_name: tinyllama-coder-color-en-basic-1.5T-step-1k
 output_base_dir: /data/output
 dataset_id: burkelibbey/colors
 dataset_input_field_name: description
