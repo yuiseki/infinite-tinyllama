@@ -5,7 +5,7 @@ output_base_dir: /data/output
 dataset_id: nvidia/OpenMathInstruct-1
 dataset_input_field_name: question
 dataset_output_field_name: generated_solution
-dataset_filter_field_name: is_collect
+dataset_filter_field_name: is_correct
 dataset_filter_field_value: true
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
