@@ -5,6 +5,9 @@ output_base_dir: /data/output
 dataset_id: tweets_hate_speech_detection
 dataset_input_field_name: tweet
 dataset_output_field_name: label
+dataset_output_field_values_to_texts:
+  0: "Not hate speech"
+  1: "Hate speech"
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8
@@ -20,7 +23,7 @@ inference_max_new_tokens: 2
 evaluations:
   -
     prompt: "the white establishment can't have blk folx running around loving themselves and promoting our greatness"
-    expected_output: "1"
+    expected_output: "Hate speech"
   -
     prompt: "it's unbelievable that in the 21st century we'd need something like this. again. #neverump #xenophobia"
-    expected_output: "1"
+    expected_output: "Hate speech"

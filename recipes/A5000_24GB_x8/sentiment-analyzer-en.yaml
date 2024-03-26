@@ -5,6 +5,9 @@ output_base_dir: /data/output
 dataset_id: carblacac/twitter-sentiment-analysis
 dataset_input_field_name: text
 dataset_output_field_name: feeling
+dataset_output_field_values_to_texts:
+  0: "Negative"
+  1: "Positive"
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8
@@ -20,7 +23,7 @@ inference_max_new_tokens: 2
 evaluations:
   -
     prompt: "Yes my laptop works So now i can abort my diplomthesis"
-    expected_output: "1"
+    expected_output: "Negative"
   -
     prompt: "Hmm don't know what to do today -- Model just canceled = I hate it when that happens..will have to do gardening!	"
-    expected_output: "1"
+    expected_output: "Negative"

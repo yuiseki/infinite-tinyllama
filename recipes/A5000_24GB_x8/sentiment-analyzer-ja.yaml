@@ -5,6 +5,9 @@ output_base_dir: /data/output
 dataset_id: llm-book/wrime-sentiment
 dataset_input_field_name: sentence
 dataset_output_field_name: label
+dataset_output_field_values_to_texts:
+  0: "Positive"
+  1: "Negative"
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8
@@ -19,8 +22,8 @@ train_fp16: True
 inference_max_new_tokens: 2
 evaluations:
   -
-    prompt: "Yes my laptop works So now i can abort my diplomthesis"
-    expected_output: "1"
+    prompt: "ぼけっとしてたらこんな時間。チャリあるから食べにでたいのに…"
+    expected_output: "Negative"
   -
-    prompt: "Hmm don't know what to do today -- Model just canceled = I hate it when that happens..will have to do gardening!	"
-    expected_output: "1"
+    prompt: "今日の月も白くて明るい。昨日より雲が少なくてキレイな〜 と立ち止まる帰り道。チャリなし生活も悪くない。"
+    expected_output: "Positive"
