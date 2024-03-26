@@ -1,0 +1,7 @@
+type: huggingface
+id: shunk031/livedoor-news-corpus
+url: https://huggingface.co/datasets/shunk031/livedoor-news-corpus
+converted_size: Unknown
+license: CC-BY-ND-4.0
+lang: ja
+description: 本コーパスは、NHN Japan 株式会社が運営する「livedoor ニュース」のうち、下記のクリエイティブ・コモンズライセンスが適用されるニュース記事を収集し、可能な限り HTML タグを取り除いて作成したものです。

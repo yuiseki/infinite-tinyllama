@@ -1,0 +1,17 @@
+type: huggingface
+id: fujiki/llm-japanese-dataset_snow
+url: https://huggingface.co/datasets/fujiki/llm-japanese-dataset_snow
+converted_size: 5.54MB
+license: CC-BY-4.0
+lang: ja
+description: This dataset is a subset of izumi-lab/llm-japanese-dataset only including snow tasks.
+structure:
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: input
+    type: string
+    description: Context
+  - id: output
+    type: string
+    description: Output

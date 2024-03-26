@@ -1,0 +1,17 @@
+type: huggingface
+id: if001/oasst1_ja_ppl
+url: https://huggingface.co/datasets/if001/oasst1_ja_ppl
+converted_size: 27.2MB
+license: Apache-2.0
+lang: ja
+description: kunishou/oasst1-89k-ja のforkです。instructionとinput、outputにまとめ、kenllmでperplexityのスコアが付与してあります。
+structure:
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: input
+    type: string
+    description: Context
+  - id: output
+    type: string
+    description: Output

@@ -1,0 +1,17 @@
+type: huggingface
+id: fujiki/japanese_alpaca_data
+url: https://huggingface.co/datasets/fujiki/japanese_alpaca_data
+converted_size: 13.8MB
+license: CC-BY-NC-SA-4.0
+lang: ja
+description: This dataset is based on masa3141's great work on japanese-alpaca-lora [github]. Please also refer to this repo.
+structure:
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: input
+    type: string
+    description: Context
+  - id: output
+    type: string
+    description: Output
