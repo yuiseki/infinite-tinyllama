@@ -171,7 +171,10 @@ data = prepare_train_data(dataset_id)
 def load_model_and_tokenizer(model_id):
     # Load the tokenizer for the specified model.
     tokenizer = AutoTokenizer.from_pretrained(model_id)
-    tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+    # NOTE: これやるならmodel.resize_token_embeddingsが必要
+    # tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+    # NOTE: tokenizer.add_special_tokensやるならこれは不要
+    tokenizer.pad_token = tokenizer.eos_token
 
     # Define the quantization configuration for memory-efficient training.
     bnb_config = BitsAndBytesConfig(
@@ -195,7 +198,8 @@ def load_model_and_tokenizer(model_id):
     model.config.use_cache = False
     # Set the temperature for pretraining to 1.
     model.config.pretraining_tp = 1
-    model.resize_token_embeddings(len(tokenizer))
+    # NOTE: tokenizer.add_special_tokensやるならこれが必要
+    # model.resize_token_embeddings(len(tokenizer))
     print(model.hf_device_map)
     return model, tokenizer
 

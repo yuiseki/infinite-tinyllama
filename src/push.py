@@ -27,7 +27,11 @@ model_id = train_config["base_model_id"]
 # Load the tokenizer for the specified model.
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 # Set the padding token.
-tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+# NOTE: これやるならmodel.resize_token_embeddingsが必要
+# tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+# Set the padding token to be the same as the end of sentence token.
+# NOTE: tokenizer.add_special_tokensやるならこれは不要
+tokenizer.pad_token = tokenizer.eos_token
 # Load the model.
 base_model = AutoModelForCausalLM.from_pretrained(
     model_id,
@@ -36,8 +40,9 @@ base_model = AutoModelForCausalLM.from_pretrained(
     device_map="auto",
     trust_remote_code=True,
 )
+# NOTE: tokenizer.add_special_tokensやるならこれが必要
 # Resize the token embeddings to match the tokenizer.
-base_model.resize_token_embeddings(len(tokenizer))
+# base_model.resize_token_embeddings(len(tokenizer))
 
 #
 # Merge model
