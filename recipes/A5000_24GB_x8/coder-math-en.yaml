@@ -1,0 +1,34 @@
+target_task: tasks/nlp/translation.md
+base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
+model_name: tinyllama-coder-math-en-v0.1
+output_base_dir: /data/output
+dataset_id: nvidia/OpenMathInstruct-1
+dataset_input_field_name: question
+dataset_output_field_name: generated_solution
+dataset_filter_field_name: is_collect
+dataset_filter_field_value: true
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.2
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_claim_gpu_num: 4
+train_per_device_train_batch_size: 8
+train_gradient_accumulation_steps: 2
+train_num_train_epochs: 4
+train_max_steps: 1000
+train_fp16: True
+inference_max_new_tokens: 32
+evaluations:
+  -
+    prompt: "thank you"
+    expected_output: "ありがとう"
+  -
+    prompt: "Hello"
+    expected_output: "こんにちは"
+  -
+    prompt: "How are you?"
+    expected_output: "お元気ですか？"
+  -
+    prompt: "I am hungry"
+    expected_output: "お腹が空いています"
