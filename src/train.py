@@ -273,8 +273,8 @@ trainer.train()
 #
 # Save the model
 #
-merged_model = model.merge_and_unload()
-merged_model.save_pretrained(merged_model_path)
-tokenizer.save_pretrained(merged_model_path)
+#merged_model = model.merge_and_unload()
+#merged_model.save_pretrained(merged_model_path)
+#tokenizer.save_pretrained(merged_model_path)
 
 wandb.finish()
