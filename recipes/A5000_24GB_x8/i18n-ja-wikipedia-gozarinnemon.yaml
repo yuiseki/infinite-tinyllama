@@ -1,6 +1,6 @@
 target_task: tasks/i18n/ja.md
 base_model_id: yuiseki/tinyllama-ja-wikipedia-1.5T-v0.1
-model_name: tinyllama-ja-wikipedia-databricks-dolly-v0.1
+model_name: tinyllama-ja-wikipedia-gozarinnemon-v0.1
 output_base_dir: /data/output
 dataset_id: bbz662bbz/databricks-dolly-15k-ja-gozarinnemon
 dataset_context_field_name: input
