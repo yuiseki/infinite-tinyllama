@@ -1,11 +1,11 @@
 target_task: tasks/i18n/ja.md
-base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
-model_name: tinyllama-ja-databricks-dolly-1.5T-v0.1
+base_model_id: yuiseki/tinyllama-ja-wikipedia-1.5T-v0.1
+model_name: tinyllama-ja-wikipedia-databricks-dolly-v0.1
 output_base_dir: /data/output
-dataset_id: llm-jp/databricks-dolly-15k-ja
-dataset_context_field_name: context
+dataset_id: bbz662bbz/databricks-dolly-15k-ja-gozarinnemon
+dataset_context_field_name: input
 dataset_input_field_name: instruction
-dataset_output_field_name: response
+dataset_output_field_name: output
 dataset_filter_field_value: 0
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
@@ -18,7 +18,7 @@ train_gradient_accumulation_steps: 4
 train_num_train_epochs: 4
 train_max_steps: 1000
 train_fp16: True
-inference_max_new_tokens: 32
+inference_max_new_tokens: 64
 evaluations:
   -
     prompt: "ヴァージン・オーストラリアが事業を開始したのはいつですか？"
