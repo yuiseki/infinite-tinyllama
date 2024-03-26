@@ -1,0 +1,8 @@
+FROM ~/llama.cpp/models/RakutenAI-7B-chat-q4_K_M.gguf
+
+TEMPLATE """USER: {{ .Prompt }}
+ASSISTANT: 
+"""
+
+PARAMETER stop "USER:"
+PARAMETER stop "ASSISTANT:"
