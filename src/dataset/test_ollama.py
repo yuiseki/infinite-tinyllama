@@ -5,12 +5,8 @@ import sys
 text_to_translate = sys.argv[1]
 
 prompt = f"""\
-あなたは優秀な翻訳者です。
-以下の英語テキストを日本語に翻訳してください。
-
-英語:
+以下の英語を日本語に翻訳してください。翻訳結果のみを簡潔に出力してください。記号は全角にしてください。
 {text_to_translate}
-日本語:
 """
 
 models = [
@@ -24,7 +20,7 @@ models = [
     "rakutenai:7b-instruct",
     "rinna-youri:7b-instruct",
     "phi:2.7b",
-    "zephyr:7b",
+    # "zephyr:7b",
     "yi:6b",
     "stablelm-zephyr:3b",
     "stablelm2:1.6b-zephyr",
