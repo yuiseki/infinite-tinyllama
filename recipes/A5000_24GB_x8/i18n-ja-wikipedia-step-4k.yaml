@@ -1,6 +1,6 @@
 target_task: tasks/i18n/ja.md
 base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
-model_name: TinyLlama-1.5T-ja-wikipedia-step-10k
+model_name: tinyllama-ja-wikipedia-1.5T-step-4k
 output_base_dir: /data/output
 dataset_id: wikimedia/wikipedia
 dataset_load_config: 20231101.ja
@@ -14,7 +14,7 @@ train_claim_gpu_num: 4
 train_per_device_train_batch_size: 8
 train_gradient_accumulation_steps: 4
 train_num_train_epochs: 4
-train_max_steps: 10000
+train_max_steps: 4000
 train_fp16: True
 inference_max_new_tokens: 32
 evaluations:

@@ -3,8 +3,9 @@ import glob
 import yaml
 from datasets.load import load_dataset
 
-load_dataset("oscar")
-load_dataset("cc100")
+# load_dataset("oscar")
+load_dataset("cc100", "en")
+load_dataset("cc100", "ja")
 load_dataset("cerebras/SlimPajama-627B")
 load_dataset("bigcode/starcoderdata")
 load_dataset("Open-Orca/OpenOrca")
