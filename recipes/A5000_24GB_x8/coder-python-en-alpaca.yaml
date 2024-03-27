@@ -1,6 +1,6 @@
 target_task: tasks/text-generation/text2sql.md
 base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
-model_name: tinyllama-coder-alpaca-en-v0.1
+model_name: tinyllama-coder-python-en-alpaca-v0.1
 output_base_dir: /data/output
 dataset_id: sahil2801/CodeAlpaca-20k
 dataset_input_field_name: instruction
