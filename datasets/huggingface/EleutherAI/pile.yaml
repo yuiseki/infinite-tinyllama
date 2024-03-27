@@ -1,0 +1,14 @@
+type: huggingface
+id: EleutherAI/pile
+url: https://huggingface.co/datasets/EleutherAI/pile
+converted_size: 825GB
+license: Other
+lang: en
+description: The Pile is a 825 GiB diverse, open source language modelling data set that consists of 22 smaller, high-quality datasets combined together.
+structure:
+  - id: text
+    type: string
+    description: Text
+  - id: meta
+    type: dict
+    description: Metadata

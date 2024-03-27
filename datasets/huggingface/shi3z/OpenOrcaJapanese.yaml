@@ -1,0 +1,21 @@
+type: huggingface
+id: shi3z/OpenOrcaJapanese
+url: https://huggingface.co/datasets/shi3z/OpenOrcaJapanese
+converted_size: 608MB
+license: MIT
+lang: ja
+description: Open-Orca/OpenOrca の日本語翻訳版
+structure:
+  - id: id
+    type: string
+    description: ID
+  - id: system_prompt
+    type: string
+    optional: true
+    description: System prompt
+  - id: question
+    type: string
+    description: Question
+  - id: response
+    type: string
+    description: Response

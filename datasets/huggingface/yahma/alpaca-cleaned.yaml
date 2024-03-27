@@ -1,0 +1,18 @@
+type: huggingface
+id: shi3z/alpaca_cleaned_ja_json
+url: https://huggingface.co/datasets/shi3z/alpaca_cleaned_ja_json
+converted_size: 26.8MB
+license: CC-BY-4.0
+lang: ja
+description: tatsu-lab/alpaca の日本語翻訳版
+structure:
+  - id: instruction
+    type: string
+    description: Instruction
+  - id: input
+    type: string
+    optional: true
+    description: Context
+  - id: output
+    type: string
+    description: Response

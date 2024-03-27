@@ -1,0 +1,7 @@
+type: huggingface
+id: sentiment140
+url: https://huggingface.co/datasets/sentiment140
+converted_size: Unknown
+license: ODC-BY
+lang: multiple
+description: Dataset "mc4" is deprecated and will be deleted. Use "allenai/c4" instead. A multilingual colossal, cleaned version of Common Crawl's web crawl corpus. Based on Common Crawl dataset, "https://commoncrawl.org".
