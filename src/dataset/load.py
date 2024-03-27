@@ -3,6 +3,17 @@ import glob
 import yaml
 from datasets.load import load_dataset
 
+load_dataset("oscar")
+load_dataset("cc100")
+load_dataset("cerebras/SlimPajama-627B")
+load_dataset("bigcode/starcoderdata")
+load_dataset("Open-Orca/OpenOrca")
+load_dataset("HuggingFaceH4/ultrafeedback_binarized")
+load_dataset("HuggingFaceH4/ultrachat_200k")
+load_dataset("allenai/c4", "en")
+load_dataset("allenai/c4", "ja")
+load_dataset("the_pile", "all")
+
 
 # 指定されたファイルパスからyamlファイルを読み込む
 def load_yaml(file_path):
