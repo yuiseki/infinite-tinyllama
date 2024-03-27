@@ -1,0 +1,30 @@
+target_task: tasks/i18n/ja.md
+base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-715k-1.5T
+model_name: tinyllama-ml-wikipedia-1.5T-v0.1
+output_base_dir: /data/output
+dataset_id: wikimedia/wikipedia
+dataset_load_config: 20231101.ml
+dataset_input_field_name: title
+dataset_output_field_name: text
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.2
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_claim_gpu_num: 4
+train_per_device_train_batch_size: 8
+train_gradient_accumulation_steps: 4
+train_num_train_epochs: 4
+train_max_steps: 2000
+train_fp16: True
+inference_max_new_tokens: 32
+evaluations:
+  -
+    prompt: "２つ以上の文字を組み合わせて図案化したもののことで、特にルイ・ヴィトンのものが知られるのは何でしょう？"
+    expected_output: "モノグラム"
+  -
+    prompt: "幾つかの布切れを縫いあわせ、飾りや模様を作る手芸方法を何というでしょう？"
+    expected_output: "パッチワーク"
+  -
+    prompt: "格闘家ボブ・サップの出身国はどこでしょう？"
+    expected_output: "アメリカ"

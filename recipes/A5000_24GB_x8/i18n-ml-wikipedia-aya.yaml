@@ -1,12 +1,12 @@
 target_task: tasks/i18n/fr.md
-base_model_id: yuiseki/tinyllama-it-wikipedia-1.5T-v0.1
-model_name: tinyllama-it-wikipedia-aya-1.5T-v0.1
+base_model_id: yuiseki/tinyllama-ml-wikipedia-1.5T-v0.1
+model_name: tinyllama-ml-wikipedia-aya-1.5T-v0.1
 output_base_dir: /data/output
 dataset_id: CohereForAI/aya_dataset
 dataset_input_field_name: inputs
 dataset_output_field_name: targets
 dataset_filter_field_name: language_code
-dataset_filter_field_value: ita
+dataset_filter_field_value: mal
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8

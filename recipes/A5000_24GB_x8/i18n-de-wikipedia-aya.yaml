@@ -1,5 +1,5 @@
 target_task: tasks/i18n/fr.md
-base_model_id: yuiseki/tinyllama-fr-wikipedia-1.5T-v0.1
+base_model_id: yuiseki/tinyllama-de-wikipedia-1.5T-v0.1
 model_name: tinyllama-de-wikipedia-aya-1.5T-v0.1
 output_base_dir: /data/output
 dataset_id: CohereForAI/aya_dataset
