@@ -14,10 +14,10 @@ lora_r: 8
 lora_alpha: 16
 lora_dropout: 0.05
 train_claim_gpu_num: 1
-train_per_device_train_batch_size: 6
-train_gradient_accumulation_steps: 2
+train_per_device_train_batch_size: 16
+train_gradient_accumulation_steps: 4
 train_num_train_epochs: 4
-train_max_steps: 200
+train_max_steps: 10000
 train_fp16: True
 inference_max_new_tokens: 16
 evaluations:
@@ -27,3 +27,9 @@ evaluations:
   -
     prompt: "Hmm don't know what to do today -- Model just canceled = I hate it when that happens..will have to do gardening!	"
     expected_output: "Negative"
+  -
+    prompt: "About to go to bed. Sleeping really late tomorrow! I am so glad the Tigers won tonight!!"
+    expected_output: "Positive"
+  -
+    prompt: "AHH i'm so HAPPY. I just found my ipod. God is sooo good to me!"
+    expected_output: "Positive"
