@@ -1,0 +1,31 @@
+target_task: tasks/i18n/fr.md
+base_model_id: yuiseki/tinyllama-fr-wikipedia-1.5T-v0.1
+model_name: tinyllama-ko-wikipedia-aya-1.5T-v0.1
+output_base_dir: /data/output
+dataset_id: CohereForAI/aya_dataset
+dataset_input_field_name: inputs
+dataset_output_field_name: targets
+dataset_filter_field_name: language_code
+dataset_filter_field_value: kor
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.2
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_claim_gpu_num: 3
+train_per_device_train_batch_size: 8
+train_gradient_accumulation_steps: 4
+train_num_train_epochs: 4
+train_max_steps: 1000
+train_fp16: True
+inference_max_new_tokens: 32
+evaluations:
+  -
+    prompt: "火縄銃の威力が全国に知られる事となった、１５７５年に織田・徳川連合軍が鉄砲隊を用いて武田勝頼率いる騎馬隊を破った戦いを何というでしょう？"
+    expected_output: "長篠の戦いです。"
+  -
+    prompt: "ベトナム戦争終結や米ソ戦略兵器削減交渉などを進めたものの、１９７４年にウォーターゲート事件の責任をとって辞任したアメリカの第３７代大統領は誰でしょう？"
+    expected_output: "リチャード・ニクソンです。"
+  -
+    prompt: "格闘家ボブ・サップの出身国はどこでしょう？"
+    expected_output: "アメリカです。"
