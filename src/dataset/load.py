@@ -4,19 +4,19 @@ import yaml
 from datasets.load import load_dataset
 
 # load_dataset("oscar")
-load_dataset("cc100", "en")
-load_dataset("cc100", "ja")
-load_dataset("cerebras/SlimPajama-627B")
-load_dataset("bigcode/starcoderdata")
-load_dataset("Open-Orca/OpenOrca")
-load_dataset("HuggingFaceH4/ultrafeedback_binarized")
-load_dataset("HuggingFaceH4/ultrachat_200k")
-load_dataset("cognitivecomputations/dolphin")
-load_dataset("LDJnr/Capybara")
-load_dataset("ise-uiuc/Magicoder-Evol-Instruct-110K")
-load_dataset("allenai/c4", "en")
-load_dataset("allenai/c4", "ja")
-load_dataset("the_pile", "all")
+load_dataset("cc100", "en", trust_remote_code=True)
+load_dataset("cc100", "ja", trust_remote_code=True)
+load_dataset("cerebras/SlimPajama-627B", trust_remote_code=True)
+load_dataset("bigcode/starcoderdata", trust_remote_code=True)
+load_dataset("Open-Orca/OpenOrca", trust_remote_code=True)
+load_dataset("HuggingFaceH4/ultrafeedback_binarized", trust_remote_code=True)
+load_dataset("HuggingFaceH4/ultrachat_200k", trust_remote_code=True)
+load_dataset("cognitivecomputations/dolphin", trust_remote_code=True)
+load_dataset("LDJnr/Capybara", trust_remote_code=True)
+load_dataset("ise-uiuc/Magicoder-Evol-Instruct-110K", trust_remote_code=True)
+load_dataset("allenai/c4", "en", trust_remote_code=True)
+load_dataset("allenai/c4", "ja", trust_remote_code=True)
+load_dataset("the_pile", "all", trust_remote_code=True)
 
 
 # 指定されたファイルパスからyamlファイルを読み込む
@@ -43,7 +43,7 @@ for file in files:
         is_lte_10gb_dataset = data["converted_size"][-2:] == "GB" and float(data["converted_size"][:-2]) <= 10
         # MBオーダーか10GB以下のデータセットの場合のみ読み込む
         if is_mb_dataset or is_lte_10gb_dataset:
-            dataset = load_dataset(data["id"])
+            dataset = load_dataset(data["id"], trust_remote_code=True)
             print(dataset)
     except Exception as e:
         print(f"Error loading dataset: {e}")
