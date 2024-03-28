@@ -18,7 +18,7 @@ train_gradient_accumulation_steps: 4
 train_num_train_epochs: 4
 train_max_steps: 1000
 train_fp16: True
-inference_max_new_tokens: 32
+inference_max_new_tokens: 64
 evaluations:
   -
     prompt: "火縄銃の威力が全国に知られる事となった、１５７５年に織田・徳川連合軍が鉄砲隊を用いて武田勝頼率いる騎馬隊を破った戦いを何というでしょう？"
