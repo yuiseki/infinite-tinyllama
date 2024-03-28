@@ -12,6 +12,14 @@ load_dataset("ise-uiuc/Magicoder-Evol-Instruct-110K", trust_remote_code=True)
 # マルチターン対話
 load_dataset("LDJnr/Capybara", trust_remote_code=True)
 
+# Instruction
+load_dataset("OpenAssistant/oasst1", trust_remote_code=True)
+load_dataset("OpenAssistant/oasst2", trust_remote_code=True)
+# RLHF
+load_dataset("Anthropic/hh-rlhf", trust_remote_code=True)
+load_dataset("shi3z/anthropic_hh_rlhf_japanese", trust_remote_code=True)
+
+
 # GBオーダー
 load_dataset("cognitivecomputations/dolphin", trust_remote_code=True)
 load_dataset("Open-Orca/OpenOrca", trust_remote_code=True)
