@@ -1,5 +1,6 @@
 !output/.gitkeep
 output
 wandb
+tmp
 /.venv
 /.mypy_cache
