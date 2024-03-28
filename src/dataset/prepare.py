@@ -4,6 +4,7 @@ from pathlib import Path
 
 from litgpt import HFTokenizer
 from litgpt.data.prepare_starcoder import DataChunkRecipe
+from litdata.processing.data_processor import DataProcessor
 
 from datasets.load import load_dataset
 
@@ -67,7 +68,6 @@ def prepare_for_dataset(
     chunk_size: int,
 ) -> None:
     destination_path.mkdir(parents=True, exist_ok=True)
-    from litdata.processing.data_processor import DataProcessor
 
     tokenizer = HFTokenizer(tokenizer_path)
     data_recipe = YuisekinAIDataRecipe(tokenizer=tokenizer, chunk_size=chunk_size)
