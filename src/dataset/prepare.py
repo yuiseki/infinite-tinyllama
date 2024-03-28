@@ -1,16 +1,25 @@
-import lit_llama.packed_dataset as packed_dataset
-from lit_llama import Tokenizer, HFTokenizer
-from datasets import load_dataset
-import numpy as np
-
+import os
+import time
 from pathlib import Path
+
+from litgpt import HFTokenizer
+from litgpt.data.prepare_starcoder import DataChunkRecipe
+from litgpt.utils import CLI
+
+from datasets.load import load_dataset
+
 import sys
 
 # support running without installing as a package
 wd = Path(__file__).parent.parent.resolve()
 sys.path.append(str(wd))
 
-sample_ids = ["izumi-lab/wikinews-ja-20230728", "izumi-lab/wikinews-en-20230728", "if001/aozorabunko-clean-sin"]
+dataset_list = [
+    {"id": "wikimedia/wikipedia", "config": "20231101.en"},
+    {"id": "wikimedia/wikipedia", "config": "20231101.ja"},
+    {"id": "CohereForAI/aya_dataset", "config": "en"},
+    {"id": "CohereForAI/aya_dataset", "config": "ja"},
+]
 
 
 def format_number(num):
@@ -24,45 +33,57 @@ def format_number(num):
         return str(num)
 
 
+class YuisekinAIDataRecipe(DataChunkRecipe):
+    def __init__(self, tokenizer: HFTokenizer, chunk_size: int):
+        super().__init__(chunk_size)
+        self.tokenizer = tokenizer
+        self.total_token_cnt = 0
+
+    def prepare_item(self):
+        for dataset_data in dataset_list:
+            print("start...", dataset_data["id"], dataset_data["config"])
+            dataset_id = dataset_data["id"]
+            dataset_config = dataset_data["config"]
+            if dataset_config is not None:
+                dataset = load_dataset(dataset_id, dataset_config)
+            else:
+                dataset = load_dataset(dataset_id)
+            ds = dataset["train"]
+            print("ds", ds)
+        if "aya" in dataset_id:
+            for v in ds["inputs"]:
+                text_ids = self.tokenizer.encode(v, bos=False, eos=True)
+                self.total_token_cnt += len(text_ids)
+                yield text_ids
+        else:
+            for v in ds:
+                text_ids = self.tokenizer.encode(v["text"], bos=False, eos=True)
+                self.total_token_cnt += len(text_ids)
+                yield text_ids
+
+
 def prepare_for_dataset(
-    dataset_ids: list[str],
     tokenizer_path: Path,
     destination_path: Path,
     chunk_size: int,
 ) -> None:
     destination_path.mkdir(parents=True, exist_ok=True)
-    # tokenizer = Tokenizer(tokenizer_path)
-    tokenizer = HFTokenizer(model_path=tokenizer_path)
-    total_token_cnt = 0
-    for dataset_id in dataset_ids:
-        token_cnt = 0
-        print(f"Processing {dataset_ids}")
-        prefix = dataset_id.split("/")[-1]
-        builder = packed_dataset.PackedDatasetBuilder(
-            outdir=destination_path,
-            prefix=prefix,
-            chunk_size=chunk_size,
-            sep_token=tokenizer.bos_id,
-            dtype="auto",
-            vocab_size=tokenizer.vocab_size,
-        )
-        ds = load_dataset(dataset_id)
-        ds = ds["train"]
+    from litdata.processing.data_processor import DataProcessor
 
-        if "aozora" in dataset_id:
-            for v in ds["text"]:
-                text_ids = tokenizer.encode(v)
-                token_cnt += len(text_ids)
-                builder.add_array(np.array(text_ids, dtype=builder.dtype))
-        else:
-            for v in ds:
-                text_ids = tokenizer.encode(v["text"])
-                token_cnt += len(text_ids)
-                builder.add_array(np.array(text_ids, dtype=builder.dtype))
-        builder.write_reminder()
-        print("tokens ", format_number(token_cnt))
-        total_token_cnt += token_cnt
-    print("total tokens", format_number(total_token_cnt))
+    tokenizer = HFTokenizer(tokenizer_path)
+    data_recipe = YuisekinAIDataRecipe(tokenizer=tokenizer, chunk_size=chunk_size)
+    data_processor = DataProcessor(
+        input_dir=None,
+        output_dir=str(destination_path),
+        fast_dev_run=True,
+        num_workers=os.cpu_count(),
+        num_downloaders=1,
+    )
+
+    start_time = time.time()
+    data_processor.run(data_recipe)
+    elapsed_time = time.time() - start_time
+    print(f"Time taken: {elapsed_time:.2f} seconds")
 
 
 def prepare(
@@ -70,8 +91,8 @@ def prepare(
     # 2048 block size + 1 for causal (from LLama), 1024 blocks
     chunk_size: int = 2049 * 1024,
 ) -> None:
+    tokenizer_path = Path("./tmp/tokenizer.json")
     prepare_for_dataset(
-        dataset_ids=dataset_ids,
         tokenizer_path=tokenizer_path,
         destination_path=destination_path,
         chunk_size=chunk_size,
