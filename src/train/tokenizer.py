@@ -1,4 +1,5 @@
-# https://zenn.dev/if001/articles/87bbe893411fa1
+# 参考:
+#  - https://zenn.dev/if001/articles/87bbe893411fa1
 from datasets.arrow_dataset import Dataset
 from datasets.load import load_dataset
 from tokenizers import Tokenizer, decoders, models, normalizers, pre_tokenizers, trainers
@@ -40,7 +41,6 @@ def train(tokenizer, trainer):
             else:
                 ds = raw_dataset
             print("ds", ds)
-            # ds = ds.select(range(0, 100))
             if "aya" in dataset_id:
                 for v in ds["inputs"]:
                     yield v
