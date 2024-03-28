@@ -36,7 +36,7 @@ def simple_template_for_pretrain(input) -> str:
     # inputから、2つ以上連続する改行を除去する
     input = "\n".join([line for line in input.splitlines() if line.strip() != ""])
     template = f"""\
-    {input}
+    {input}\
     """
     # Remove any leading whitespace characters from each line in the template.
     template = "\n".join([line.lstrip() for line in template.splitlines()])
@@ -50,7 +50,7 @@ def simple_template_for_train(input, output) -> str:
     <|im_end|>
     <|im_start|>assistant
     {output}
-    <|im_end|>
+    <|im_end|>\
     """
     # Remove any leading whitespace characters from each line in the template.
     template = "\n".join([line.lstrip() for line in template.splitlines()])
@@ -65,7 +65,7 @@ def hint_template_for_train(hint, question, answer):
     <|im_end|>
     <|im_start|>assistant
     {answer}
-    <|im_end|>
+    <|im_end|>\
     """
     # Remove any leading whitespace characters from each line in the template.
     template = "\n".join([line.lstrip() for line in template.splitlines()])
@@ -80,7 +80,7 @@ def context_template_for_train(context, question, answer):
     <|im_end|>
     <|im_start|>assistant
     {answer}
-    <|im_end|>
+    <|im_end|>\
     """
     # Remove any leading whitespace characters from each line in the template.
     template = "\n".join([line.lstrip() for line in template.splitlines()])
@@ -98,7 +98,7 @@ def context_hint_template_for_train(hint, context, question, answer):
     <|im_end|>
     <|im_start|>assistant
     {answer}
-    <|im_end|>
+    <|im_end|>\
     """
     # Remove any leading whitespace characters from each line in the template.
     template = "\n".join([line.lstrip() for line in template.splitlines()])
