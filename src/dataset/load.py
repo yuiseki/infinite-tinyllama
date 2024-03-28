@@ -3,20 +3,33 @@ import glob
 import yaml
 from datasets.load import load_dataset
 
-# load_dataset("oscar")
+# TinyLlamaが使ってる
+load_dataset("HuggingFaceH4/ultrafeedback_binarized", trust_remote_code=True)
+# TinyLlamaが使ってる
+load_dataset("HuggingFaceH4/ultrachat_200k", trust_remote_code=True)
+# dolphinが使ってる
+load_dataset("ise-uiuc/Magicoder-Evol-Instruct-110K", trust_remote_code=True)
+# マルチターン対話
+load_dataset("LDJnr/Capybara", trust_remote_code=True)
+
+# GBオーダー
+load_dataset("cognitivecomputations/dolphin", trust_remote_code=True)
+load_dataset("Open-Orca/OpenOrca", trust_remote_code=True)
+
+# デカい
 load_dataset("cc100", "en", trust_remote_code=True)
 load_dataset("cc100", "ja", trust_remote_code=True)
-load_dataset("cerebras/SlimPajama-627B", trust_remote_code=True)
-load_dataset("bigcode/starcoderdata", trust_remote_code=True)
-load_dataset("Open-Orca/OpenOrca", trust_remote_code=True)
-load_dataset("HuggingFaceH4/ultrafeedback_binarized", trust_remote_code=True)
-load_dataset("HuggingFaceH4/ultrachat_200k", trust_remote_code=True)
-load_dataset("cognitivecomputations/dolphin", trust_remote_code=True)
-load_dataset("LDJnr/Capybara", trust_remote_code=True)
-load_dataset("ise-uiuc/Magicoder-Evol-Instruct-110K", trust_remote_code=True)
 load_dataset("allenai/c4", "en", trust_remote_code=True)
 load_dataset("allenai/c4", "ja", trust_remote_code=True)
-load_dataset("the_pile", "all", trust_remote_code=True)
+
+# デカすぎる
+# TinyLlamaが使ってる、895 GB
+# load_dataset("cerebras/SlimPajama-627B", trust_remote_code=True)
+# TinyLlamaが使ってる、311 GB
+# load_dataset("bigcode/starcoderdata", trust_remote_code=True)
+# 825 GB
+# load_dataset("EleutherAI/pile", "all", trust_remote_code=True)
+# load_dataset("oscar")
 
 
 # 指定されたファイルパスからyamlファイルを読み込む
