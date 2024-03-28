@@ -4,8 +4,7 @@ model_name: tinyllama-yo-wikipedia-1.5T-v0.1
 output_base_dir: /data/output
 dataset_id: wikimedia/wikipedia
 dataset_load_config: 20231101.yo
-dataset_input_field_name: title
-dataset_output_field_name: text
+dataset_input_field_name: text
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8

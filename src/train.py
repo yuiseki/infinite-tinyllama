@@ -35,9 +35,7 @@ train_config = load_yaml(filepath)
 def simple_template_for_pretrain(input) -> str:
     # inputから、2つ以上連続する改行を除去する
     input = "\n".join([line for line in input.splitlines() if line.strip() != ""])
-    template = f"""\
-    {input}\
-    """
+    template = input
     # Remove any leading whitespace characters from each line in the template.
     template = "\n".join([line.lstrip() for line in template.splitlines()])
     return template
@@ -127,9 +125,7 @@ def prepare_train_data(dataset_id):
         output_field_name = train_config["dataset_output_field_name"]
         if "dataset_output_field_values_to_texts" in train_config:
             output_field_values_to_texts = train_config["dataset_output_field_values_to_texts"]
-            data_df[output_field_name] = data_df[output_field_name].apply(
-                lambda x: output_field_values_to_texts.get(x, x)
-            )
+            data_df[output_field_name] = data_df[output_field_name].apply(lambda x: output_field_values_to_texts.get(x, x))
         if "dataset_context_field_name" in train_config:
             context_field_name = train_config["dataset_context_field_name"]
             if "dataset_context_hint" not in train_config:
