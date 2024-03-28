@@ -35,7 +35,7 @@ load_dataset("allenai/c4", "ja", trust_remote_code=True)
 # load_dataset("cerebras/SlimPajama-627B", trust_remote_code=True)
 # TinyLlamaが使ってる、311 GB
 # load_dataset("bigcode/starcoderdata", trust_remote_code=True)
-# 825 GB
+# 886 GB
 # load_dataset("EleutherAI/pile", "all", trust_remote_code=True)
 # load_dataset("oscar")
 
