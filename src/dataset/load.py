@@ -26,16 +26,16 @@ load_dataset("cognitivecomputations/dolphin", "flan5m-alpaca-uncensored", trust_
 load_dataset("Open-Orca/OpenOrca", trust_remote_code=True)
 
 # デカい
-load_dataset("cc100", "en", trust_remote_code=True)
-load_dataset("cc100", "ja", trust_remote_code=True)
-load_dataset("allenai/c4", "en", trust_remote_code=True)
-load_dataset("allenai/c4", "ja", trust_remote_code=True)
+# load_dataset("cc100", "en", trust_remote_code=True)
+# load_dataset("cc100", "ja", trust_remote_code=True)
+# load_dataset("allenai/c4", "en", trust_remote_code=True)
+# load_dataset("allenai/c4", "ja", trust_remote_code=True)
 
 # デカすぎる
 # TinyLlamaが使ってる、895 GB
-# load_dataset("cerebras/SlimPajama-627B", trust_remote_code=True)
+load_dataset("cerebras/SlimPajama-627B", trust_remote_code=True)
 # TinyLlamaが使ってる、311 GB
-# load_dataset("bigcode/starcoderdata", trust_remote_code=True)
+load_dataset("bigcode/starcoderdata", trust_remote_code=True)
 # 886 GB
 # load_dataset("EleutherAI/pile", "all", trust_remote_code=True)
 # load_dataset("oscar")
