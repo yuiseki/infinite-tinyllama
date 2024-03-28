@@ -4,24 +4,25 @@ import yaml
 from datasets.load import load_dataset
 
 # TinyLlamaが使ってる
-load_dataset("HuggingFaceH4/ultrafeedback_binarized", trust_remote_code=True)
+# load_dataset("HuggingFaceH4/ultrafeedback_binarized", trust_remote_code=True)
 # TinyLlamaが使ってる
-load_dataset("HuggingFaceH4/ultrachat_200k", trust_remote_code=True)
+# load_dataset("HuggingFaceH4/ultrachat_200k", trust_remote_code=True)
 # dolphinが使ってる
-load_dataset("ise-uiuc/Magicoder-Evol-Instruct-110K", trust_remote_code=True)
+# load_dataset("ise-uiuc/Magicoder-Evol-Instruct-110K", trust_remote_code=True)
 # マルチターン対話
-load_dataset("LDJnr/Capybara", trust_remote_code=True)
+# load_dataset("LDJnr/Capybara", trust_remote_code=True)
 
 # Instruction
-load_dataset("OpenAssistant/oasst1", trust_remote_code=True)
-load_dataset("OpenAssistant/oasst2", trust_remote_code=True)
+# load_dataset("OpenAssistant/oasst1", trust_remote_code=True)
+# load_dataset("OpenAssistant/oasst2", trust_remote_code=True)
 # RLHF
-load_dataset("Anthropic/hh-rlhf", trust_remote_code=True)
-load_dataset("shi3z/anthropic_hh_rlhf_japanese", trust_remote_code=True)
+# load_dataset("Anthropic/hh-rlhf", trust_remote_code=True)
+# load_dataset("shi3z/anthropic_hh_rlhf_japanese", trust_remote_code=True)
 
 
 # GBオーダー
-load_dataset("cognitivecomputations/dolphin", "all", trust_remote_code=True)
+load_dataset("cognitivecomputations/dolphin", "flan1m-alpaca-uncensored", trust_remote_code=True)
+load_dataset("cognitivecomputations/dolphin", "flan5m-alpaca-uncensored", trust_remote_code=True)
 load_dataset("Open-Orca/OpenOrca", trust_remote_code=True)
 
 # デカい
