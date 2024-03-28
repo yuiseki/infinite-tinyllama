@@ -1,8 +1,8 @@
 target_task: tasks/i18n/ja.md
-base_model_id: yuiseki/tinyllama-ja-wikipedia-1.5T-v0.1
-model_name: tinyllama-summarizer-ja-wikipedia-cnn-dailymail-1.5T-v0.1
+base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
+model_name: tinyllama-summarizer-en-cnn-dailymail-3T-v0.1
 output_base_dir: /data/output
-dataset_id: kunishou/cnn-dailymail-27k-ja
+dataset_id: cnn_dailymail
 dataset_input_field_name: instruction
 dataset_context_field_name: input
 dataset_output_field_name: output
