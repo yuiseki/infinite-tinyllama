@@ -4,7 +4,6 @@ from pathlib import Path
 
 from litgpt import HFTokenizer
 from litgpt.data.prepare_starcoder import DataChunkRecipe
-from litgpt.utils import CLI
 
 from datasets.load import load_dataset
 
