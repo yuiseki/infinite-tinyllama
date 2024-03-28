@@ -21,7 +21,7 @@ load_dataset("shi3z/anthropic_hh_rlhf_japanese", trust_remote_code=True)
 
 
 # GBオーダー
-load_dataset("cognitivecomputations/dolphin", trust_remote_code=True)
+load_dataset("cognitivecomputations/dolphin", "all", trust_remote_code=True)
 load_dataset("Open-Orca/OpenOrca", trust_remote_code=True)
 
 # デカい
