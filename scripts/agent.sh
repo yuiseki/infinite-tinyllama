@@ -9,9 +9,9 @@
 #   2.3. Generate recipes - Generate recipes for the new LLM based on the state of the computational resources and the found task
 
 
-eval "$(/home/yuiseki/miniconda3/bin/conda shell.bash hook)"
-export PATH="/home/yuiseki/miniconda3/bin:$PATH"
-conda activate peft
+# eval "$(/home/yuiseki/miniconda3/bin/conda shell.bash hook)"
+# export PATH="/home/yuiseki/miniconda3/bin:$PATH"
+# conda activate peft
 
 # $1 = directory of recipes
 RECIPE_DIR=$1
@@ -48,10 +48,12 @@ echo "AVAILABLE_RECIPES: ${AVAILABLE_RECIPES[@]}"
 for RECIPE in $AVAILABLE_RECIPES; do
   TARGET_MODEL_NAME=$(cat $1$RECIPE | yq ".model_name")
   echo "TARGET_MODEL_NAME: $TARGET_MODEL_NAME"
+  OUTPUT_BASE_DIR=$(cat $1$RECIPE | yq ".output_base_dir")
+  echo "OUTPUT_BASE_DIR: $OUTPUT_BASE_DIR"
   # If recipe already trained, skip
   # If recipe already trained, directory like output/TARGET_MODEL_NAME are exists
   # If exists, skip
-  if [ -d "output/$TARGET_MODEL_NAME" ]; then
+  if [ -d "$OUTPUT_BASE_DIR/$TARGET_MODEL_NAME" ]; then
     echo "Skip $1$RECIPE"
     continue
   fi
