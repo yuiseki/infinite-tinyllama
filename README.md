@@ -41,6 +41,10 @@ conda create -n peft
 ```
 
 ```bash
+conda install -c nvidia cuda-toolkit=12.1
+```
+
+```bash
 conda activate peft
 ```
 

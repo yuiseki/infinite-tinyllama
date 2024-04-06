@@ -4,5 +4,6 @@ bitsandbytes
 transformers
 trl
 wandb
+flash_attn
 
 types-PyYAML

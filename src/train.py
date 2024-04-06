@@ -1,8 +1,9 @@
 import os
 import sys
 
-import wandb
+import torch
 import yaml
+from accelerate import PartialState
 from datasets.arrow_dataset import Dataset
 from datasets.load import load_dataset
 from peft import LoraConfig
@@ -13,6 +14,8 @@ from transformers import (
     TrainingArguments,
 )
 from trl import SFTTrainer
+
+import wandb
 
 os.environ["TRANSFORMERS_NO_ADVISORY_WARNINGS"] = "true"
 
@@ -176,24 +179,35 @@ def load_model_and_tokenizer(model_id):
     # tokenizer.add_special_tokens({'pad_token': '[PAD]'})
     # NOTE: tokenizer.add_special_tokensやるならこれは不要
     tokenizer.pad_token = tokenizer.eos_token
+    tokenizer.padding_side = "right"
 
     # Define the quantization configuration for memory-efficient training.
     bnb_config = BitsAndBytesConfig(
         # Load the model weights in 4-bit quantized format.
         load_in_4bit=True,
+        # Specify whether to use double quantization for 4-bit quantization.
+        bnb_4bit_use_double_quant=True,
         # Specify the quantization type to use for 4-bit quantization.
         bnb_4bit_quant_type="nf4",
         # Specify the data type to use for computations during training.
-        bnb_4bit_compute_dtype="float16",
-        # Specify whether to use double quantization for 4-bit quantization.
-        bnb_4bit_use_double_quant=True,
+        bnb_4bit_compute_dtype=torch.float16,
     )
     # Load the model from the specified model ID and apply the quantization configuration.
+
     model = AutoModelForCausalLM.from_pretrained(
+        # Base model id
         model_id,
+        # BitsAndBytes configuration
         quantization_config=bnb_config,
+        # Set torch dtype
+        torch_dtype=torch.float16,
+        # Trust remote code
         trust_remote_code=True,
-        device_map="auto",
+        # Set device map to auto
+        # device_map="auto",
+        device_map={"": PartialState().process_index},
+        # Set the attention impl
+        attn_implementation="flash_attention_2",
     )
     # Disable cache to improve training speed.
     model.config.use_cache = False
@@ -222,12 +236,6 @@ model, tokenizer = load_model_and_tokenizer(model_id)
 os.environ["WANDB_PROJECT"] = "infinite-tinyllama"
 os.environ["WANDB_LOG_MODEL"] = "false"
 os.environ["WANDB_WATCH"] = "all"
-wandb.init(
-    project="infinite-tinyllama",
-    name=train_config["model_name"],
-    group=train_config["model_name"],
-    config=train_config,
-)
 
 #
 # Define LoRA and PEFT config
@@ -249,12 +257,11 @@ training_arguments = TrainingArguments(
     optim="paged_adamw_32bit",
     learning_rate=2e-4,
     lr_scheduler_type="cosine",
-    save_strategy="steps",
-    save_steps=100,
+    save_strategy="epoch",
     logging_steps=10,
     num_train_epochs=int(train_config["train_num_train_epochs"]),
-    max_steps=int(train_config["train_max_steps"]),
     fp16=True,
+    run_name=train_config["model_name"],
 )
 
 trainer = SFTTrainer(
