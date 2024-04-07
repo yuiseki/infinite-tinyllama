@@ -182,11 +182,26 @@ base_model_score = evaluate_model(base_model, train_config)
 #
 # Merge model
 #
-model_path = os.path.join(
+checkpoints_dir_path = os.path.join(
     train_config["output_base_dir"],
     train_config["model_name"],
-    f"checkpoint-{train_config['train_max_steps']}",
 )
+
+# checkpoints_dir内のディレクトリ一覧を取得
+# 一番数字が大きいものが最後に保存されたモデル
+last_checkpoint_dir_name = ""
+last_checkpoint_dir_num = -1
+
+for dir_name in os.listdir(checkpoints_dir_path):
+    if not dir_name.startswith("checkpoint-"):
+        continue
+    dir_num = int(dir_name.split("-")[1])
+    if dir_num > last_checkpoint_dir_num:
+        last_checkpoint_dir_num = dir_num
+        last_checkpoint_dir_name = dir_name
+
+model_path = os.path.join(checkpoints_dir_path, last_checkpoint_dir_name)
+
 peft_model = PeftModel.from_pretrained(base_model, model_path, from_transformers=True, device_map="auto")
 
 merged_model = peft_model.merge_and_unload()

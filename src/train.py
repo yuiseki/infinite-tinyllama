@@ -112,9 +112,9 @@ def context_hint_template_for_train(hint, context, question, answer):
 def prepare_train_data(dataset_id):
     if "dataset_load_config" in train_config:
         dataset_load_config = train_config["dataset_load_config"]
-        data = load_dataset(dataset_id, dataset_load_config, split="train")
+        data = load_dataset(dataset_id, dataset_load_config, split="train", num_proc=32)
     else:
-        data = load_dataset(dataset_id, split="train")
+        data = load_dataset(dataset_id, split="train", num_proc=32)
 
     data_df = data.to_pandas()
 
@@ -289,4 +289,5 @@ trainer.train()
 # merged_model.save_pretrained(merged_model_path)
 # tokenizer.save_pretrained(merged_model_path)
 
-wandb.finish()
+if PartialState().is_last_process:
+    wandb.finish()
