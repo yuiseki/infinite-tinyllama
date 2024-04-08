@@ -113,13 +113,10 @@ def prepare_train_data(dataset_id):
     if "dataset_load_config" in train_config:
         dataset_load_config = train_config["dataset_load_config"]
         data = load_dataset(dataset_id, dataset_load_config, split="train", num_proc=32)
-        if (
-            dataset_load_config == "20231101.ja"
-            or dataset_load_config == "20231101.vi"
-            or dataset_load_config == "20231101.es"
-            or dataset_load_config == "20231101.de"
-        ):
+        if dataset_load_config == "20231101.ja" or dataset_load_config == "20231101.vi" or dataset_load_config == "20231101.es":
             data = data.filter(lambda item, idx: idx % 3 == 0, with_indices=True)
+        if dataset_load_config == "20231101.de":
+            data = data.filter(lambda item, idx: idx % 5 == 0, with_indices=True)
     else:
         data = load_dataset(dataset_id, split="train", num_proc=32)
 
