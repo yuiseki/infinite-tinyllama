@@ -1,0 +1,32 @@
+target_task: tasks/nlp/translation.md
+base_model_id: yuiseki/YuisekinAI-mistral-en-1.1B
+model_name: YuisekinAI-mistral-en-1.1B-coder-dolphin
+output_base_dir: /data/output
+dataset_id: cognitivecomputations/dolphin
+dataset_load_config: flan1m-alpaca-uncensored
+dataset_input_field_name: instruction
+dataset_context_field_name: input
+dataset_output_field_name: output
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.2
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_claim_gpu_num: 4
+train_per_device_train_batch_size: 4
+train_gradient_accumulation_steps: 32
+train_num_train_epochs: 4
+inference_max_new_tokens: 32
+evaluations:
+  -
+    prompt: "thank you"
+    expected_output: "ありがとう"
+  -
+    prompt: "Hello"
+    expected_output: "こんにちは"
+  -
+    prompt: "How are you?"
+    expected_output: "お元気ですか？"
+  -
+    prompt: "I am hungry"
+    expected_output: "お腹が空いています"

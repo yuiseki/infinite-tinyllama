@@ -1,6 +1,6 @@
 target_task: tasks/i18n/ja.md
-base_model_id: yuiseki/YuisekinAI-mistral-1.1B
-model_name: YuisekinAI-mistral-1.1B-aya
+base_model_id: llm-jp/llm-jp-13b-v1.0
+model_name: llm-jp-13b-instruct-lora-aya-v0.1
 output_base_dir: /data/output
 dataset_id: CohereForAI/aya_dataset
 dataset_input_field_name: inputs
@@ -12,11 +12,10 @@ dataset_train_split_test_size: 0.2
 lora_r: 8
 lora_alpha: 16
 lora_dropout: 0.05
-train_claim_gpu_num: 1
-train_per_device_train_batch_size: 4
-train_gradient_accumulation_steps: 32
-train_num_train_epochs: 4
-train_fp16: True
+train_claim_gpu_num: 8
+train_per_device_train_batch_size: 1
+train_gradient_accumulation_steps: 128
+train_num_train_epochs: 5
 inference_max_new_tokens: 32
 evaluations:
   -

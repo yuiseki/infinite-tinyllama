@@ -213,7 +213,9 @@ def load_model_and_tokenizer(model_id):
         # device_map="auto",
         device_map={"": PartialState().process_index},
         # Set the attention impl
-        attn_implementation="flash_attention_2",
+        # if model_id is llm-jp/llm-jp-13b-v1.0, dont use flash_attention
+        # if other models, use flash_attention_2
+        attn_implementation=None if "llm-jp-13b" in model_id else "flash_attention_2",
     )
     # Disable cache to improve training speed.
     model.config.use_cache = False
