@@ -1,0 +1,28 @@
+target_task: tasks/text-generation/text2sql.md
+base_model_id: lightblue/karasu-1.1B
+model_name: karasu-q-gen-ja-v0.1
+output_base_dir: /data/output
+dataset_id: SkelterLabsInc/JaQuAD
+dataset_input_hint: "以下の文章から次の単語が答えとなるような質問を作成してください。"
+dataset_input_field_name: answers
+dataset_context_field_name: context
+dataset_output_field_name: question
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.2
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_claim_gpu_num: 4
+train_per_device_train_batch_size: 4
+train_gradient_accumulation_steps: 64
+train_num_train_epochs: 4
+inference_max_new_tokens: 64
+evaluations:
+  - 
+    prompt: "How many heads of the departments are older than 56 ?"
+    context: "CREATE TABLE head (age INTEGER)"
+    expected_output: "SELECT COUNT(*) FROM head WHERE age > 56"
+  -
+    prompt: "List the name, born state and age of the heads of departments ordered by age."
+    context: "CREATE TABLE head (name VARCHAR, born_state VARCHAR, age VARCHAR)"
+    expected_output: "SELECT name, born_state, age FROM head ORDER BY age"
