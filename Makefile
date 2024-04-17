@@ -7,6 +7,9 @@ all: $(targets)
 
 .PHONY: setup lock
 setup:
+	conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 pytorch-cuda=12.1 -c pytorch -c nvidia
+	conda install -c nvidia cuda-toolkit=11.6
+	pip install flash-attn --no-build-isolation
 	pip install -U pip
 	pip install -Ur requirements.txt
 lock:
