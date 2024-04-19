@@ -1,6 +1,6 @@
 target_task: tasks/i18n/ja.md
 base_model_id: google/gemma-2b
-model_name: gemma-2b-aya-v0.1
+model_name: gemma-2b-aya-ja-v0.1
 output_base_dir: output
 dataset_id: CohereForAI/aya_dataset
 dataset_input_field_name: inputs
