@@ -9,9 +9,9 @@ all: $(targets)
 setup:
 	conda install -c nvidia cuda-toolkit=12.1
 	conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+	pip install -U pip
 	pip install packaging
 	pip install flash-attn --no-build-isolation
-	pip install -U pip
 	pip install -Ur requirements.txt
 lock:
 	pip freeze > requirements.txt.lock
