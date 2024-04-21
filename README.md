@@ -37,7 +37,7 @@ VRAM 24GB で日本語データセットでファインチューニングしよ�
 ## Setup
 
 ```bash
-conda create -n peft
+conda create -n peft python=3.10
 ```
 
 ```bash
