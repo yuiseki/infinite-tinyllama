@@ -41,11 +41,11 @@ conda create -n peft python=3.10
 ```
 
 ```bash
-conda install -c nvidia cuda-toolkit=12.4
+conda activate peft
 ```
 
 ```bash
-conda activate peft
+conda install -c nvidia cuda-toolkit=12.4
 ```
 
 ## Training all models
