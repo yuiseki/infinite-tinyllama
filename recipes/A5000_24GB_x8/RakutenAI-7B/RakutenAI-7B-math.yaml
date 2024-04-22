@@ -1,12 +1,10 @@
 target_task: tasks/i18n/ja.md
-base_model_id: llm-jp/llm-jp-13b-v1.0
-model_name: llm-jp-13b-instruct-lora-aya-v0.1
+base_model_id: Rakuten/RakutenAI-7B
+model_name: RakutenAI-7B-math-v0.1
 output_base_dir: output
-dataset_id: CohereForAI/aya_dataset
-dataset_input_field_name: inputs
-dataset_output_field_name: targets
-dataset_filter_field_name: language_code
-dataset_filter_field_value: jpn
+dataset_id: kunishou/OpenMathInstruct-1-1.8m-ja
+dataset_input_field_name: question_ja
+dataset_output_field_name: generated_solution_ja
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8
