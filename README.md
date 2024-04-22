@@ -37,15 +37,15 @@ VRAM 24GB で日本語データセットでファインチューニングしよ�
 ## Setup
 
 ```bash
-conda create -n peft
-```
-
-```bash
-conda install -c nvidia cuda-toolkit=12.1
+conda create -n peft python=3.10
 ```
 
 ```bash
 conda activate peft
+```
+
+```bash
+conda install -c nvidia cuda-toolkit=12.1
 ```
 
 ## Training all models
