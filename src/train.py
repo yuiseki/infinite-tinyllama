@@ -281,7 +281,7 @@ trainer = SFTTrainer(
     args=training_arguments,
     tokenizer=tokenizer,
     packing=False,
-    max_seq_length=1024,
+    max_seq_length=512,
 )
 
 #
