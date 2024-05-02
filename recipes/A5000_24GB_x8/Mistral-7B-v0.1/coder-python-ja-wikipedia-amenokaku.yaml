@@ -3,6 +3,8 @@ base_model_id: yuiseki/Mistral-7B-v0.1-ja-wikipedia-v0.1
 model_name: Mistral-7B-v0.1-ja-wikipedia-amenokaku-v0.1
 output_base_dir: /data/output
 dataset_id: kunishou/amenokaku-code-instruct
+dataset_filter_field_name: liscence
+dataset_filter_field_value: MIT
 dataset_input_field_name: instruction
 dataset_context_field_name: input
 dataset_output_field_name: output
@@ -11,7 +13,7 @@ dataset_train_split_test_size: 0.2
 lora_r: 8
 lora_alpha: 16
 lora_dropout: 0.05
-train_claim_gpu_num: 4
-train_per_device_train_batch_size: 8
-train_gradient_accumulation_steps: 4
+train_claim_gpu_num: 8
+train_per_device_train_batch_size: 1
+train_gradient_accumulation_steps: 16
 train_num_train_epochs: 4

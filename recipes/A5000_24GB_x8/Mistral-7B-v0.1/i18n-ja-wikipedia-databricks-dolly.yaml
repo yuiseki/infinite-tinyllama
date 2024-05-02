@@ -1,10 +1,12 @@
-target_task: tasks/nlp/translation.md
+target_task: tasks/i18n/ja.md
 base_model_id: yuiseki/Mistral-7B-v0.1-ja-wikipedia-v0.1
-model_name: Mistral-7B-v0.1-ja-wikipedia-OpenMath-v0.1
+model_name: Mistral-7B-v0.1-ja-wikipedia-databricks-dolly-v0.1
 output_base_dir: /data/output
-dataset_id: kunishou/OpenMathInstruct-1-1.8m-ja
-dataset_input_field_name: question_ja
-dataset_output_field_name: generated_solution_ja
+dataset_id: llm-jp/databricks-dolly-15k-ja
+dataset_context_field_name: context
+dataset_input_field_name: instruction
+dataset_output_field_name: response
+dataset_filter_field_value: 0
 dataset_train_split_seed: 42
 dataset_train_split_test_size: 0.2
 lora_r: 8
