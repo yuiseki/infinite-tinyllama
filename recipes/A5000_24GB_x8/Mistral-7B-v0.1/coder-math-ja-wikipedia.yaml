@@ -1,0 +1,16 @@
+target_task: tasks/nlp/translation.md
+base_model_id: yuiseki/Mistral-7B-v0.1-ja-wikipedia-v0.1
+model_name: Mistral-7B-v0.1-ja-wikipedia-OpenMath-v0.1
+output_base_dir: /data/output
+dataset_id: kunishou/OpenMathInstruct-1-1.8m-ja
+dataset_input_field_name: question_ja
+dataset_output_field_name: generated_solution_ja
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.2
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_claim_gpu_num: 4
+train_per_device_train_batch_size: 8
+train_gradient_accumulation_steps: 2
+train_num_train_epochs: 4
