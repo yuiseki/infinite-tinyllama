@@ -13,6 +13,6 @@ lora_r: 8
 lora_alpha: 16
 lora_dropout: 0.05
 train_claim_gpu_num: 8
-train_per_device_train_batch_size: 4
-train_gradient_accumulation_steps: 4
+train_per_device_train_batch_size: 2
+train_gradient_accumulation_steps: 8
 train_num_train_epochs: 4
