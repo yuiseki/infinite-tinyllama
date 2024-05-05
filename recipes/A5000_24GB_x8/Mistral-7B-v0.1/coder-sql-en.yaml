@@ -1,0 +1,18 @@
+target_task: tasks/text-generation/text2sql.md
+base_model_id: mistralai/Mistral-7B-v0.1
+model_name: Mistral-7B-v0.1-coder-sql-en-v0.1
+output_base_dir: output
+dataset_id: b-mc2/sql-create-context
+dataset_input_field_name: question
+dataset_context_hint: Given the context, generate an SQL query that answers the question
+dataset_context_field_name: context
+dataset_output_field_name: answer
+dataset_train_split_seed: 42
+dataset_train_split_test_size: 0.2
+lora_r: 8
+lora_alpha: 16
+lora_dropout: 0.05
+train_claim_gpu_num: 8
+train_per_device_train_batch_size: 1
+train_gradient_accumulation_steps: 16
+train_num_train_epochs: 4
