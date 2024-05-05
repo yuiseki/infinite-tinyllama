@@ -1,7 +1,7 @@
 target_task: tasks/nlp/translation.md
-base_model_id: TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T
+base_model_id: tinyllama-ja-wikipedia-1.5T-v0.2
 model_name: tinyllama-translator-en-ja-oasst1-v0.1
-output_base_dir: /data/output
+output_base_dir: output
 dataset_id: kunishou/oasst1-89k-ja
 dataset_input_hint: Given the text, translate to Japanese.
 dataset_input_field_name: text
