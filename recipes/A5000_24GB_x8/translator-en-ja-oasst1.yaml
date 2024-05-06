@@ -1,5 +1,5 @@
 target_task: tasks/nlp/translation.md
-base_model_id: tinyllama-ja-wikipedia-1.5T-v0.2
+base_model_id: yuiseki/tinyllama-ja-wikipedia-1.5T-v0.2
 model_name: tinyllama-translator-en-ja-oasst1-v0.1
 output_base_dir: output
 dataset_id: kunishou/oasst1-89k-ja
